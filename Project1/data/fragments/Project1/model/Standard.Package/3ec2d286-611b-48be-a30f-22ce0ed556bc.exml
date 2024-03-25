@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="project1" version="4">
+  <OBJECT>
+    <ID name="project1" mc="Standard.Package" uid="3ec2d286-611b-48be-a30f-22ce0ed556bc"/>
+    <PID name="Project1" mc="Standard.Project" uid="6330e155-fb1d-4bac-833a-ac9d8a6cab4f"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[project1]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="User" mc="Standard.Class" uid="6412baee-661e-436f-a950-5de361b91273"/>
+        <COMPID name="Buyer" mc="Standard.Class" uid="40702575-e8ca-46f7-bb02-79fceae607b0"/>
+        <COMPID name="Seller" mc="Standard.Class" uid="6d902e69-c984-4c00-b995-bde7da786fd8"/>
+        <COMPID name="Admin" mc="Standard.Class" uid="44ffaf60-acff-4cc8-b7b9-c50673ed1282"/>
+        <COMPID name="Chat" mc="Standard.Class" uid="d01785c2-0069-4f23-a4ea-0937c533cba9"/>
+        <COMPID name="Product" mc="Standard.Class" uid="328fcffa-fc32-4150-a0e8-7851840f06ac"/>
+        <COMPID name="Location" mc="Standard.Class" uid="3ce99fb0-e33b-4183-935d-1a55900141d6"/>
+        <COMPID name="Category" mc="Standard.Class" uid="199008c4-5237-4cb9-b082-fb598221d9a7"/>
+        <COMPID name="Brand" mc="Standard.Class" uid="6da3674b-09f1-472b-945f-5089f1687dea"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="project1 Class diagram" mc="Standard.ClassDiagram" uid="59246579-de15-4473-ab04-472660de6940"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

@@ -15,6 +15,38 @@ header {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 8px;
+    margin-right: 5px; /* Spacing between input and button */
+    border: none;
+    border-radius: 5px;
+}
+
+.search-button {
+    padding: 8px 15px;
+    background: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-button:hover {
+    background-color: greenyellow;
+}
+
+
 header > h1 {
     font-family: 'Archivo Black';
 }
@@ -37,7 +69,7 @@ nav ul li a:hover, .categories ul li a:hover {
     background-color: greenyellow;
 }
 .categories {
-    background-color: greenyellow;
+    background-color: darkslategrey ;
     padding: 5px 0;
 }
 .categories ul {
@@ -64,7 +96,7 @@ main {
 footer {
     text-align: center;
     padding: 10px 0;
-    background-color: greenyellow;
+    background-color: green;
     color: white;
     position: fixed;
     bottom: 0;

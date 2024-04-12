@@ -8,38 +8,80 @@
 </head>
 <body>
     <header>
-        <h1>R E V A M P</h1>
+        <div class="header-content">
+            <h1>R E V A M P</h1>
             <div class="search-container">
                 <form action="/search" method="get">
-                    <input type="text" placeholder="Search..." name="search" class="search-input">
+                    <input type="text" placeholder="Search..." class="search-input">
                     <button type="submit" class="search-button">Search</button>
                 </form>
             </div>
-        
+        </div>
     </header>
     <div class="categories">
         <ul>
-            <li><a href="#">Electronics</a></li>
-            <li><a href="#">Vehicles</a></li>
-            <li><a href="#">Clothing</a></li>
-            <li><a href="#">Books</a></li>
+            <li><a href="#">Veículos</a></li>
+            <li><a href="#">Tecnologia</a></li>
+            <li><a href="#">Vestuário</a></li>
+            <li><a href="#">Calçado</a></li>
+            <li><a href="#">Filmes, Livros e Música</a></li>
+            <li><a href="#">Saúde e Beleza</a></li>
+            <li><a href="#">Serviços</a></li>
+
         </ul>
     </div>
     <main>
         <section>
-            <h2>Featured Listings</h2>
-            <div>
-                <!-- This is where featured listings would be displayed -->
-                <article>
-                    <h3> Iphone 15 </h3>
-                    <p> As new.</p>
-                    <p>Price: $800 </p>
-                </article>
+            <h2> Vistos recentemente </h2>
+            <div class="flex-container">
+                <div class="flex-row">
+                    <div class="flex-item"> 
+                        <img src="iphone.jpg"  alt="make it boom">
+                        <p> Iphone 15 </p>
+                    </div>
+                    <div class="flex-item"> 
+                        <img src="iphone.jpg"  alt="make it boom">
+                        <p> Veículos </p>
+                    </div>
+                    <div class="flex-item"> 
+                        <img src="iphone.jpg"  alt="make it boom">
+                        <p> Vestuário</p>
+                    </div>
+                    <div class="flex-item"> 
+                        <img src="iphone.jpg"  alt="make it boom">
+                        <p> Calçado</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>
+                Favoritos
+            </h2>
+            <div class="flex-container">
+                <div class="flex-row">
+                    <div class="flex-item"> 
+                        <img src="iphone.jpg"  alt="make it boom">
+                        <p> Iphone 15 </p>
+                    </div>
+                    <div class="flex-item"> 
+                        <img src="iphone.jpg"  alt="make it boom">
+                        <p> Veículos </p>
+                    </div>
+                    <div class="flex-item"> 
+                        <img src="iphone.jpg"  alt="make it boom">
+                        <p> Vestuário</p>
+                    </div>
+                    <div class="flex-item"> 
+                        <img src="iphone.jpg"  alt="make it boom">
+                        <p> Calçado</p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
     <footer>
-        <p>R E V A M P © 2024</p>
+        <p> R E V A M P © 2024</p>
     </footer>
 </body>
 </html>

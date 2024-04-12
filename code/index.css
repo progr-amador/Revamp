@@ -9,7 +9,7 @@ body {
     color: #333;
 }
 header {
-    background-color: green;
+    background-color: #0b5a4f;
     color: white;
     padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -35,7 +35,7 @@ header {
 
 .search-button {
     padding: 8px 15px;
-    background: green;
+    background: #0b5a4f;
     color: white;
     border: none;
     border-radius: 5px;
@@ -43,7 +43,7 @@ header {
 }
 
 .search-button:hover {
-    background-color: greenyellow;
+    background-color: #8DCE92;
 }
 
 
@@ -66,10 +66,10 @@ nav ul li a {
     display: inline-block;
 }
 nav ul li a:hover, .categories ul li a:hover {
-    background-color: greenyellow;
+    background-color: #8DCE92;
 }
 .categories {
-    background-color: darkslategrey ;
+    background-color: #8DCE92 ;
     padding: 5px 0;
 }
 .categories ul {
@@ -81,10 +81,11 @@ nav ul li a:hover, .categories ul li a:hover {
     display: inline;
 }
 .categories ul li a {
-    color: white;
+    color: darkslategray;
     font-weight: bold;
     padding: 8px 12px;
     display: inline-block;
+    text-decoration: none;
 }
 main {
     padding: 20px;
@@ -96,7 +97,7 @@ main {
 footer {
     text-align: center;
     padding: 10px 0;
-    background-color: green;
+    background-color: #0b5a4f;
     color: white;
     position: fixed;
     bottom: 0;

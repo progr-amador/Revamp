@@ -3,58 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="style.css">
     <title>Revamp - Search</title>
 </head>
 <body>
     <header>
-        <h1>revampd</h1>
+        <div class="header-content">
+            <h1>R E V A M P</h1>
+            <div class="search-container">
+                <form action="search" method="get">
+                    <input type="text" placeholder="Search..." class="search-input">
+                    <button type="submit" class="search-button"> 🔎 </button>
+                </form>
+            </div>
+            <div class="authentication-buttons">
+                <a href="login.html"> <button class="abtn"> Login </button></a>
+                <a href="register.html"> <button class="abtn"> Sign Up</button></a>
+            </div>
+        </div>
     </header>
     <div class="categories">
         <ul>
-            <li><a href="#">Electronics</a></li>
-            <li><a href="#">Vehicles</a></li>
-            <li><a href="#">Clothing</a></li>
-            <li><a href="#">Books</a></li>
+            <li><a href="#">Veículos</a></li>
+            <li><a href="#">Tecnologia</a></li>
+            <li><a href="#">Vestuário</a></li>
+            <li><a href="#">Calçado</a></li>
+            <li><a href="#">Filmes, Livros e Música</a></li>
+            <li><a href="#">Saúde e Beleza</a></li>
+            <li><a href="#">Serviços</a></li>
+
         </ul>
     </div>
     <main>
-        <section id = "listings">
-            <article>
-                <h3> Telemóvel</h3>
-                <img src = "../gato.png" >
-                <p>o meu telemovel é maior que este gato juro</p>
-            </article>
-            <article>
-                <h3> Telemóvel</h3>
-                <img src = "../gato.png" >
-                <p>o meu telemovel é maior que este gato juro</p>
-            </article>
-            <article>
-                <h3> Telemóvel</h3>
-                <img src = "../gato.png" >
-                <p>o meu telemovel é maior que este gato juro</p>
-            </article>
-            <article>
-                <h3> Telemóvel</h3>
-                <img src = "../gato.png" >
-                <p>o meu telemovel é maior que este gato juro</p>
-            </article>
-            <article>
-                <h3> Telemóvel</h3>
-                <img src = "../gato.png" >
-                <p>o meu telemovel é maior que este gato juro</p>
-            </article>
-            <article>
-                <h3> Telemóvel</h3>
-                <img src = "../gato.png" >
-                <p>o meu telemovel é maior que este gato juro</p>
-            </article>
-            <article>
-                <h3> Telemóvel</h3>
-                <img src = "../gato.png" >
-                <p>o meu telemovel é maior que este gato juro</p>
-            </article>
+        <section id="listings">
+            <div class="flex-container">
+                <div class="flex-row">
+                    <div class="flex-item"> 
+                        <img src="../gato.png"  alt="no image">
+                        <p> Gato </p>
+                    </div>
+                    <div class="flex-item"> 
+                        <img src="../gato.png"  alt="no image">
+                        <p> Gato </p>
+                    </div>
+                    <div class="flex-item"> 
+                        <img src="../gato.png"  alt="no image">
+                        <p> Gato </p>
+                    </div>
+                    <div class="flex-item"> 
+                        <img src="../gato.png"  alt="no image">
+                        <p> Gato </p>
+                    </div>
+                    <div class="flex-item"> 
+                        <img src="../gato.png"  alt="no image">
+                        <p> Gato </p>
+                    </div>
+                </div>
+            </div>
         </section>
         <section id="filters">
             <form>
@@ -132,8 +137,6 @@
             </form>
         </section>
     </main>
-    <footer>
-        <p>revampd © 2024</p>
-    </footer>
+    
 </body>
 </html>

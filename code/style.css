@@ -5,53 +5,50 @@
 body {
     font-family: 'Prompt', sans-serif;
     margin: 0;
-    background-color: #f4f4f4;
+    background-color: #cce3f3f5;
     color: #333;
 }
+
+/********** HEADER ***********/
 
 .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
     background-color: #0b5a4f;
     color: white;
     padding: 10px 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     
-}
-
-
-.search-container {
-    display: flex;
-    align-items: center;
     
-}
-
-.search-input {
-    padding: 8px;
-    margin-right: 5px; /* Spacing between input and button */
-    border: none;
-    border-radius: 5px;
-}
-
-.search-button {
-    padding: 8px 15px;
-    background: #0b5a4f;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.search-button:hover {
-    background-color: #8DCE92;
 }
 
 header > h1 {
     font-family: 'Archivo Black', sans-serif;
-    
+    margin-right: 20px;
 }
+
+/********** SEARCH ***********/
+
+.search-container {
+    display: flex;
+    justify-content: center; /* Centers the search bar */
+    padding: 10px;
+}
+
+.search-input {
+    width: 100%; /* Takes full width of the container */
+    padding: 8px;
+    margin-right: 5px; /* Optional: Adjusts spacing if needed */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-input:focus {
+    border-color: #0b5a4f; /* Changes border color on focus */
+    box-shadow: 0 0 8px rgba(0, 186, 159, 0.25); /* Optional: Adds a subtle shadow on focus */
+}
+
+/********** CATEGORIES ***********/
 
 nav ul {
     list-style-type: none;
@@ -74,6 +71,7 @@ nav ul li a:hover, .categories ul li a:hover {
 .categories {
     background-color: #8DCE92 ;
     padding: 5px 0;
+    
 }
 .categories ul {
     text-align: center;
@@ -90,7 +88,6 @@ nav ul li a:hover, .categories ul li a:hover {
     display: inline-block;
     text-decoration: none;
 }
-
 
 main {
     padding: 20px;
@@ -115,7 +112,7 @@ main {
     padding: 10px;
     margin: 5px;
     text-align: center;
-    background-color: lightblue;
+    background-color: #cce3f3f5;
     border: 1px solid #ccc;
     border-radius: 10px;
 }
@@ -127,14 +124,7 @@ main {
     border-radius: 10px;
 }
 
-footer {
-    text-align: center;
-    padding: 10px 0;
-    background-color: #0b5a4f;
-    color: white;
-    bottom: 0;
-    width: 100%;
-}
+
 
 /* LOGIN */
 
@@ -244,9 +234,6 @@ footer {
     
 }
 
-body {
-    background-color: lightblue;
-}
 
 /*** Profile ****/
 
@@ -281,6 +268,62 @@ body {
     flex-direction: column;
     justify-content: space-between;
 }
+
+/* Footer */
+
+footer {
+    background-color: #0b5a4f;
+    color: white;
+    padding: 5px 0;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+    
+}
+
+.footer-about {
+    flex: 1;
+}
+
+.footer-about p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.footer-about ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-about ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+
+h3 {
+    font-family: 'Prompt', sans-serif;
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-about {
+        margin-top: 10px;
+    }
+
+    
+}
+
 
 
 

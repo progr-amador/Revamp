@@ -10,8 +10,9 @@ DROP TABLE IF EXISTS PHOTO;
 DROP TABLE IF EXISTS PRODUCT;
 DROP TABLE IF EXISTS CATEGORY;
 DROP TABLE IF EXISTS BRAND;
-DROP TABLE IF EXISTS USER_;
+DROP TABLE IF EXISTS USERS;
 DROP TABLE IF EXISTS LOCATION_;
+DROP TABLE IF EXISTS RATING;
 
 /*******************************************************************************
    Create Tables
@@ -24,7 +25,7 @@ CREATE TABLE LOCATION_ (
 );
 
 -- Create a table for users
-CREATE TABLE USER_ (
+CREATE TABLE USERS (
     userID INT PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
@@ -60,7 +61,7 @@ CREATE TABLE PRODUCT (
     description TEXT,
     price DECIMAL(10, 2) NOT NULL,
     condition VARCHAR(50), -- New, Like New, Used, etc.
-    FOREIGN KEY(sellerID) REFERENCES USER_(userID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(sellerID) REFERENCES USERS(userID) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(brandID) REFERENCES BRAND(brandID) ON DELETE SET NULL ON UPDATE CASCADE,
     FOREIGN KEY(categoryID) REFERENCES CATEGORY(categoryID) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(locationID) REFERENCES LOCATION_(locationID) ON DELETE SET NULL ON UPDATE CASCADE
@@ -80,8 +81,8 @@ CREATE TABLE RATING (
     raterID INT,
     score INT CHECK (score >= 1 AND score <= 5),
     PRIMARY KEY(ratedID, raterID),
-    FOREIGN KEY(ratedID) REFERENCES USER_(userID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(raterID) REFERENCES USER_(userID) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY(ratedID) REFERENCES USERS(userID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(raterID) REFERENCES USERS(userID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Create a table for shipping information
@@ -90,8 +91,8 @@ CREATE TABLE SHIPPING (
     sellerID INT NOT NULL,    
     buyerID INT NOT NULL,
     weight INT NOT NULL,
-    FOREIGN KEY(sellerID) REFERENCES USER_(userID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(buyerID) REFERENCES USER_(userID) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY(sellerID) REFERENCES USERS(userID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(buyerID) REFERENCES USERS(userID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Create a table for chats between buyers and sellers
@@ -100,8 +101,8 @@ CREATE TABLE CHAT (
     buyerID INT NOT NULL,    
     sellerID INT NOT NULL,
     productID INT NOT NULL,
-    FOREIGN KEY(buyerID) REFERENCES USER_(userID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(sellerID) REFERENCES USER_(userID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(buyerID) REFERENCES USERS(userID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(sellerID) REFERENCES USERS(userID) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(productID) REFERENCES PRODUCT(productID) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
@@ -109,9 +110,11 @@ CREATE TABLE CHAT (
 CREATE TABLE MESSAGE_ (
     messageID INT PRIMARY KEY,    
     chatID INT NOT NULL,
-    date DATE NOT NULL,
+    senderID INT NOT NULL,
     messageText TEXT NOT NULL,
-    FOREIGN KEY(chatID) REFERENCES CHAT(chatID) ON DELETE CASCADE ON UPDATE CASCADE
+    messageDate DATE NOT NULL,
+    FOREIGN KEY(chatID) REFERENCES CHAT(chatID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(senderID) REFERENCES USERS(userID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Create a table for managing shipping details linked to products
@@ -129,7 +132,7 @@ CREATE TABLE CART (
     productID INT,
     quantity INT DEFAULT 1,
     PRIMARY KEY(buyerID, productID),
-    FOREIGN KEY(buyerID) REFERENCES USER_(userID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(buyerID) REFERENCES USERS(userID) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(productID) REFERENCES PRODUCT(productID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -138,7 +141,7 @@ CREATE TABLE FAVORITES (
     buyerID INT,
     productID INT,
     PRIMARY KEY(buyerID, productID),
-    FOREIGN KEY(buyerID) REFERENCES USER_(userID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(buyerID) REFERENCES USERS(userID) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(productID) REFERENCES PRODUCT(productID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -146,14 +149,36 @@ CREATE TABLE FAVORITES (
 /*******************************************************************************
    Populate Tables
 ********************************************************************************/
+-- Insert statements for the LOCATION_ table
+INSERT INTO LOCATION_ (locationID, locationName) VALUES
+(1, 'Aveiro'),
+(2, 'Beja'),
+(3, 'Braga'),
+(4, 'Bragança'),
+(5, 'Castelo Branco'),
+(6, 'Coimbra'),
+(7, 'Évora'),
+(8, 'Faro'),
+(9, 'Guarda'),
+(10, 'Leiria'),
+(11, 'Lisboa'),
+(12, 'Portalegre'),
+(13, 'Porto'),
+(14, 'Santarém'),
+(15, 'Setúbal'),
+(16, 'Viana do Castelo'),
+(17, 'Vila Real'),
+(18, 'Viseu'),
+(19, 'Açores'),
+(20, 'Madeira');
 
 -- Insert statements for the USER_ table
-INSERT INTO USER_ (userID, username, email, phoneNumber, creationDate, hashedPassword, address, isAdmin, locationID) VALUES
+INSERT INTO USERS (userID, username, email, phoneNumber, creationDate, hashedPassword, address, isAdmin, locationID) VALUES
 (1, 'FranciscoA', 'franciscompaf@gmail.com', '937222411', '2023-04-01', 'Ltw_2024', 'Rua das Flores, Porto', TRUE, 13),
 (2, 'AnaP', 'ana.pereira@example.com', '923456789', '2023-04-02', 'hashed_password_here', 'Avenida Liberdade, Lisboa', FALSE, 11),
 (3, 'MiguelC', 'miguel.correia@example.com', '934567890', '2023-04-03', 'hashed_password_here', 'Praça do Comércio, Braga', FALSE, 3),
 (4, 'SofiaG', 'sofia.gomes@example.com', '945678901', '2023-04-04', 'hashed_password_here', 'Largo da Sé, Faro', FALSE, 8),
-(5, 'RicardoR', 'ricardo.reis@example.com', '956789012', '2023-04-05', 'hashed_password_here', 'Rua Major Ávila, Coimbra', FALSE, 6)
+(5, 'RicardoR', 'ricardo.reis@example.com', '956789012', '2023-04-05', 'hashed_password_here', 'Rua Major Ávila, Coimbra', FALSE, 6);
 
 INSERT INTO BRAND (brandID, brandName) VALUES
 (1, 'Apple'),
@@ -190,28 +215,7 @@ INSERT INTO CATEGORY (categoryID, categoryName) VALUES
 (4, 'Carregadores e cabos'),
 (5, 'Power Banks');
 
--- Insert statements for the LOCATION_ table
-INSERT INTO LOCATION_ (locationID, locationName) VALUES
-(1, 'Aveiro'),
-(2, 'Beja'),
-(3, 'Braga'),
-(4, 'Bragança'),
-(5, 'Castelo Branco'),
-(6, 'Coimbra'),
-(7, 'Évora'),
-(8, 'Faro'),
-(9, 'Guarda'),
-(10, 'Leiria'),
-(11, 'Lisboa'),
-(12, 'Portalegre'),
-(13, 'Porto'),
-(14, 'Santarém'),
-(15, 'Setúbal'),
-(16, 'Viana do Castelo'),
-(17, 'Vila Real'),
-(18, 'Viseu'),
-(19, 'Açores'),
-(20, 'Madeira');
+
 
 -- Insert statements for the PRODUCT table including titles
 INSERT INTO PRODUCT (productID, sellerID, brandID, categoryID, locationID, title, description, price, condition) VALUES
@@ -259,6 +263,12 @@ INSERT INTO CART (buyerID, productID, quantity) VALUES
 (4, 1, 1),  -- Buyer 4 adds 1 iPhone 13 to their cart
 (5, 3, 1);  -- Buyer 5 adds 1 Samsung Galaxy Tab S6 to their cart
 
+-- Insert statements for the CHAT table
+INSERT INTO CHAT (chatID, buyerID, sellerID, productID) VALUES
+(1, 1, 2, 5),  -- Chat session about the Google Pixel 6 between Buyer 1 and Seller 2
+(2, 1, 3, 7),  -- Chat session about the iPhone 13 Screen Protector between Buyer 1 and Seller 3
+(3, 2, 4, 6);  -- Chat session about the Huawei MatePad Pro between Buyer 2 and Seller 4
+
 -- Insert statements for the MESSAGE_ table
 INSERT INTO MESSAGE_ (messageID, chatID, senderID, messageText, messageDate) VALUES
 (1, 1, 1, 'Hello, is the Google Pixel 6 still available?', '2023-04-01 08:30:00'),
@@ -268,8 +278,4 @@ INSERT INTO MESSAGE_ (messageID, chatID, senderID, messageText, messageDate) VAL
 (5, 3, 2, 'I am interested in the MatePad. What is the lowest price you can offer?', '2023-04-01 10:00:00'),
 (6, 3, 4, 'I can offer it for €750, including the keyboard and stylus.', '2023-04-01 10:15:00');
 
--- Insert statements for the CHAT table
-INSERT INTO CHAT (chatID, buyerID, sellerID, productID) VALUES
-(1, 1, 2, 5),  -- Chat session about the Google Pixel 6 between Buyer 1 and Seller 2
-(2, 1, 3, 7),  -- Chat session about the iPhone 13 Screen Protector between Buyer 1 and Seller 3
-(3, 2, 4, 6);  -- Chat session about the Huawei MatePad Pro between Buyer 2 and Seller 4
+

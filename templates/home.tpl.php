@@ -1,40 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="../docs/revamp.jpg">
-    <title> Revamp - Home </title>
-</head>
-<body>
-    <header>
-        <div class="header-content">
-            <h1>R E V A M P </h1>
-            <div class="search-container">
-                <form action="search" method="get">
-                    <input type="text" placeholder="Search..." class="search-input">
-                </form>
-            </div>
-            <div class="authentication-buttons">
-                <a href="login.html"> <button class="abtn"> Login </button></a>
-                <a href="register.html"> <button class="abtn"> Sign Up</button></a>
-                <a href="profile.html"> <button class="abtn"> Profile </button></a>
-            </div>
-        </div>
-    </header>
-    <div class="categories">
-        <ul>
-            <li><a href="#">Veículos</a></li>
-            <li><a href="#">Tecnologia</a></li>
-            <li><a href="#">Vestuário</a></li>
-            <li><a href="#">Calçado</a></li>
-            <li><a href="#">Filmes, Livros e Música</a></li>
-            <li><a href="#">Saúde e Beleza</a></li>
-            <li><a href="#">Serviços</a></li>
+<?php declare(strict_types = 1); ?>
 
-        </ul>
-    </div>
+<?php function drawHome() { ?>
     <main>
         <section>
             <h2> Featured </h2>
@@ -85,10 +51,4 @@
             </div>
         </section>
     </main>
-    <footer>
-        <div class="footer-container">   
-            <h3>R E V A M P © 2024</h3>
-        </div>
-    </footer>
-</body>
-</html>
+<?php } ?>

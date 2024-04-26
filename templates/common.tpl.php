@@ -11,6 +11,16 @@
         <title>Revamp - <?php echo $name; ?></title>
     </head>
     <body>
+    <div id="profileDrawer" class="profile-drawer">
+        <div class="drawer-header">
+            <button class="abtn" onclick="closeDrawer()">Fechar</button>
+        </div>
+        <div class="drawer-content">
+            <p>Nome: <b>Francisco</b></p>
+            <p>Email: <b>franciscoafonso04@outlook.pt</b></p>
+        </div>
+    </div>
+    <div class="body-container"> <!-- Início do container flexível -->
 <?php } ?>
 
 <?php function drawHeader($showAuthButtons = false) { ?>
@@ -27,21 +37,7 @@
                     <a href="login.php"> <button class="abtn"> Login </button></a>
                     <a href="register.php"> <button class="abtn"> Sign Up</button></a>
                 <?php else: ?>
-                    <a href="favorites.php"> <button class="abtn"> &#9829; </button></a>
-                    <div id="drawer" class="drawer">
-                    
-                    <h2>Favorites</h2>
-                        <p>This is some content inside the drawer.</p>
-                    </div>
-                
-                    <a href="cart.php"> <button class="abtn"> &#128722; </button></a>
-                    <div id="drawer" class="drawer">
-
-                    <h2>Cart</h2>
-                        <p>This is some content inside the drawer.</p>
-                    </div>
-
-                    <a href="profile.php"> <button class="abtn"> Profile </button></a>
+                    <button onclick="openDrawer()" class="abtn"> Profile </button>
                 <?php endif; ?>
     
                 <script src="script.js"></script>
@@ -57,17 +53,27 @@
             <li><a href="#">Filmes, Livros e Música</a></li>
             <li><a href="#">Saúde e Beleza</a></li>
             <li><a href="#">Serviços</a></li>
-
         </ul>
     </div>
 <?php } ?>
 
 <?php function drawFooter() { ?>
+    </div> <!-- Fim do container do conteúdo principal -->
     <footer>
         <div class="footer-container">   
             <h3>R E V A M P © 2024</h3>
         </div>
     </footer>
+    <script>
+    function openDrawer() {
+        document.getElementById('profileDrawer').classList.add('open');
+    }
+
+    function closeDrawer() {
+        document.getElementById('profileDrawer').classList.remove('open');
+    }
+    </script>
 </body>
 </html>
 <?php } ?>
+

@@ -2,53 +2,58 @@
 
 <?php function drawHome() { ?>
     <main>
-        <section>
-            <h2> Featured </h2>
+        <div class="featured">
+            <h2>Featured</h2>
             <div class="flex-container">
                 <div class="flex-row">
-                    <div class="flex-item"> 
-                        <img src="../temp/iphone.jpg"  alt="no image">
-                        <p> Iphone 15 </p>
+                    <div class="flex-item">
+                        <div class="item-image">
+                            <img src="../temp/iphone.jpg" alt="Iphone 13">
+                        </div>
+                        <div class="item-details">
+                            <h3>Iphone 13</h3>
+                            <p> Porto </p>
+                        </div>
                     </div>
-                    <div class="flex-item"> 
-                        <img src="../temp/iphone.jpg"  alt="no image">
-                        <p> Iphone 14 </p>
+                    <div class="flex-item">
+                        <div class="item-image">
+                            <img src="../temp/iphone.jpg" alt="Iphone 13">
+                        </div>
+                        <div class="item-details">
+                            <h3>Iphone 13 mini</h3>
+                            <p> Lisboa </p>
+                        </div>
                     </div>
-                    <div class="flex-item"> 
-                        <img src="../temp/iphone.jpg"  alt="no image">
-                        <p> Iphone 13 </p>
+                    <div class="flex-item">
+                        <div class="item-image">
+                            <img src="../temp/iphone.jpg" alt="Iphone 13">
+                        </div>
+                        <div class="item-details">
+                            <h3>Iphone 13</h3>
+                            <p> Coimbra </p>
+                        </div>
                     </div>
-                    <div class="flex-item"> 
-                        <img src="../temp/iphone.jpg"  alt="no image">
-                        <p> Iphone 12</p>
+                    <div class="flex-item">
+                        <div class="item-image">
+                            <img src="../temp/iphone.jpg" alt="Iphone 13">
+                        </div>
+                        <div class="item-details">
+                            <h3>Iphone 13 mini </h3>
+                            <p> Porto </p>
+                        </div>
                     </div>
+                    <div class="flex-item">
+                        <div class="item-image">
+                            <img src="../temp/iphone.jpg" alt="Iphone 13">
+                        </div>
+                        <div class="item-details">
+                            <h3>Iphone 13 mini </h3>
+                            <p> Porto </p>
+                        </div>
+                    </div>
+                    <!-- Repita para os outros itens -->
                 </div>
             </div>
-        </section>
-        <section>
-            <h2>
-                Featured
-            </h2>
-            <div class="flex-container">
-                <div class="flex-row">
-                    <div class="flex-item"> 
-                        <img src="../temp/note7.jpg"  alt="no image">
-                        <p> Samsung Note 7 </p>
-                    </div>
-                    <div class="flex-item"> 
-                        <img src="../temp/note7.jpg"  alt="no image">
-                        <p> Samsung Note 8 </p>
-                    </div>
-                    <div class="flex-item"> 
-                        <img src="../temp/note7.jpg"  alt="no image">
-                        <p> Samsung Note 9 </p>
-                    </div>
-                    <div class="flex-item"> 
-                        <img src="../temp/note7.jpg"  alt="no image">
-                        <p> Samsung Note 10 </p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
     </main>
 <?php } ?>

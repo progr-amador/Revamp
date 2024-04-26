@@ -8,5 +8,4 @@
 
   drawHead($name);
   drawProfile();
-  drawFooter();
 ?>

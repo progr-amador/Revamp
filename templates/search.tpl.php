@@ -1,10 +1,30 @@
 <?php declare(strict_types = 1); ?>
 
 <?php function drawSearch() { ?>
-    <main>
+    <main id = "search">
         <section id="listings">
         <div class="flex-container">
             <div class="flex-row">
+                <div class="flex-item"> 
+                    <img src="../temp/gato.png"  alt="no image">
+                    <p> Gato </p>
+                </div>
+                <div class="flex-item"> 
+                    <img src="../temp/gato.png"  alt="no image">
+                    <p> Gato </p>
+                </div>
+                <div class="flex-item"> 
+                    <img src="../temp/gato.png"  alt="no image">
+                    <p> Gato </p>
+                </div>
+                <div class="flex-item"> 
+                    <img src="../temp/gato.png"  alt="no image">
+                    <p> Gato </p>
+                </div>
+                <div class="flex-item"> 
+                    <img src="../temp/gato.png"  alt="no image">
+                    <p> Gato </p>
+                </div>
                 <div class="flex-item"> 
                     <img src="../temp/gato.png"  alt="no image">
                     <p> Gato </p>
@@ -30,24 +50,32 @@
         </section>
         <section id="filters">
         <form>
+            <label> 
+            Preço
             <fieldset>
-                <legend>Preço</legend>
                 <br>
+                <label>
                 De: 
                 <input type="number" name="more than" placeholder="0€">
+                </label>
+                <label>
                 Até:
                 <input type="number" name="less than" placeholder="1000€">
+                </label>
             </fieldset>
+            </label>
             <br>
-            <fieldset>
-                <legend>Condição</legend>       
+            <label>
+            Condição
+            <fieldset id = "estado">
                 <label>Como novo<input type="checkbox" name="como novo" ></label>
                 <label>Muito bom<input type="checkbox" name="muito bom"></label>
                 <label>Bom<input type="checkbox" name="bom"></label>
                 <label>Satisfatório<input type="checkbox" name="satisfatorio"></label>
             </fieldset>
+            </label>
             <br>
-            <label>
+            <label id = "regiao">
             Região
             <select name="regiao">
                 <option value="">&mdash;</option>
@@ -76,7 +104,9 @@
                     <option value="FA">Faro</option>
                 </optgroup>
             </select>
+            </label>
             <br>
+            <label id = "categoria">
             Categoria
             <select name="categoria">
                 <option value="">&mdash;</option>
@@ -95,6 +125,7 @@
                     <option value="PL">Carrera</option>
                 </optgroup>
             </select>
+            </label>
             <br>
             <label>
                 <button formaction="save.php" formmethod="get" type="submit">

@@ -46,13 +46,12 @@
     </header>
     <div class="categories">
         <ul>
-            <li><a href="#">Veículos</a></li>
-            <li><a href="#">Tecnologia</a></li>
-            <li><a href="#">Vestuário</a></li>
-            <li><a href="#">Calçado</a></li>
-            <li><a href="#">Filmes, Livros e Música</a></li>
-            <li><a href="#">Saúde e Beleza</a></li>
-            <li><a href="#">Serviços</a></li>
+            <li><a href="#">Telemóveis</a></li>
+            <li><a href="#">Tablets</a></li>
+            <li><a href="#">Capas e Películas</a></li>
+            <li><a href="#">Carregadores e cabos</a></li>
+            <li><a href="#">Power Banks</a></li>
+        
         </ul>
     </div>
 <?php } ?>

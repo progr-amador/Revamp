@@ -34,5 +34,51 @@
             $stmt->execute(array($this->name,this->id));
         }
 
+        static function getUsersWithPassword(PDO $db, string $email, string $password) : ?Users {
+            $stmt = $db->prepare('
+              SELECT userId, username, email, phoneNumber, creationDate, address, locationID, isAdmin
+              FROM USERS
+              JOIN LOCATION using (locationID) 
+              WHERE lower(email) = ? AND password = ?
+            ');
+      
+            $stmt->execute(array(strtolower($email), sha1($password)));
+        
+            if ($user = $stmt->fetch()) {
+              return new Customer(
+                $user['CustomerId'],
+                $user['username'],
+                $user['email'],
+                $user['phoneNumber'],
+                $user['creationDate'],
+                $user['address'],
+                $user['locationID'],
+                $user['isAdmin'],
+              );
+            } else return null;
+          }
+      
+          static function getUser(PDO $db, int $id) : Customer {
+            $stmt = $db->prepare('
+              SELECT userId, username, email, phoneNumber, creationDate, address, locationID, isAdmin
+              FROM USERS
+              WHERE CustomerId = ?
+            ');
+      
+            $stmt->execute(array($id));
+            $user = $stmt->fetch();
+            
+            return new Customer(
+                $user['CustomerId'],
+                $user['username'],
+                $user['email'],
+                $user['phoneNumber'],
+                $user['creationDate'],
+                $user['address'],
+                $user['locationID'],
+                $user['isAdmin'],
+              );
+          }
+
     }
 ?>

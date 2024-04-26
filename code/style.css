@@ -4,6 +4,7 @@
 
 body {
     font-family: 'Prompt', sans-serif;
+    height: 100%;
     margin: 0;
     background-color: #cce3f3f5;
     color: #333;
@@ -324,6 +325,20 @@ h3 {
     
 }
 
+.drawer {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top:0;
+    right:-250px;
+    background-color:#8DCE92;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.5);
+    transition: right 0.3s;
+}
+
+.drawer.open {
+    right:0;
+}
 
 
 

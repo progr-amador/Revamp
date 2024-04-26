@@ -1,6 +1,7 @@
 <?php declare(strict_types = 1); ?>
 
 <?php function drawProfile() { ?>
+    
     <header>
         <div class="header-content">
             <h1>R E V A M P</h1>
@@ -21,4 +22,5 @@
             </div>
         </div>
     </main>
+    
 <?php } ?>

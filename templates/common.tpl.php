@@ -13,7 +13,7 @@
     <body>
 <?php } ?>
 
-<?php function drawHeader() { ?>
+<?php function drawHeader($showAuthButtons = false) { ?>
     <header>
         <div class="header-content">
             <h1>R E V A M P</h1>
@@ -23,8 +23,28 @@
                 </form>
             </div>
             <div class="authentication-buttons">
-                <a href="login.php"> <button class="abtn"> Login </button></a>
-                <a href="register.php"> <button class="abtn"> Sign Up</button></a>
+                <?php if ($showAuthButtons): ?>
+                    <a href="login.php"> <button class="abtn"> Login </button></a>
+                    <a href="register.php"> <button class="abtn"> Sign Up</button></a>
+                <?php else: ?>
+                    <a href="favorites.php"> <button class="abtn"> &#9829; </button></a>
+                    <div id="drawer" class="drawer">
+                    
+                    <h2>Favorites</h2>
+                        <p>This is some content inside the drawer.</p>
+                    </div>
+                
+                    <a href="cart.php"> <button class="abtn"> &#128722; </button></a>
+                    <div id="drawer" class="drawer">
+
+                    <h2>Cart</h2>
+                        <p>This is some content inside the drawer.</p>
+                    </div>
+
+                    <a href="profile.php"> <button class="abtn"> Profile </button></a>
+                <?php endif; ?>
+    
+                <script src="script.js"></script>
             </div>
         </div>
     </header>

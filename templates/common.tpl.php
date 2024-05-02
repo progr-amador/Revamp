@@ -26,9 +26,9 @@
 <?php function drawHeader($showAuthButtons = false) { ?>
     <header>
         <div class="header-content">
-            <h1>R E V A M P</h1>
+            <h1><a href="home.php"> R E V A M P </a></h1>
             <div class="search-container">
-                <form action="search" method="get">
+                <form action="search.php" method="get">
                     <input type="text" placeholder="Search..." class="search-input">
                 </form>
             </div>
@@ -60,7 +60,7 @@
     </div> <!-- Fim do container do conteúdo principal -->
     <footer>
         <div class="footer-container">   
-            <h3>R E V A M P © 2024</h3>
+            <h3><a href="home.php"> R E V A M P © 2024 </a></h3>
         </div>
     </footer>
     <script>

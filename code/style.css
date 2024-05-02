@@ -16,6 +16,22 @@ body {
     color: #333;
 }
 
+main {
+    width: 70%;
+    align-self: center;
+}
+
+@media (max-width: 50em) {
+    main {
+        width: 100%;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 /********** HEADER ***********/
 
 .header-content {
@@ -49,7 +65,6 @@ header > h1 {
     border: 1px solid whitesmoke;
     border-radius: 5px;
 }
-
 
 /********** CATEGORIES ***********/
 
@@ -353,9 +368,12 @@ h3 {
     flex: 1 0 15em; /* Set flex-basis to 10em */
 }
 
+form {
+    margin: 6px;
+}
 
 fieldset {
-    border: 2px solid whitesmoke;
+    border: 3px solid whitesmoke;
     border-radius: 8px;
     padding: 10px;
     margin-bottom: 20px;
@@ -367,10 +385,10 @@ legend {
 }
 
 input[type="number"] {
-    width: 30%;
+    width: 100%;
     padding: 10px;
     margin: 5px 0;
-    border: 1px solid whitesmoke;
+    border: 2px solid whitesmoke;
     border-radius: 4px;
     box-sizing: border-box;
 }
@@ -379,7 +397,7 @@ select {
     width: 100%;
     padding: 10px;
     margin: 5px 0;
-    border: 1px solid whitesmoke;
+    border: 2px solid whitesmoke;
     border-radius: 4px;
     box-sizing: border-box;
 }
@@ -389,15 +407,38 @@ select {
 }
 
 button[type="submit"] {
-    background-color: var(--accent-color); /* Green */
-    padding: 14px 20px;
-    margin: 8px 0;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: var(--accent-color);
     border: none;
+    border-radius: 5px;
+    color: var(--main-color);
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin: 5px 0;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--hover-color);
+    color: whitesmoke;
+}
+
+/*input[type="checkbox"] {
+    display: none;
+}*/
+
+#estado label {
+    margin: 5px 0;
+    padding: 10px 20px;
+    border: 2px solid whitesmoke;
     border-radius: 4px;
     cursor: pointer;
-    width: 100%;
-    color: var(--hover-color);
-    font-family: 'Archivo Black', sans-serif;
+}
+
+input[type="checkbox"]:checked + #estado>label {
+    background-color: #20cf46;
+    color: #fff;
 }
 
 
@@ -481,7 +522,7 @@ button[type="submit"] {
     font-style: italic;
 }
 
-.buy-now {
+.buy-now, .message{
     padding: 10px 20px;
     background-color: var(--accent-color);
     border: none;
@@ -492,7 +533,7 @@ button[type="submit"] {
     transition: background-color 0.3s;
 }
 
-.buy-now:hover {
+.buy-now:hover, .message:hover {
     background-color: var(--hover-color);
     color: whitesmoke;
 }

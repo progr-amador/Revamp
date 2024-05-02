@@ -7,43 +7,43 @@
             <div class="flex-row">
                 <div class="flex-item"> 
                     <img src="../temp/gato.png"  alt="no image">
-                    <p> Gato </p>
+                    <p> <a href="product.php"> Gato </a> </p>
                 </div>
                 <div class="flex-item"> 
                     <img src="../temp/gato.png"  alt="no image">
-                    <p> Gato </p>
+                    <p> <a href="product.php"> Gato </a> </p>
                 </div>
                 <div class="flex-item"> 
                     <img src="../temp/gato.png"  alt="no image">
-                    <p> Gato </p>
+                    <p> <a href="product.php"> Gato </a> </p>
                 </div>
                 <div class="flex-item"> 
                     <img src="../temp/gato.png"  alt="no image">
-                    <p> Gato </p>
+                    <p> <a href="product.php"> Gato </a> </p>
                 </div>
                 <div class="flex-item"> 
                     <img src="../temp/gato.png"  alt="no image">
-                    <p> Gato </p>
+                    <p> <a href="product.php"> Gato </a> </p>
                 </div>
                 <div class="flex-item"> 
                     <img src="../temp/gato.png"  alt="no image">
-                    <p> Gato </p>
+                    <p> <a href="product.php"> Gato </a> </p>
                 </div>
                 <div class="flex-item"> 
                     <img src="../temp/gato.png"  alt="no image">
-                    <p> Gato </p>
+                    <p> <a href="product.php"> Gato </a> </p>
                 </div>
                 <div class="flex-item"> 
                     <img src="../temp/gato.png"  alt="no image">
-                    <p> Gato </p>
+                    <p> <a href="product.php"> Gato </a> </p>
                 </div>
                 <div class="flex-item"> 
                     <img src="../temp/gato.png"  alt="no image">
-                    <p> Gato </p>
+                    <p> <a href="product.php"> Gato </a> </p>
                 </div>
                 <div class="flex-item"> 
                     <img src="../temp/gato.png"  alt="no image">
-                    <p> Gato </p>
+                    <p> <a href="product.php"> Gato </a> </p>
                 </div>
             </div>
         </div>
@@ -53,18 +53,10 @@
             <label> 
             Preço
             <fieldset>
-                <br>
-                <label>
-                De: 
                 <input type="number" name="more than" placeholder="0€">
-                </label>
-                <label>
-                Até:
                 <input type="number" name="less than" placeholder="1000€">
-                </label>
             </fieldset>
             </label>
-            <br>
             <label>
             Condição
             <fieldset id = "estado">
@@ -74,7 +66,6 @@
                 <label>Satisfatório<input type="checkbox" name="satisfatorio"></label>
             </fieldset>
             </label>
-            <br>
             <label id = "regiao">
             Região
             <select name="regiao">
@@ -105,7 +96,6 @@
                 </optgroup>
             </select>
             </label>
-            <br>
             <label id = "categoria">
             Categoria
             <select name="categoria">
@@ -126,7 +116,6 @@
                 </optgroup>
             </select>
             </label>
-            <br>
             <label>
                 <button formaction="save.php" formmethod="get" type="submit">
                 Submit

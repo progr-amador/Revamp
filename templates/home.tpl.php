@@ -11,7 +11,7 @@
                             <img src="../temp/iphone.jpg" alt="Iphone 13">
                         </div>
                         <div class="item-details">
-                            <h3>Iphone 13</h3>
+                            <h3> <a href="product.php"> Iphone 13 </a> </h3>
                             <p> Porto </p>
                         </div>
                     </div>
@@ -20,7 +20,7 @@
                             <img src="../temp/iphone.jpg" alt="Iphone 13">
                         </div>
                         <div class="item-details">
-                            <h3>Iphone 13 mini</h3>
+                            <h3> <a href="product.php"> Iphone 13 mini  </a> </h3>
                             <p> Lisboa </p>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                             <img src="../temp/iphone.jpg" alt="Iphone 13">
                         </div>
                         <div class="item-details">
-                            <h3>Iphone 13</h3>
+                            <h3> <a href="product.php"> Iphone 13  </a> </h3>
                             <p> Coimbra </p>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                             <img src="../temp/iphone.jpg" alt="Iphone 13">
                         </div>
                         <div class="item-details">
-                            <h3>Iphone 13 mini </h3>
+                            <h3> <a href="product.php"> Iphone 13 mini  </a></h3>
                             <p> Porto </p>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                             <img src="../temp/iphone.jpg" alt="Iphone 13">
                         </div>
                         <div class="item-details">
-                            <h3>Iphone 13 mini </h3>
+                            <h3> <a href="product.php">Iphone 13 mini </a></h3>
                             <p> Porto </p>
                         </div>
                     </div>

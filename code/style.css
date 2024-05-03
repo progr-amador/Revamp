@@ -447,24 +447,29 @@ input[type="checkbox"]:checked + #estado>label {
     top: 0;
     width: 400px; /* Largura do drawer */
     height: 100%;
+    
     background-color: whitesmoke; /* Fundo branco */
-    box-shadow: -4px 0 8px --hint-color; /* Sombra para destacar */
+     /* Sombra para destacar */
     transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
-    z-index: 1000; /* Garantir que o drawer esteja acima de outros elementos */
+    z-index: 1000;
+     /* Garantir que o drawer esteja acima de outros elementos */
 }
 
 .profile-drawer.open {
-    transform: translateX(0); /* Abrir o drawer */
+    transform: translateX(0);
+    box-shadow: -8px 0 15px -3px rgba(0, 0, 0, 0.5); /* Abrir o drawer */
 }
 
 .drawer-header {
     background-color: var(--main-color); /* Cor do cabeçalho do drawer como no header */
     color: whitesmoke; /* Texto branco */
-    padding: 15px 20px; /* Espaçamento interno */
+    padding: 10px 20px; /* Espaçamento interno */
     display: flex;
     justify-content: space-between; /* Espaçamento entre o título e o botão */
     align-items: center;
+    
+    
 }
 
 .drawer-content {

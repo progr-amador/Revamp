@@ -13,11 +13,33 @@
     <body>
     <div id="profileDrawer" class="profile-drawer">
         <div class="drawer-header">
-            <button class="abtn" onclick="closeDrawer()">Fechar</button>
+        <h1> Profile </h1>
+            <button class="abtn" onclick="closeProfileDrawer()">Fechar</button>
         </div>
         <div class="drawer-content">
             <p>Nome: <b>Francisco</b></p>
             <p>Email: <b>franciscoafonso04@outlook.pt</b></p>
+        </div>
+    </div>
+    <div id="cartDrawer" class="profile-drawer">
+        <div class="drawer-header">
+        <h1> Cart </h1>
+            <button class="abtn" onclick="closeCartDrawer()">Fechar</button>
+        </div>
+        <div class="drawer-content">
+            <p> Cart </p>
+            <p> Iphone 13 </p>
+        </div>
+    </div>
+    <div id="favoritesDrawer" class="profile-drawer">
+        <div class="drawer-header">
+            
+            <h1> Favorites </h1>
+            <button class="abtn" onclick="closeFavoritesDrawer()">Fechar</button>
+        </div>
+        <div class="drawer-content">
+            <p> Favorites</b></p>
+            <p> Iphone 13 mini</p>
         </div>
     </div>
     <div class="body-container"> <!-- Início do container flexível -->
@@ -37,7 +59,9 @@
                     <a href="login.php"> <button class="abtn"> Login </button></a>
                     <a href="register.php"> <button class="abtn"> Sign Up</button></a>
                 <?php else: ?>
-                    <button onclick="openDrawer()" class="abtn"> Profile </button>
+                    <button onclick="openProfileDrawer()" class="abtn"> Profile </button>
+                    <button onclick="openCartDrawer()" class="abtn"> Cart </button>
+                    <button onclick="openFavoritesDrawer()" class="abtn"> Favorites </button>
                 <?php endif; ?>
     
                 <script src="script.js"></script>
@@ -64,12 +88,26 @@
         </div>
     </footer>
     <script>
-    function openDrawer() {
+    function openProfileDrawer() {
         document.getElementById('profileDrawer').classList.add('open');
     }
 
-    function closeDrawer() {
+    function closeProfileDrawer() {
         document.getElementById('profileDrawer').classList.remove('open');
+    }
+    function openCartDrawer() {
+        document.getElementById('cartDrawer').classList.add('open');
+    }
+
+    function closeCartDrawer() {
+        document.getElementById('cartDrawer').classList.remove('open');
+    }
+    function openFavoritesDrawer() {
+        document.getElementById('favoritesDrawer').classList.add('open');
+    }
+
+    function closeFavoritesDrawer() {
+        document.getElementById('favoritesDrawer').classList.remove('open');
     }
     </script>
 </body>

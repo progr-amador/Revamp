@@ -9,10 +9,9 @@
         public int $location;
         public int $price;
         public int $condition;
-    }
 
     public function __construct(int $id,int $seller,int $brand,int $category,int $location,int $price,int $condition){
-        $this->id = $id;
+      $this->id = $id;
       $this->seller = $seller;
       $this->brand = $brand;
       $this->category = $category;
@@ -86,5 +85,6 @@
 
         return $products;
     }
+  }
 
 ?>

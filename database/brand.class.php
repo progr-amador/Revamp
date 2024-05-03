@@ -4,7 +4,6 @@
     class Brand{
         public int $id;
         public string $name;
-    }
 
     public function __construct(int $id, string $name){
         $this->id = $id;
@@ -45,7 +44,7 @@
         return $brands;
       }
 
-      static function getBrands(PDO $db, int $id) : array {
+      static function getBrand(PDO $db, int $id) : array {
         $stmt = $db->prepare(
             'SELECT brandID, brandName FROM BRAND WHERE brandID= ?');
 
@@ -58,7 +57,7 @@
             $brand['brandName']
           );
       }
-
+    }
 
 
 

@@ -1,6 +1,6 @@
-<?php 
-    declare(strict_types = 1);
+<?php declare(strict_types = 1); ?>
 
+<?php   
     function getProductDetails() {
         // This function simulates fetching product details from a database
         return [
@@ -13,8 +13,8 @@
             'seller' => 'francisco',
         ];
     }
-
-    function drawProduct() {
+?>
+<?php function drawProduct() {
         $product = getProductDetails(); ?>
     <main>
         <div class="product-container">

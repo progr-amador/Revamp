@@ -17,7 +17,7 @@ body {
 }
 
 main {
-    width: 70%;
+    width: 80%;
     align-self: center;
 }
 
@@ -53,17 +53,16 @@ header > h1 {
 /********** SEARCH ***********/
 
 .search-container {
-    display: flex;
-    justify-content: center; /* Centers the search bar */
-    padding: 10px;
+    width: 50em;
 }
 
 .search-input {
-    width: 100%; /* Takes full width of the container */
+    width: 90%; /* Takes full width of the container */
     padding: 8px;
     margin-right: 5px; /* Optional: Adjusts spacing if needed */
-    border: 1px solid whitesmoke;
+    border: 0px solid whitesmoke;
     border-radius: 5px;
+    height: 3em;
 }
 
 /********** CATEGORIES ***********/

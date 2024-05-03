@@ -46,11 +46,11 @@
     </header>
     <div class="categories">
         <ul>
-            <li><a href="#">Telemóveis</a></li>
-            <li><a href="#">Tablets</a></li>
-            <li><a href="#">Capas e Películas</a></li>
-            <li><a href="#">Carregadores e cabos</a></li>
-            <li><a href="#">Power Banks</a></li>
+            <li><a href="category.php">Telemóveis</a></li>
+            <li><a href="category.php">Tablets</a></li>
+            <li><a href="category.php">Capas e Películas</a></li>
+            <li><a href="category.php">Carregadores e cabos</a></li>
+            <li><a href="category.php">Power Banks</a></li>
         
         </ul>
     </div>

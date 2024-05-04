@@ -8,6 +8,8 @@
       public int $category;
       public int $location;
       public int $price;
+      public string $title;
+      public string $description;
       public int $condition;
 
     public function __construct(int $id,int $seller,int $brand,int $category,int $location,int $price,int $condition){
@@ -17,21 +19,57 @@
       $this->category = $category;
       $this->location = $location;
       $this->price = $price;
+      $this->title = $title;
+      $this->description = $description;
       $this->condition = $condition;
     }
 
-    static function getProducts(PDO $db): array{
+    static function getFeatured(PDO $db): array{
       $stmt = $db->prepare('
-        SELECT *
+        SELECT title, price, locationName AS location, photoURL
         FROM PRODUCT
+        JOIN LOCATION_ USING (locationID)
+        JOIN PHOTO USING (productID)
+        ORDER BY price ASC
+        LIMIT 4
       ');
 
       $stmt->execute();
-
       $products = $stmt->fetchAll();
-
       return $products;
     }
+
+    static function getFavorites(PDO $db): array{
+      $stmt = $db->prepare('
+        SELECT title, price, locationName AS location, photoURL
+        FROM PRODUCT
+        JOIN LOCATION_ USING (locationID)
+        JOIN PHOTO USING (productID)
+        ORDER BY price DESC
+        LIMIT 3
+      ');
+
+      $stmt->execute();
+      $products = $stmt->fetchAll();
+      return $products;
+    }
+
+    static function getSearched(PDO $db, string $search): array {
+      $stmt = $db->prepare('
+        SELECT title, price, locationName AS location, photoURL
+        FROM PRODUCT
+        JOIN LOCATION_ USING (locationID)
+        JOIN PHOTO USING (productID)
+        WHERE title LIKE ?
+        ORDER BY price ASC
+      ');
+  
+      $stmt->execute(array("%$search%")); 
+      $products = $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch the results
+      return $products;
+    }
+
+    
 
     static function getProductSeller(PDO $db, int$id): array{
         $stmt = $db->prepare('

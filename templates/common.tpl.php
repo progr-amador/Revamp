@@ -51,7 +51,7 @@
             <h1><a href="home.php"> R E V A M P </a></h1>
             <div class="search-container">
                 <form action="search.php" method="get">
-                    <input type="text" placeholder="Search..." class="search-input">
+                    <input type="text" name="query" placeholder="Search..." class="search-input">
                 </form>
             </div>
             <div class="authentication-buttons">
@@ -112,5 +112,22 @@
     </script>
 </body>
 </html>
+<?php } ?>
+
+<?php function drawProductCard($products) { ?>
+    <?php foreach ($products as $product) { ?>
+        <div class="flex-item">
+            <a href="product.php">
+                <div class="item-image">
+                    <img src="<?php echo $product['photoURL']; ?>" alt="Image for <?php echo $product['title']; ?>">
+                </div>
+                <div class="item-details">                   
+                    <h3><?php echo $product['title']; ?></h3>
+                    <p><?php echo $product['price']; ?></p>
+                    <p><?php echo $product['location']; ?></p>
+                </div>
+            </a>
+        </div>
+    <?php } ?>
 <?php } ?>
 

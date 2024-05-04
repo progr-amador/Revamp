@@ -1,50 +1,11 @@
 <?php declare(strict_types = 1); ?>
 
-<?php function drawSearch() { ?>
+<?php function drawSearch($searched) { ?>
     <main id = "search">
         <section id="listings">
         <div class="flex-container">
             <div class="flex-row">
-                <div class="flex-item"> 
-                    <img src="../temp/gato.png"  alt="no image">
-                    <p> <a href="product.php"> Gato </a> </p>
-                </div>
-                <div class="flex-item"> 
-                    <img src="../temp/gato.png"  alt="no image">
-                    <p> <a href="product.php"> Gato </a> </p>
-                </div>
-                <div class="flex-item"> 
-                    <img src="../temp/gato.png"  alt="no image">
-                    <p> <a href="product.php"> Gato </a> </p>
-                </div>
-                <div class="flex-item"> 
-                    <img src="../temp/gato.png"  alt="no image">
-                    <p> <a href="product.php"> Gato </a> </p>
-                </div>
-                <div class="flex-item"> 
-                    <img src="../temp/gato.png"  alt="no image">
-                    <p> <a href="product.php"> Gato </a> </p>
-                </div>
-                <div class="flex-item"> 
-                    <img src="../temp/gato.png"  alt="no image">
-                    <p> <a href="product.php"> Gato </a> </p>
-                </div>
-                <div class="flex-item"> 
-                    <img src="../temp/gato.png"  alt="no image">
-                    <p> <a href="product.php"> Gato </a> </p>
-                </div>
-                <div class="flex-item"> 
-                    <img src="../temp/gato.png"  alt="no image">
-                    <p> <a href="product.php"> Gato </a> </p>
-                </div>
-                <div class="flex-item"> 
-                    <img src="../temp/gato.png"  alt="no image">
-                    <p> <a href="product.php"> Gato </a> </p>
-                </div>
-                <div class="flex-item"> 
-                    <img src="../temp/gato.png"  alt="no image">
-                    <p> <a href="product.php"> Gato </a> </p>
-                </div>
+                <?php drawProductCard($searched) ?>
             </div>
         </div>
         </section>

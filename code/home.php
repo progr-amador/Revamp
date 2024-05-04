@@ -11,10 +11,11 @@
 
   $db = getDatabaseConnection();
 
-  $products = Product::getProducts($db);
+  $featured = Product::getFeatured($db);
+  $favorites = Product::getFavorites($db);
 
   drawHead($name);
   drawHeader();
-  drawHome($products);
+  drawHome($featured, $favorites);
   drawFooter();
 ?>

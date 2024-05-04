@@ -1,59 +1,27 @@
 <?php declare(strict_types = 1); ?>
 
-<?php function drawHome() { ?>
+<?php function drawHome($products) { ?>
     <main>
         <div class="featured">
             <h2>Featured</h2>
             <div class="flex-container">
                 <div class="flex-row">
+                <?php foreach ($products as $product) { ?>
                     <div class="flex-item">
                         <div class="item-image">
-                            <img src="../temp/iphone.jpg" alt="Iphone 13">
+                            <img src="../temp/iphone.jpg" alt="<?php echo $product['title']; ?>">
                         </div>
                         <div class="item-details">
-                            <h3> <a href="product.php"> Iphone 13 </a> </h3>
-                            <p> Porto </p>
+                            <h3><?php echo $product['title']; ?></h3>
+                            <p><?php echo $product['price']; ?></p>
                         </div>
                     </div>
-                    <div class="flex-item">
-                        <div class="item-image">
-                            <img src="../temp/iphone.jpg" alt="Iphone 13">
-                        </div>
-                        <div class="item-details">
-                            <h3> <a href="product.php"> Iphone 13 mini  </a> </h3>
-                            <p> Lisboa </p>
-                        </div>
-                    </div>
-                    <div class="flex-item">
-                        <div class="item-image">
-                            <img src="../temp/iphone.jpg" alt="Iphone 13">
-                        </div>
-                        <div class="item-details">
-                            <h3> <a href="product.php"> Iphone 13  </a> </h3>
-                            <p> Coimbra </p>
-                        </div>
-                    </div>
-                    <div class="flex-item">
-                        <div class="item-image">
-                            <img src="../temp/iphone.jpg" alt="Iphone 13">
-                        </div>
-                        <div class="item-details">
-                            <h3> <a href="product.php"> Iphone 13 mini  </a></h3>
-                            <p> Porto </p>
-                        </div>
-                    </div>
-                    <div class="flex-item">
-                        <div class="item-image">
-                            <img src="../temp/iphone.jpg" alt="Iphone 13">
-                        </div>
-                        <div class="item-details">
-                            <h3> <a href="product.php">Iphone 13 mini </a></h3>
-                            <p> Porto </p>
-                        </div>
-                    </div>
+                <?php } ?>
                     <!-- Repita para os outros itens -->
                 </div>
             </div>
         </div>
     </main>
 <?php } ?>
+
+

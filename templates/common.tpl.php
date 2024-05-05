@@ -70,11 +70,11 @@
     </header>
     <div class="categories">
         <ul>
-            <li><a href="category.php">Telemóveis</a></li>
-            <li><a href="category.php">Tablets</a></li>
-            <li><a href="category.php">Capas e Películas</a></li>
-            <li><a href="category.php">Carregadores e cabos</a></li>
-            <li><a href="category.php">Power Banks</a></li>
+            <li><a href="category.php?id=Telemóveis">Telemóveis</a></li>
+            <li><a href="category.php?id=Tablets">Tablets</a></li>
+            <li><a href="category.php?id=Capas e Películas">Capas e Películas</a></li>
+            <li><a href="category.php?id=Carregadores e Cabos">Carregadores e cabos</a></li>
+            <li><a href="category.php?id=Power Banks">Power Banks</a></li>
         
         </ul>
     </div>
@@ -117,14 +117,14 @@
 <?php function drawProductCard($products) { ?>
     <?php foreach ($products as $product) { ?>
         <div class="flex-item">
-            <a href="product.php">
+            <a href="product.php?id=<?php echo $product['productID']; ?>">
                 <div class="item-image">
                     <img src="<?php echo $product['photoURL']; ?>" alt="Image for <?php echo $product['title']; ?>">
                 </div>
                 <div class="item-details">                   
-                    <h3><?php echo $product['title']; ?></h3>
-                    <p><?php echo $product['price']; ?></p>
-                    <p><?php echo $product['location']; ?></p>
+                    <h3 id="title"><?php echo $product['title']; ?></h3>
+                    <p id="price"><?php echo $product['price']; ?> €</p>
+                    <p id="location"><?php echo $product['location']; ?></p>
                 </div>
             </a>
         </div>

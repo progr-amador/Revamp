@@ -2,7 +2,7 @@
 
 <?php function drawHome($featured, $favorites, $loggedin = false) { ?>
     <main>
-        <div class="featured">
+        <div class="item-list">
             <h2>Featured</h2>
             <div class="flex-container">
                 <div class="flex-row">
@@ -10,7 +10,7 @@
                 </div>
             </div>
         </div>
-        <div class="favorites">
+        <div class="item-list">
             <h2>Favorites</h2>
             <div class="flex-container">
                 <div class="flex-row">

@@ -3,11 +3,13 @@
 <?php function drawSearch($searched) { ?>
     <main id = "search">
         <section id="listings">
-        <div class="flex-container">
-            <div class="flex-row">
-                <?php drawProductCard($searched) ?>
+            <div class="item-list">
+                <div class="flex-container">
+                    <div class="flex-row">
+                        <?php drawProductCard($searched) ?>
+                    </div>
+                </div>
             </div>
-        </div>
         </section>
         <section id="filters">
         <form>

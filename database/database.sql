@@ -212,7 +212,7 @@ INSERT INTO CATEGORY (categoryID, categoryName) VALUES
 (1, 'Telemóveis'),
 (2, 'Tablets'),
 (3, 'Capas e Películas'),
-(4, 'Carregadores e cabos'),
+(4, 'Carregadores e Cabos'),
 (5, 'Power Banks');
 
 
@@ -225,7 +225,7 @@ INSERT INTO PRODUCT (productID, sellerID, brandID, categoryID, locationID, title
 (4, 3, 1, 3, 12, 'iPhone 12 Protective Case', 'Perfect condition, never used.', 20.00, 'New'),
 (5, 2, 3, 1, 11, 'Google Pixel 6, 128GB', 'Mint condition, barely used with original packaging.', 700.00, 'Like New'),
 (6, 4, 4, 2, 11, 'Huawei MatePad Pro, 256GB', 'Full set, no scratches, with keyboard and stylus.', 800.00, 'New'),
-(7, 3, 1, 5, 12, 'iPhone 13 Screen Protector', 'Tempered glass, high durability, anti-scratch.', 15.00, 'New'),
+(7, 3, 1, 3, 12, 'iPhone 13 Screen Protector', 'Tempered glass, high durability, anti-scratch.', 15.00, 'New'),
 (8, 1, 5, 3, 11, 'Xiaomi Redmi Note 10 Case', 'Silicone case, shock-proof, with grip handle.', 10.00, 'New');
 
 

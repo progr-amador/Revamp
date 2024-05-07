@@ -2,7 +2,7 @@
 
 <?php function drawCategory($category, $products) { ?>
     <main>
-        <div class="featured">
+        <div class="item-list">
             <h2><?php echo $category; ?></h2>
             <div class="flex-container">
                 <div class="flex-row">

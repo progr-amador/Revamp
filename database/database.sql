@@ -243,14 +243,14 @@ INSERT INTO SHIPPING (shippingID, sellerID, buyerID, weight) VALUES
 
 -- Insert statements for the PHOTO table
 INSERT INTO PHOTO (photoID, productID, photoURL) VALUES
-(1, 1, 'https://cdn.discordapp.com/attachments/951794689353351169/1236395312285880442/iphone13-min.jpg?ex=6637da5d&is=663688dd&hm=6e423cc5f092d20f90b3ca61c817d061954829d1412e226cea2253cd9524811a&'),
-(2, 2, 'https://cdn.discordapp.com/attachments/951794689353351169/1236395313212821565/samsung-min.jpg?ex=6637da5d&is=663688dd&hm=d959c293bdd7473fcb4e27f479c7945755d937a2ec37fa50c0192d16cfc7669f&'),
-(3, 3, 'https://cdn.discordapp.com/attachments/951794689353351169/1236395311476248707/ipad-min.jpg?ex=6637da5d&is=663688dd&hm=de014e96489d203e9debe9fa4e08e18417569433161f6ed9525c9ff6bcbbe50d&'),
-(4, 4, 'https://cdn.discordapp.com/attachments/951794689353351169/1236395310587056158/13case-min.jpg?ex=6637da5d&is=663688dd&hm=f2a5c55645e207ef86d0dff28ff430cf5386a212b9a9f4be4d09b805a2ab8e73&'),
-(5, 5, 'https://cdn.discordapp.com/attachments/951794689353351169/1236395312621555752/pixel6-min.jpg?ex=6637da5d&is=663688dd&hm=181ffd133ea70c0864abc4cea03ddb69d4c275082cf8bb43d6c4c3aeededb835&'),
-(6, 6, 'https://cdn.discordapp.com/attachments/951794689353351169/1236395311111606343/huawei-min.jpg?ex=6637da5d&is=663688dd&hm=b369a3e554ece6df2c2bd150698339a18fc7a26157c50b99ad4a5365f198fc1d&'),
-(7, 7, 'https://cdn.discordapp.com/attachments/951794689353351169/1236395310847234120/13screen-min.jpg?ex=6637da5d&is=663688dd&hm=b72df26fc19d99595b4975187fbe6a515c0c5e1b7fb1d66805adef2723bdb9da&'),
-(8, 8, 'https://cdn.discordapp.com/attachments/951794689353351169/1236395312927477770/redmicase-min.jpg?ex=6637da5d&is=663688dd&hm=6bbe33b9403593ba92bdd898c0e061c1428bc24939e4afa08fbbfc8e11304dfb&');
+(1, 1, '../assets/iphone13.jpg'),
+(2, 2, '../assets/samsung.jpg'),
+(3, 3, '../assets/ipad.jpg'),
+(4, 4, '../assets/13case.jpg'),
+(5, 5, '../assets/pixel6.jpg'),
+(6, 6, '../assets/huawei.jpg'),
+(7, 7, '../assets/13screen.jpg'),
+(8, 8, '../assets/redmicase.jpg');
 
 -- Insert statements for the FAVORITES table
 INSERT INTO FAVORITES (buyerID, productID) VALUES

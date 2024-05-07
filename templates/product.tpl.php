@@ -13,9 +13,9 @@
                 <p class="description"><?php echo $product['description']; ?></p>
                 <p class="location">Location: <?php echo $product['location']; ?></p>
                 <div class="buttons">
-                    <a href="shipping.php"><button class="buy-now">Buy Now</button></a>
-                    <a href="message.php"><button class="message">Message Seller</button></a>
-                    <button class="add-cart">Add to Cart</button>
+                    <a href="shipping.php"><button class="abtn">Buy Now</button></a>
+                    <a href="message.php"><button class="abtn">Message Seller</button></a>
+                    <button class="abtn">Add to Cart</button>
                 </div>
             </div>
         </div>

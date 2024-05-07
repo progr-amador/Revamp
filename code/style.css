@@ -500,21 +500,16 @@ input[type="checkbox"]:checked + #estado>label {
     font-style: italic;
 }
 
-.buy-now, .message, .add-cart{
-    padding: 10px 20px;
-    background-color: var(--accent-color);
-    border: none;
-    border-radius: 5px;
-    color: var(--main-color);
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
+.radio-option {
+    display: flex;
+    align-items: center;  }
+
+.radio-option img {
+    height: 2em;
+    width: 2em;
+    padding: 0 1em;
 }
 
-.buy-now:hover, .message:hover, .add-cart:hover{
-    background-color: var(--hover-color);
-    color: whitesmoke;
-}
 
 
 

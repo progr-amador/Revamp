@@ -45,7 +45,7 @@
     <div class="body-container"> <!-- Início do container flexível -->
 <?php } ?>
 
-<?php function drawHeader($showAuthButtons = false) { ?>
+<?php function drawHeader($showAuthButtons = true) { ?>
     <header>
         <div class="header-content">
             <h1><a href="home.php"> R E V A M P </a></h1>

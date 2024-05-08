@@ -4,7 +4,7 @@
   require_once('../templates/common.tpl.php');
   require_once('../templates/register.tpl.php');
 
-  $name = "Register";
+  $name = "Registo";
 
   drawHead($name);
   drawRegister();

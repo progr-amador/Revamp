@@ -7,7 +7,7 @@
   require_once('../templates/product.tpl.php');
   require_once('../templates/common.tpl.php');
 
-  $name = "Product";
+  $name = "Produto";
   $db = getDatabaseConnection();
   $ID = $_GET['id'];
 

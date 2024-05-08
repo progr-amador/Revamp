@@ -243,14 +243,14 @@ INSERT INTO SHIPPING (shippingID, sellerID, buyerID, weight) VALUES
 
 -- Insert statements for the PHOTO table
 INSERT INTO PHOTO (photoID, productID, photoURL) VALUES
-(1, 1, '../assets/iphone13.jpg'),
-(2, 2, '../assets/samsung.jpg'),
-(3, 3, '../assets/ipad.jpg'),
-(4, 4, '../assets/13case.jpg'),
-(5, 5, '../assets/pixel6.jpg'),
-(6, 6, '../assets/huawei.jpg'),
-(7, 7, '../assets/13screen.jpg'),
-(8, 8, '../assets/redmicase.jpg');
+(1, 1, '../assets/products/iphone13.jpg'),
+(2, 2, '../assets/products/samsung.jpg'),
+(3, 3, '../assets/products/ipad.jpg'),
+(4, 4, '../assets/products/13case.jpg'),
+(5, 5, '../assets/products/pixel6.jpg'),
+(6, 6, '../assets/products/huawei.jpg'),
+(7, 7, '../assets/products/13screen.jpg'),
+(8, 8, '../assets/products/redmicase.jpg');
 
 -- Insert statements for the FAVORITES table
 INSERT INTO FAVORITES (buyerID, productID) VALUES

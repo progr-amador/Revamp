@@ -16,7 +16,7 @@
   $districts = Brand::getDistricts($db);
   $brands = Brand::getBrands($db);
 
-  $name = "Search";
+  $name = "Pesquisa";
 
   if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $title = $_GET['title'] ?? $query;

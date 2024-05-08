@@ -7,9 +7,9 @@
   require_once('../templates/message.tpl.php');
 
   //$db = getDatabaseConnection();
-  $name = 'Message';
+  $name = 'Mensagens';
 
-  drawHead($category);
+  drawHead($name);
   drawHeader();
   drawMessage();
   drawFooter();

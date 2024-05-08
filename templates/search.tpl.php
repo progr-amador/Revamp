@@ -24,9 +24,9 @@
             <label>
             Condição
             <fieldset id="estado">
-                <label>Novo<input value="New" type="checkbox" name="condition" ></label>
-                <label>Como Novo<input value="Like New" type="checkbox" name="condition"></label>
-                <label>Usado<input value="Used" type="checkbox" name="condition"></label>
+                <label>Novo<input value="Novo" type="checkbox" name="condition" ></label>
+                <label>Como Novo<input value="Como novo" type="checkbox" name="condition"></label>
+                <label>Usado<input value="Usado" type="checkbox" name="condition"></label>
             </fieldset>
             </label>
             <label id = "regiao">

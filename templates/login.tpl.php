@@ -16,7 +16,7 @@
                     <input type="text" name="password" id="password" autocomplete="off" required>
                     </div>
                     <div class="field">
-                        <input type="submit" class="bbtn" name="submit" value="Login" autocomplete="off" required>
+                        <input type="submit" class="bbtn" name="submit" value="Iniciar sessão" autocomplete="off" required>
                     </div>
                     <div class="links">
                         Não tem conta? <a href="register.php"> Registe-se. </a>

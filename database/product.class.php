@@ -54,20 +54,61 @@
       return $products;
     }
 
-    static function getSearched(PDO $db, string $search): array {
-      $stmt = $db->prepare('
-        SELECT productID, title, price, locationName AS location, photoURL
-        FROM PRODUCT
-        JOIN LOCATION_ USING (locationID)
-        JOIN PHOTO USING (productID)
-        WHERE title LIKE ?
-        ORDER BY price ASC
-      ');
+    static function getFiltered(PDO $db, string $title = '', string $price_min = '', string $price_max = '', string $condition = '', string $district = '', string $category = '', string $brand = ''): array {
+      // Start building the query
+      $query = '
+          SELECT productID, title, price, locationName AS location, photoURL
+          FROM PRODUCT
+          JOIN LOCATION_ USING (locationID)
+          JOIN PHOTO USING (productID)
+          JOIN CATEGORY USING (categoryID)
+          JOIN BRAND USING (brandID)
+          WHERE 1=1 '; // 1=1 always true, acts as a starting point for further conditions
   
-      $stmt->execute(array("%$search%")); 
+      $params = array(); // Array to hold parameters for execution
+  
+      // Add conditions based on provided parameters
+      if (!empty($title)) {
+          $query .= 'AND title LIKE ? ';
+          $params[] = "%$title%";
+      }
+      if (!empty($price_min)) {
+          $price_min = intval($price_min);
+          $query .= 'AND price >= ? ';
+          $params[] = $price_min;
+      }
+      if (!empty($price_max)) {
+          $price_max = intval($price_max);
+          $query .= 'AND price <= ? ';
+          $params[] = $price_max;
+      }
+      if (!empty($condition)) {
+          $query .= 'AND condition = ? ';
+          $params[] = $condition;
+      }
+      if (!empty($district)) {
+          $query .= 'AND locationName = ? ';
+          $params[] = $district;
+      }
+      if (!empty($category)) {
+          $query .= 'AND categoryName = ? ';
+          $params[] = $category;
+      }
+      if (!empty($brand)) {
+          $query .= 'AND brandName = ? ';
+          $params[] = $brand;
+      }
+  
+      $query .= 'ORDER BY price ASC'; // Add the final ordering
+
+      //echo $query;
+  
+      $stmt = $db->prepare($query);
+      $stmt->execute($params); 
       $products = $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch the results
       return $products;
-    }
+  }
+  
 
     static function getCategory(PDO $db, string $category): array {
       $stmt = $db->prepare('
@@ -84,8 +125,6 @@
       $products = $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch the results
       return $products;
     }
-
-    
 
     static function getProductSeller(PDO $db, int$id): array{
         $stmt = $db->prepare('

@@ -10,22 +10,39 @@
         $this->name = $name;
     }
 
-    static function getCategories(PDO $db, int $count) : array {
-        $stmt = $db->prepare(
-            'SELECT categoryID, categoryName FROM CATEGORY LIMIT ?');
+      static function getCategories(PDO $db) : array {
+        $stmt = $db->prepare('
+          SELECT categoryName 
+          FROM CATEGORY 
+        ');
 
-        $stmt->execute(array($count));
-    
-        $categories = array();
-        while ($category = $stmt->fetch()) {
-          $categories[] = new Category(
-            $category['categoryID'],
-            $category['categoryName']
-          );
-        }
-    
+        $stmt->execute();
+        $categories = $stmt->fetchAll();
         return $categories;
       }
+
+      static function getDistricts(PDO $db) : array {
+        $stmt = $db->prepare('
+          SELECT locationName 
+          FROM LOCATION_ 
+        ');
+
+        $stmt->execute();
+        $categories = $stmt->fetchAll();
+        return $categories;
+      }
+
+      static function getBrands(PDO $db) : array {
+        $stmt = $db->prepare('
+          SELECT brandName 
+          FROM BRAND 
+        ');
+
+        $stmt->execute();
+        $categories = $stmt->fetchAll();
+        return $categories;
+      }
+
 
       static function searchCategories(PDO $db, string $search, int $count) : array {
         $stmt = $db->prepare(

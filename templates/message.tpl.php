@@ -1,8 +1,7 @@
 <?php declare(strict_types = 1); ?>
 
 <?php function drawMessage() { ?>
-    <main id = "shipping">
-        <section id="filters">
+    <main id = "message">
         <form>
             <!-- onde estariam as mensagens-->
             <input type="text" name="text" placeholder="Text">
@@ -12,6 +11,5 @@
                 </button>
             </label>
         </form>
-        </section>
     </main>
 <?php } ?>

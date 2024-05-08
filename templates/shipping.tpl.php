@@ -44,7 +44,7 @@
                     <div class="radio-option">
                     <label>
                         <input type="radio" name="delivery_method" value="delivery" checked>
-                         <img src="../assets/icons/icons/delivery.png" alt="Delivery Logo"> Entrega ao Domicílio
+                         <img src="../assets/icons/delivery.png" alt="Delivery Logo"> Entrega ao Domicílio
                     </label>
                     </div>
                     <div class="radio-option">

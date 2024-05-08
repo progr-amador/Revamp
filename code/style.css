@@ -155,25 +155,10 @@ nav ul li a:hover, .categories ul li a:hover {
 }
 
 .item-details {
-    /*display: grid;*/
     text-align: center; /* Ocupa a outra metade do flex-item */
     padding: 5px;
     color: black;
     font-weight: 600;
-    grid-template-areas: "title     title"
-                         "price  location";
-}
-
-.item-details {
-    #title {
-        grid-area: title;
-    }
-    #price {
-        grid-area: price;
-    }
-    #location {
-        grid-area: location;
-    }
 }
 
 
@@ -381,25 +366,7 @@ select {
 
 button[type="submit"] {
     width: 100%;
-    padding: 10px 20px;
-    background-color: var(--accent-color);
-    border: none;
-    border-radius: 5px;
-    color: var(--main-color);
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-    margin: 5px 0;
 }
-
-button[type="submit"]:hover {
-    background-color: var(--hover-color);
-    color: whitesmoke;
-}
-
-/*input[type="checkbox"] {
-    display: none;
-}*/
 
 #estado label {
     margin: 5px 0;

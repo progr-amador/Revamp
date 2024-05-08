@@ -1,14 +1,24 @@
-<?php declare(strict_types = 1); ?>
+<?php declare(strict_types = 1);
+?>
 
-<?php function drawHead($name) { ?>
+<?php function drawHead($name) {
+
+    require_once('../database/connection.db.php');
+    require_once('../database/product.class.php');
+
+    $db = getDatabaseConnection();
+    $favorites = Product::getFavorites($db, 3);
+    $cart = Product::getCart($db, 1);
+?>
+
     <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
-        <link rel="icon" href="../docs/revamp.jpg">
-        <title>Revamp - <?php echo $name; ?></title>
+        <link rel="icon" href="../assets/icons/revamp.jpg">
+        <title>Revamp - <?php echo $name ?></title>
     </head>
     <body>
     <div id="profileDrawer" class="profile-drawer">
@@ -27,24 +37,26 @@
             <button class="abtn" onclick="closeCartDrawer()">Fechar</button>
         </div>
         <div class="drawer-content">
-            <p> Iphone 13 </p>
+            <div class="flex-row">
+                <?php drawProductCard($cart) ?>
+            </div>
         </div>
     </div>
     <div id="favoritesDrawer" class="profile-drawer">
         <div class="drawer-header">
-            
             <h1> Favoritos </h1>
             <button class="abtn" onclick="closeFavoritesDrawer()">Fechar</button>
         </div>
         <div class="drawer-content">
-            
-            <p> Iphone 13 mini </p>
+            <div class="flex-row">
+                <?php drawProductCard($favorites) ?>
+            </div>
         </div>
     </div>
     <div class="body-container"> 
 <?php } ?>
 
-<?php function drawHeader($showAuthButtons = true) { ?>
+<?php function drawHeader($showAuthButtons = false) { ?>
     <header>
         <div class="header-content">
             <h1><a href="home.php"> R E V A M P </a></h1>
@@ -113,8 +125,8 @@
 </html>
 <?php } ?>
 
-<?php function drawProductCard($products) { ?>
-    <?php foreach ($products as $product) { ?>
+<?php function drawProductCard($products) {
+    foreach ($products as $product) { ?>
         <div class="flex-item">
             <a href="product.php?id=<?php echo $product['productID']; ?>">
                 <div class="item-image">
@@ -127,6 +139,6 @@
                 </div>
             </a>
         </div>
-    <?php } ?>
-<?php } ?>
+    <?php }
+} ?>
 

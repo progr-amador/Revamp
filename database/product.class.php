@@ -24,36 +24,6 @@
       $this->condition = $condition;
     }
 
-    static function getFeatured(PDO $db): array{
-      $stmt = $db->prepare('
-        SELECT productID, title, price, locationName AS location, photoURL
-        FROM PRODUCT
-        JOIN LOCATION_ USING (locationID)
-        JOIN PHOTO USING (productID)
-        ORDER BY price ASC
-        LIMIT 4
-      ');
-
-      $stmt->execute();
-      $products = $stmt->fetchAll();
-      return $products;
-    }
-
-    static function getFavorites(PDO $db): array{
-      $stmt = $db->prepare('
-        SELECT productID, title, price, locationName AS location, photoURL
-        FROM PRODUCT
-        JOIN LOCATION_ USING (locationID)
-        JOIN PHOTO USING (productID)
-        ORDER BY price DESC
-        LIMIT 3
-      ');
-
-      $stmt->execute();
-      $products = $stmt->fetchAll();
-      return $products;
-    }
-
     static function getFiltered(PDO $db, string $title = '', string $price_min = '', string $price_max = '', string $condition = '', string $district = '', string $category = '', string $brand = ''): array {
       // Start building the query
       $query = '
@@ -108,6 +78,51 @@
       $products = $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch the results
       return $products;
   }
+
+  static function getFeatured(PDO $db): array{
+    $stmt = $db->prepare('
+      SELECT productID, title, price, locationName AS location, photoURL
+      FROM PRODUCT
+      JOIN LOCATION_ USING (locationID)
+      JOIN PHOTO USING (productID)
+      ORDER BY price ASC
+      LIMIT 20
+    ');
+
+    $stmt->execute();
+    $featured = $stmt->fetchAll();
+    return $featured;
+  }
+
+  static function getFavorites(PDO $db, $userID): array{
+    $stmt = $db->prepare( '
+      SELECT productID, title, price, locationName AS location, photoURL
+      FROM PRODUCT
+      JOIN LOCATION_ USING (locationID)
+      JOIN PHOTO USING (productID)
+      JOIN FAVORITES USING (productID)
+      WHERE buyerID = ?
+    ');
+
+    $stmt->execute(array($userID));
+    $favorites = $stmt->fetchAll();
+    return $favorites;
+  }
+
+  static function getCart(PDO $db, $userID): array{
+    $stmt = $db->prepare( '
+      SELECT productID, title, price, locationName AS location, photoURL
+      FROM PRODUCT
+      JOIN LOCATION_ USING (locationID)
+      JOIN PHOTO USING (productID)
+      JOIN CART USING (productID)
+      WHERE buyerID = ?
+    ');
+
+    $stmt->execute(array($userID));
+    $favorites = $stmt->fetchAll();
+    return $favorites;
+  }
   
 
     static function getCategory(PDO $db, string $category): array {
@@ -125,6 +140,8 @@
       $products = $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch the results
       return $products;
     }
+
+    // FUNÇÕES DA MARIANA
 
     static function getProductSeller(PDO $db, int$id): array{
         $stmt = $db->prepare('

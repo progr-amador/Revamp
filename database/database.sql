@@ -219,14 +219,14 @@ INSERT INTO CATEGORY (categoryID, categoryName) VALUES
 
 -- Insert statements for the PRODUCT table including titles
 INSERT INTO PRODUCT (productID, sellerID, brandID, categoryID, locationID, title, description, price, condition) VALUES
-(1, 1, 1, 1, 11, 'iPhone 13, 128GB', 'A few little scratches on the back.', 800.00, 'Like New'),
-(2, 2, 2, 1, 11, 'Samsung Galaxy S21, 256GB', 'Minor signs of use on the screen.', 750.00, 'Used'),
-(3, 1, 2, 2, 11, 'Samsung Galaxy Tab S9, 256GB', 'Brand new, sealed in box.', 650.00, 'New'),
-(4, 3, 1, 3, 12, 'iPhone 12 Protective Case', 'Perfect condition, never used.', 20.00, 'New'),
-(5, 2, 3, 1, 11, 'Google Pixel 6, 128GB', 'Mint condition, barely used with original packaging.', 700.00, 'Like New'),
-(6, 4, 4, 2, 11, 'Huawei MatePad Pro, 256GB', 'Full set, no scratches, with keyboard and stylus.', 800.00, 'New'),
-(7, 3, 1, 3, 12, 'iPhone 13 Screen Protector', 'Tempered glass, high durability, anti-scratch.', 15.00, 'New'),
-(8, 1, 5, 3, 11, 'Xiaomi Redmi Note 10 Case', 'Silicone case, shock-proof, with grip handle.', 10.00, 'New');
+(1, 1, 1, 1, 11, 'iPhone 13, 128GB', 'Com alguns arranhões', 800.00, 'Como novo'),
+(2, 2, 2, 1, 11, 'Samsung Galaxy S21, 256GB', 'Alguns sinais de uso na parte frontal', 750.00, 'Usado'),
+(3, 1, 2, 2, 11, 'Samsung Galaxy Tab S9, 256GB', 'Novo, ainda selado', 650.00, 'Novo'),
+(4, 3, 1, 3, 12, 'Capa Protetora para iPhone 12 ', 'Em perfeitas condições, nunca usado.', 20.00, 'Novo'),
+(5, 2, 3, 1, 11, 'Google Pixel 6, 128GB', 'Como novo.', 700.00, 'Como novo'),
+(6, 4, 4, 2, 11, 'Huawei MatePad Pro, 256GB', 'Conjunto completo com caneta e capa com teclado', 800.00, 'Novo'),
+(7, 3, 1, 3, 12, 'Película de vidro para Iphone 13', 'Vidro temperado, grande durabilidade.', 15.00, 'Novo'),
+(8, 1, 5, 3, 11, 'Capa para Xiaomi Redmi Note 10 ', 'Capa protetora, anti-quedas.', 10.00, 'Novo');
 
 
 
@@ -275,11 +275,11 @@ INSERT INTO CHAT (chatID, buyerID, sellerID, productID) VALUES
 
 -- Insert statements for the MESSAGE_ table
 INSERT INTO MESSAGE_ (messageID, chatID, senderID, messageText, messageDate) VALUES
-(1, 1, 1, 'Hello, is the Google Pixel 6 still available?', '2023-04-01 08:30:00'),
-(2, 1, 2, 'Yes, it is still available. Would you like more details?', '2023-04-01 08:45:00'),
-(3, 2, 1, 'Can you provide more details about the screen protector?', '2023-04-01 09:00:00'),
-(4, 2, 3, 'Sure, it is tempered glass, very durable and scratch-resistant.', '2023-04-01 09:15:00'),
-(5, 3, 2, 'I am interested in the MatePad. What is the lowest price you can offer?', '2023-04-01 10:00:00'),
-(6, 3, 4, 'I can offer it for €750, including the keyboard and stylus.', '2023-04-01 10:15:00');
+(1, 1, 1, 'Olá, io Google Pixel 6 ainda está disponível?', '2023-04-01 08:30:00'),
+(2, 1, 2, 'Sim, ainda está disponível. Precisa de saber mais detalhes?', '2023-04-01 08:45:00'),
+(3, 2, 1, 'Pode fornecer mais detalhes sobre a película de vidro?', '2023-04-01 09:00:00'),
+(4, 2, 3, 'Claro, é de vidro temperado, muito resistente e anti-riscos.', '2023-04-01 09:15:00'),
+(5, 3, 2, 'Estou interessado no MatePad. Qual é o preço mais baixo que consegue fazer?', '2023-04-01 10:00:00'),
+(6, 3, 4, 'COnsigo fazer por €750, com o teclado e com a caneta.', '2023-04-01 10:15:00');
 
 

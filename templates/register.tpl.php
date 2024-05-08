@@ -4,7 +4,7 @@
     <main>
         <div class="login-container">
             <div class="box form-box">
-                <header> Sign Up </header>
+                <header> Criar Conta </header>
                 <form action="" method="post">
                     <div class="field input">
                     <label for="username"> Username </label> 
@@ -22,7 +22,7 @@
                         <input type="submit" class="bbtn" name="submit" value="Create Account" required>
                     </div>
                     <div class="links">
-                        Already a member? <a href="login.php"> Sign In.</a>
+                        Já tem conta? <a href="login.php"> Inicie sessão.</a>
                     </div>
                 </form>
             </div>

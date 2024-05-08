@@ -4,7 +4,7 @@
     <main>
         <div class="login-container">
             <div class="box form-box">
-                <header> Login </header>
+                <header> Iniciar Sessão </header>
                 <form action="" method="post">
                     
                     <div class="field input">
@@ -19,7 +19,7 @@
                         <input type="submit" class="bbtn" name="submit" value="Login" autocomplete="off" required>
                     </div>
                     <div class="links">
-                        Don't have account? <a href="register.php"> Sign Up. </a>
+                        Não tem conta? <a href="register.php"> Registe-se. </a>
                     </div>
                 </form>
             </div>

@@ -13,7 +13,7 @@
     <body>
     <div id="profileDrawer" class="profile-drawer">
         <div class="drawer-header">
-        <h1> Profile </h1>
+        <h1> Perfil </h1>
             <button class="abtn" onclick="closeProfileDrawer()">Fechar</button>
         </div>
         <div class="drawer-content">
@@ -23,29 +23,28 @@
     </div>
     <div id="cartDrawer" class="profile-drawer">
         <div class="drawer-header">
-        <h1> Cart </h1>
+        <h1> Carrinho </h1>
             <button class="abtn" onclick="closeCartDrawer()">Fechar</button>
         </div>
         <div class="drawer-content">
-            <p> Cart </p>
             <p> Iphone 13 </p>
         </div>
     </div>
     <div id="favoritesDrawer" class="profile-drawer">
         <div class="drawer-header">
             
-            <h1> Favorites </h1>
+            <h1> Favoritos </h1>
             <button class="abtn" onclick="closeFavoritesDrawer()">Fechar</button>
         </div>
         <div class="drawer-content">
-            <p> Favorites</b></p>
-            <p> Iphone 13 mini</p>
+            
+            <p> Iphone 13 mini </p>
         </div>
     </div>
-    <div class="body-container"> <!-- Início do container flexível -->
+    <div class="body-container"> 
 <?php } ?>
 
-<?php function drawHeader($showAuthButtons = true) { ?>
+<?php function drawHeader($showAuthButtons = false) { ?>
     <header>
         <div class="header-content">
             <h1><a href="home.php"> R E V A M P </a></h1>
@@ -56,12 +55,12 @@
             </div>
             <div class="authentication-buttons">
                 <?php if ($showAuthButtons): ?>
-                    <a href="login.php"> <button class="abtn"> Login </button></a>
-                    <a href="register.php"> <button class="abtn"> Sign Up</button></a>
+                    <a href="login.php"> <button class="abtn"> Iniciar Sessão </button></a>
+                    <a href="register.php"> <button class="abtn"> Criar Conta </button></a>
                 <?php else: ?>
-                    <button onclick="openProfileDrawer()" class="abtn"> Profile </button>
-                    <button onclick="openCartDrawer()" class="abtn"> Cart </button>
-                    <button onclick="openFavoritesDrawer()" class="abtn"> Favorites </button>
+                    <button onclick="openProfileDrawer()" class="abtn"> Perfil </button>
+                    <button onclick="openCartDrawer()" class="abtn"> Carrinho </button>
+                    <button onclick="openFavoritesDrawer()" class="abtn"> Favoritos </button>
                 <?php endif; ?>
     
                 <script src="script.js"></script>

@@ -11,11 +11,11 @@
                 <p class="price">€<?php echo $product['price']; ?></p>
                 <p class="user"><?php echo $product['seller']; ?></p>
                 <p class="description"><?php echo $product['description']; ?></p>
-                <p class="location">Location: <?php echo $product['location']; ?></p>
+                <p class="location">Localização: <?php echo $product['location']; ?></p>
                 <div class="buttons">
-                    <a href="shipping.php"><button class="abtn">Buy Now</button></a>
-                    <a href="message.php"><button class="abtn">Message Seller</button></a>
-                    <button class="abtn">Add to Cart</button>
+                    <a href="shipping.php"><button class="abtn"> Compre agora </button></a>
+                    <a href="message.php"><button class="abtn"> Envie mensagem </button></a>
+                    <button class="abtn"> Adicionar ao carrinho </button>
                 </div>
             </div>
         </div>

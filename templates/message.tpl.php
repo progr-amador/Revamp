@@ -7,7 +7,7 @@
             <input type="text" name="text" placeholder="Text">
             <label>
                 <button formaction="save.php" formmethod="get" type="submit">
-                Send
+                Enviar
                 </button>
             </label>
         </form>

@@ -5,18 +5,17 @@
         <div class="login-container">
             <div class="box form-box">
                 <header> Iniciar Sessão </header>
-                <form action="" method="post">
-                    
+                <form action="action_login.php" method="post">
                     <div class="field input">
                     <label for="email"> Email </label> 
-                    <input type="text" name="email" id="email" autocomplete="off" required>
+                    <input type="email" name="email" id="email" required>
                     </div>
                     <div class="field input">
                     <label for="password"> Password </label> 
-                    <input type="text" name="password" id="password" autocomplete="off" required>
+                    <input type="password" name="password" id="password" required>
                     </div>
                     <div class="field">
-                        <input type="submit" class="bbtn" name="submit" value="Iniciar sessão" autocomplete="off" required>
+                        <input type="submit" class="bbtn" name="submit">Iniciar sessão</input>
                     </div>
                     <div class="links">
                         Não tem conta? <a href="register.php"> Registe-se. </a>
@@ -26,3 +25,5 @@
         </div>
     </main>
 <?php } ?>
+
+<!--autocomplete="off"-->

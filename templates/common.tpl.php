@@ -17,8 +17,8 @@
             <button class="abtn" onclick="closeProfileDrawer()">Fechar</button>
         </div>
         <div class="drawer-content">
-            <p>Nome: <b>Francisco</b></p>
-            <p>Email: <b>franciscoafonso04@outlook.pt</b></p>
+            <p>Nome: <b><?php echo $_SESSION['user_name'];?></b></p>
+            <p>Email: <b><?php echo $_SESSION['email'];?></b></p>
         </div>
     </div>
     <div id="cartDrawer" class="profile-drawer">
@@ -44,7 +44,7 @@
     <div class="body-container"> 
 <?php } ?>
 
-<?php function drawHeader($showAuthButtons = true) { ?>
+<?php function drawHeader() { ?>
     <header>
         <div class="header-content">
             <h1><a href="home.php"> R E V A M P </a></h1>
@@ -54,13 +54,16 @@
                 </form>
             </div>
             <div class="authentication-buttons">
-                <?php if ($showAuthButtons): ?>
-                    <a href="login.php"> <button class="abtn"> Iniciar Sessão </button></a>
-                    <a href="register.php"> <button class="abtn"> Criar Conta </button></a>
-                <?php else: ?>
+                <?php if (isset($_SESSION['user_id'])): ?>
                     <button onclick="openProfileDrawer()" class="abtn"> Perfil </button>
                     <button onclick="openCartDrawer()" class="abtn"> Carrinho </button>
                     <button onclick="openFavoritesDrawer()" class="abtn"> Favoritos </button>
+                    <form action="action_logout.php" method="post">
+                        <button type="submit" class="abtn"> Terminar Sessão </button>
+                    </form>
+                <?php else: ?>
+                    <a href="login.php"> <button class="abtn"> Iniciar Sessão </button></a>
+                    <a href="register.php"> <button class="abtn"> Criar Conta </button></a>
                 <?php endif; ?>
     
                 <script src="script.js"></script>

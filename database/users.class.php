@@ -8,10 +8,10 @@ class Users {
     public string $phone;
     public string $date;
     public string $address;
-    public string $location;
+    public int $location;
     public bool $isAdmin;
 
-    public function __construct(int $id, string $name, string $email, string $phone, string $date, string $address, string $location, bool $isAdmin) {
+    public function __construct(int $id, string $name, string $email, string $phone, string $date, string $address, int $location, bool $isAdmin) {
         $this->id = $id;
         $this->name = $name;
         $this->email = $email;
@@ -35,13 +35,18 @@ class Users {
 
     public static function getUsersWithPassword( string $email, string $password): ?Users {
         $db = getDatabaseConnection();
-        $stmt = $db->prepare('SELECT userId, username, email, phoneNumber, hashedPassword, creationDate, address, locationID, isAdmin FROM USERS WHERE LOWER(email) = ?');
-        $stmt->execute([strtolower($email)]);
+        $stmt = $db->prepare('
+            SELECT userID, username, email, phoneNumber, hashedPassword, creationDate, address, locationID, isAdmin 
+            FROM USERS 
+            WHERE lower(email) = ? AND hashedPassword = ?
+        ');
+        $stmt->execute(array(strtolower($email), sha1($password)));
         
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($user && password_verify($password, $user['hashedPassword'])) {
+        if ($user) {
+            
             return new Users(
-                $user['userId'],
+                $user['userID'],
                 $user['username'],
                 $user['email'],
                 $user['phoneNumber'],

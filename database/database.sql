@@ -26,7 +26,7 @@ CREATE TABLE LOCATION_ (
 
 -- Create a table for users
 CREATE TABLE USERS (
-    userID INT PRIMARY KEY,
+    userID INTEGER PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     phoneNumber VARCHAR(20),

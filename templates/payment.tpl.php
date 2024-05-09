@@ -1,5 +1,6 @@
 <?php declare(strict_types = 1); ?>
 
+
 <?php function drawPaypal() { ?>
     <main id="payment">
         <h1>Pagamento com PayPal</h1>

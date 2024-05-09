@@ -11,6 +11,8 @@
 
   $method = $_GET['payment_method'];
 
+  session_start();
+  $_SESSION
   drawHead($name);
   drawHeader();
   if($method === 'paypal'){

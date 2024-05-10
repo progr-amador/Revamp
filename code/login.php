@@ -9,7 +9,7 @@ require_once('../database/users.class.php');
 require_once('../templates/common.tpl.php');
 require_once('../templates/login.tpl.php');
 
-$name = "Login";
+$name = "Iniciar Sessão";
 
 drawHead($name);
 drawLogin();

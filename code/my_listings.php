@@ -6,17 +6,16 @@
   require_once('../database/connection.db.php');
   require_once('../database/product.class.php');
 
-  require_once('../templates/product.tpl.php');
   require_once('../templates/common.tpl.php');
+  require_once('../templates/my_listings.tpl.php');
 
-  $name = "Produto";
   $db = getDatabaseConnection();
-  $ID = $_GET['id'];
+  $name = "Meus Produtos";
 
-  $product = Product::getProduct($db, $ID);
+  $listings = Product::getMyListings($db, $_SESSION['user_id']);
 
   drawHead($name);
   drawHeader();
-  drawProduct($product, $ID);
+  drawMyListings($listings);
   drawFooter();
 ?>

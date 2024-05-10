@@ -11,9 +11,8 @@
 
   $db = getDatabaseConnection();
   $category = $_GET['id'];
-  $name = 'Category';
 
-  $products = Product::getcategory($db, $category);
+  $products = Product::getCategory($db, $category);
 
   drawHead($category);
   drawHeader();

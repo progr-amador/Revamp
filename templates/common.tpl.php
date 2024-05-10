@@ -32,6 +32,7 @@
     <div id="cartDrawer" class="profile-drawer">
         <div class="drawer-header">
         <h1> Carrinho </h1>
+            <a href="shipping.php"><button class="abtn" onclick="closeCartDrawer()">Comprar</button></a>
             <button class="abtn" onclick="closeCartDrawer()">Fechar</button>
         </div>
         <div class="drawer-content">
@@ -71,6 +72,7 @@
                     <form action="../actions/action_logout.php" method="post">
                         <button type="submit" class="abtn"> Terminar Sessão </button>
                     </form>
+                    <a href="my_listings.php"> <button class="abtn"> Meus Produtos </button></a>
                 <?php else: ?>
                     <a href="login.php"> <button class="abtn"> Iniciar Sessão </button></a>
                     <a href="register.php"> <button class="abtn"> Criar Conta </button></a>

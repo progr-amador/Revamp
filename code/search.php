@@ -14,9 +14,9 @@
 
   $query = $_GET['query'];
 
-  $categories = Brand::getCategories($db);
-  $districts = Brand::getDistricts($db);
-  $brands = Brand::getBrands($db);
+  $categories = Category::getCategories($db);
+  $districts = Category::getDistricts($db);
+  $brands = Category::getBrands($db);
 
   $name = "Pesquisa";
 

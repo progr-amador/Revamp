@@ -70,8 +70,6 @@
       }
   
       $query .= 'ORDER BY price ASC'; // Add the final ordering
-
-      //echo $query;
   
       $stmt = $db->prepare($query);
       $stmt->execute($params); 
@@ -141,44 +139,9 @@
       return $products;
     }
 
-    // FUNÇÕES DA MARIANA
-
-    static function getProductSeller(PDO $db, int$id): array{
-        $stmt = $db->prepare('
-        SELECT productId, sellerID, brandID, categoryID, locationID, title, description, price, condition
-        FROM PRODUCT 
-        JOIN USERS ON PRODUCT.sellerID=USERS.userID
-        JOIN BRAND USING (brandID)
-        JOIN CATEGORY USING (categoryID)
-        JOIN LOCATION_ USING (locationID)
-        WHERE SellerId = ?
-        GROUP BY productID
-      ');
-
-      $stmt->execute(array($id));
-  
-      $products = array();
-  
-      while ($prod = $stmt->fetch()) {
-        $products[] = new Product(
-          $prod['productId'], 
-          $prod['sellerId'],
-          $prod['brandId'],
-          $prod['categoryId'],
-          $prod['locationId'],
-          $prod['title'],
-          $prod['description'],
-          $prod['price'],
-          $prod['condition'],
-        );
-        }
-
-        return $products;
-    }
-
     static function getProduct(PDO $db, $id): array{
         $stmt = $db->prepare('
-        SELECT productId, sellerID, brandID, categoryID, product.locationID, title, description, price, condition, photoURL, username AS seller, locationName AS location
+        SELECT productID, sellerID, brandID, categoryID, product.locationID, title, description, price, condition, photoURL, username AS seller, locationName AS location
         FROM PRODUCT 
         JOIN USERS ON PRODUCT.sellerID=USERS.userID
         JOIN BRAND USING (brandID)
@@ -196,6 +159,26 @@
 
       // Return the product data
       return $product;
+    }
+
+    static function getMyListings(PDO $db, int $userID): array {
+      $stmt = $db->prepare('
+        SELECT productID, title, price, locationName AS location, photoURL, categoryName, sellerID
+        FROM PRODUCT
+        JOIN LOCATION_ USING (locationID)
+        JOIN PHOTO USING (productID)
+        JOIN CATEGORY USING (categoryID)
+        WHERE sellerID LIKE ?
+      ');
+  
+      $stmt->execute(array($userID)); 
+      $products = $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch the results
+      return $products;
+    }
+
+    static function removeProduct(PDO $db, int $productID) {
+      $stmt = $db->prepare('DELETE FROM PRODUCT WHERE productID = ?');
+      $stmt->execute([$productID]);
     }
   }
 

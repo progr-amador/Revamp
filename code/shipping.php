@@ -12,7 +12,7 @@
   $db = getDatabaseConnection();
   $name = 'Envio';
 
-  $districts = Brand::getDistricts($db);
+  $districts = Category::getDistricts($db);
 
   drawHead($name);
   drawHeader();

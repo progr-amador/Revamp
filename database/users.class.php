@@ -11,7 +11,7 @@ class Users {
     public int $location;
     public bool $isAdmin;
 
-    public function __construct(int $id, string $name, string $email, string $phone, string $date, string $address, int $location, bool $isAdmin) {
+    public function __construct(string $name, string $email, int $id = 0, string $phone = '', string $date = '', string $address = '', int $location = 0, bool $isAdmin = false) {
         $this->id = $id;
         $this->name = $name;
         $this->email = $email;
@@ -30,10 +30,10 @@ class Users {
         $date = new DateTime('now');
         $displayDate = $date->format('Y-m-d');
         $stmt = $db->prepare('INSERT INTO USERS (username, email, hashedPassword, creationDate) VALUES (?,?,?,?) ');
-        $stmt->execute([$this->name, $this->email, $password, $displayDate]);
+        $stmt->execute([$this->name, $this->email, sha1($password), $displayDate]);
     }
 
-    public static function getUsersWithPassword( string $email, string $password): ?Users {
+    public static function getUsersWithPassword(string $email, string $password): ?Users {
         $db = getDatabaseConnection();
         $stmt = $db->prepare('
             SELECT userID, username, email, phoneNumber, hashedPassword, creationDate, address, locationID, isAdmin 
@@ -44,15 +44,19 @@ class Users {
         
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($user) {
+
+            $phoneNumber = $user['phoneNumber'] ?? '';
+            $address = $user['address'] ?? '';
+            $locationID = $user['locationID'] ?? 0;
             
             return new Users(
-                $user['userID'],
                 $user['username'],
                 $user['email'],
-                $user['phoneNumber'],
+                $user['userID'],
+                $phoneNumber,
                 $user['creationDate'],
-                $user['address'],
-                $user['locationID'],
+                $address,
+                $locationID,
                 $user['isAdmin'] == '1' ? true : false
             );
         } else return null;

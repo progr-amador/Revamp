@@ -5,7 +5,7 @@
         <div class="login-container">
             <div class="box form-box">
                 <header> Iniciar Sessão </header>
-                <form action="action_login.php" method="post">
+                <form action="../actions/action_login.php" method="post">
                     <div class="field input">
                     <label for="email"> Email </label> 
                     <input type="email" name="email" id="email" required>

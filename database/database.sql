@@ -173,12 +173,12 @@ INSERT INTO LOCATION_ (locationID, locationName) VALUES
 (20, 'Madeira');
 
 -- Insert statements for the USER_ table
-INSERT INTO USERS (userID, username, email, phoneNumber, creationDate, hashedPassword, address, isAdmin, locationID) VALUES
-(1, 'FranciscoA', 'franciscompaf@gmail.com', '937222411', '2023-04-01', 'd604daee58908ad200df132f555bf67fb3f10686', 'Rua das Flores, Porto', TRUE, 13), -- pass: meusamigos
-(2, 'AnaP', 'ana.pereira@example.com', '923456789', '2023-04-02', 'd604daee58908ad200df132f555bf67fb3f10686', 'Avenida Liberdade, Lisboa', FALSE, 11),
-(3, 'MiguelC', 'miguel.correia@example.com', '934567890', '2023-04-03', 'd604daee58908ad200df132f555bf67fb3f10686', 'Praça do Comércio, Braga', FALSE, 3),
-(4, 'SofiaG', 'sofia.gomes@example.com', '945678901', '2023-04-04', 'd604daee58908ad200df132f555bf67fb3f10686', 'Largo da Sé, Faro', FALSE, 8),
-(5, 'RicardoR', 'ricardo.reis@example.com', '956789012', '2023-04-05', 'd604daee58908ad200df132f555bf67fb3f10686', 'Rua Major Ávila, Coimbra', FALSE, 6);
+INSERT INTO USERS (username, email, phoneNumber, creationDate, hashedPassword, address, isAdmin, locationID) VALUES
+('FranciscoA', 'franciscompaf@gmail.com', '937222411', '2023-04-01', 'd604daee58908ad200df132f555bf67fb3f10686', 'Rua das Flores, Porto', TRUE, 13), -- pass: meusamigos
+('AnaP', 'ana.pereira@example.com', '923456789', '2023-04-02', 'd604daee58908ad200df132f555bf67fb3f10686', 'Avenida Liberdade, Lisboa', FALSE, 11),
+('MiguelC', 'miguel.correia@example.com', '934567890', '2023-04-03', 'd604daee58908ad200df132f555bf67fb3f10686', 'Praça do Comércio, Braga', FALSE, 3),
+('SofiaG', 'sofia.gomes@example.com', '945678901', '2023-04-04', 'd604daee58908ad200df132f555bf67fb3f10686', 'Largo da Sé, Faro', FALSE, 8),
+('RicardoR', 'ricardo.reis@example.com', '956789012', '2023-04-05', 'd604daee58908ad200df132f555bf67fb3f10686', 'Rua Major Ávila, Coimbra', FALSE, 6);
 
 INSERT INTO BRAND (brandID, brandName) VALUES
 (1, 'Apple'),

@@ -58,7 +58,7 @@
                     <button onclick="openProfileDrawer()" class="abtn"> Perfil </button>
                     <button onclick="openCartDrawer()" class="abtn"> Carrinho </button>
                     <button onclick="openFavoritesDrawer()" class="abtn"> Favoritos </button>
-                    <form action="action_logout.php" method="post">
+                    <form action="../actions/action_logout.php" method="post">
                         <button type="submit" class="abtn"> Terminar Sessão </button>
                     </form>
                 <?php else: ?>

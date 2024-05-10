@@ -28,5 +28,5 @@
     }
 }
 
-header('Location: home.php');
+header('Location: ../code/home.php');
 ?>

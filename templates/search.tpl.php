@@ -57,7 +57,7 @@
             </select>
             </label>
             <label>
-                <button type="submit">
+                <button type="submit" class="abtn">
                 Filtrar
                 </button>
             </label>

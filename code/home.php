@@ -12,12 +12,12 @@
   $name = "Página inicial";
 
   $db = getDatabaseConnection();
+  $userID = null;
 
   $featured = Product::getFeatured($db);
-  $favorites = Product::getFavorites($db);
 
   drawHead($name);
   drawHeader();
-  drawHome($featured, $favorites);
+  drawHome($featured);
   drawFooter();
 ?>

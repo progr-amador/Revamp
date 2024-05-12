@@ -12,7 +12,7 @@
 
       static function getCategories(PDO $db) : array {
         $stmt = $db->prepare('
-          SELECT categoryName 
+          SELECT categoryID, categoryName 
           FROM CATEGORY 
         ');
 
@@ -23,7 +23,7 @@
 
       static function getDistricts(PDO $db) : array {
         $stmt = $db->prepare('
-          SELECT locationName 
+          SELECT locationID, locationName 
           FROM LOCATION_ 
         ');
 
@@ -34,8 +34,19 @@
 
       static function getBrands(PDO $db) : array {
         $stmt = $db->prepare('
-          SELECT brandName 
+          SELECT brandID, brandName 
           FROM BRAND 
+        ');
+
+        $stmt->execute();
+        $categories = $stmt->fetchAll();
+        return $categories;
+      }
+
+      static function getConditions(PDO $db) : array {
+        $stmt = $db->prepare('
+          SELECT conditionID, conditionName 
+          FROM CONDITION 
         ');
 
         $stmt->execute();

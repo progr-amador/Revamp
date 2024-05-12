@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS SHIPPING;
 DROP TABLE IF EXISTS PHOTO;
 DROP TABLE IF EXISTS PRODUCT;
 DROP TABLE IF EXISTS CATEGORY;
+DROP TABLE IF EXISTS CONDITION;
 DROP TABLE IF EXISTS BRAND;
 DROP TABLE IF EXISTS USERS;
 DROP TABLE IF EXISTS LOCATION_;
@@ -50,21 +51,28 @@ CREATE TABLE CATEGORY (
     categoryName VARCHAR(255) NOT NULL
 );
 
+-- Create a table for product condition
+CREATE TABLE CONDITION (
+    conditionID INT PRIMARY KEY,
+    conditionName VARCHAR(255) NOT NULL
+);
+
 -- Create a table for products
 CREATE TABLE PRODUCT (
-    productID INT PRIMARY KEY,
+    productID INTEGER PRIMARY KEY AUTOINCREMENT,
     sellerID INT NOT NULL,
     brandID INT,
-    categoryID INT NOT NULL,
+    categoryID INT,
     locationID INT,
+    conditionID INT,
     title VARCHAR(60),
     description TEXT,
     price DECIMAL(10, 2) NOT NULL,
-    condition VARCHAR(50), -- New, Like New, Used, etc.
     FOREIGN KEY(sellerID) REFERENCES USERS(userID) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(brandID) REFERENCES BRAND(brandID) ON DELETE SET NULL ON UPDATE CASCADE,
-    FOREIGN KEY(categoryID) REFERENCES CATEGORY(categoryID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(locationID) REFERENCES LOCATION_(locationID) ON DELETE SET NULL ON UPDATE CASCADE
+    FOREIGN KEY(categoryID) REFERENCES CATEGORY(categoryID) ON DELETE SET NULL ON UPDATE CASCADE,
+    FOREIGN KEY(locationID) REFERENCES LOCATION_(locationID) ON DELETE SET NULL ON UPDATE CASCADE,
+    FOREIGN KEY(conditionID) REFERENCES CONDITION(conditionID) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 -- Create a table for photos associated with products
@@ -216,18 +224,23 @@ INSERT INTO CATEGORY (categoryID, categoryName) VALUES
 (5, 'Power Banks');
 
 
+-- Insert statements for the CONDITION table
+INSERT INTO CONDITION (conditionID, conditionName) VALUES
+(1, 'Novo'),
+(2, 'Como Novo'),
+(3, 'Usado');
+
 
 -- Insert statements for the PRODUCT table including titles
-INSERT INTO PRODUCT (productID, sellerID, brandID, categoryID, locationID, title, description, price, condition) VALUES
-(1, 1, 1, 1, 11, 'iPhone 13, 128GB', 'Com alguns arranhões', 800.00, 'Como novo'),
-(2, 2, 2, 1, 11, 'Samsung Galaxy S21, 256GB', 'Alguns sinais de uso na parte frontal', 750.00, 'Usado'),
-(3, 1, 2, 2, 11, 'Samsung Galaxy Tab S9, 256GB', 'Novo, ainda selado', 650.00, 'Novo'),
-(4, 3, 1, 3, 12, 'Capa Protetora para iPhone 12 ', 'Em perfeitas condições, nunca usado.', 20.00, 'Novo'),
-(5, 2, 3, 1, 11, 'Google Pixel 6, 128GB', 'Como novo.', 700.00, 'Como novo'),
-(6, 4, 4, 2, 11, 'Huawei MatePad Pro, 256GB', 'Conjunto completo com caneta e capa com teclado', 800.00, 'Novo'),
-(7, 3, 1, 3, 12, 'Película de vidro para Iphone 13', 'Vidro temperado, grande durabilidade.', 15.00, 'Novo'),
-(8, 1, 5, 3, 11, 'Capa para Xiaomi Redmi Note 10 ', 'Capa protetora, anti-quedas.', 10.00, 'Novo');
-
+INSERT INTO PRODUCT (productID, sellerID, brandID, categoryID, locationID, conditionID, title, description, price) VALUES
+(1, 1, 1, 1, 11, 2, 'iPhone 13, 128GB', 'Com alguns arranhões', 800.00),
+(2, 2, 2, 1, 11, 3, 'Samsung Galaxy S21, 256GB', 'Alguns sinais de uso na parte frontal', 750.00),
+(3, 1, 2, 2, 11, 1, 'Samsung Galaxy Tab S9, 256GB', 'Novo, ainda selado', 650.00),
+(4, 3, 1, 3, 12, 1, 'Capa Protetora para iPhone 12 ', 'Em perfeitas condições, nunca usado.', 20.00),
+(5, 2, 3, 1, 11, 2, 'Google Pixel 6, 128GB', 'Como novo.', 700.00),
+(6, 4, 4, 2, 11, 1, 'Huawei MatePad Pro, 256GB', 'Conjunto completo com caneta e capa com teclado', 800.00),
+(7, 3, 1, 3, 12, 1, 'Película de vidro para Iphone 13', 'Vidro temperado, grande durabilidade.', 15.00),
+(8, 1, 5, 3, 11, 1, 'Capa para Xiaomi Redmi Note 10 ', 'Capa protetora, anti-quedas.', 10.00);
 
 
 -- Insert statements for the RATING table

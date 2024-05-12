@@ -14,7 +14,7 @@
 
   $db = getDatabaseConnection();
   $userID = null;
-  $listings = Product::getMyListings($db, $_SESSION['user_id']);
+  $listings = Product::getUserListings($db, $_SESSION['user_id']);
 
   drawHead($name);
   drawHeader();

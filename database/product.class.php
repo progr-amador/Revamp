@@ -7,22 +7,47 @@
       public int $brand;
       public int $category;
       public int $location;
+      public int $condition;
       public int $price;
       public string $title;
       public string $description;
-      public int $condition;
 
-    public function __construct(int $id,int $seller,int $brand,int $category,int $location,int $price,int $condition){
+    public function __construct(int $seller,int $brand,int $category,int $location,int $condition,int $price,string $title, string $description,int $id = 0){
       $this->id = $id;
       $this->seller = $seller;
       $this->brand = $brand;
       $this->category = $category;
       $this->location = $location;
+      $this->condition = $condition;
       $this->price = $price;
       $this->title = $title;
       $this->description = $description;
-      $this->condition = $condition;
     }
+
+    public function save(PDO $db) {
+      $stmt = $db->prepare('
+        INSERT INTO PRODUCT (sellerID, brandID, categoryID, locationID, conditionID, title, description, price) 
+        VALUES (?,?,?,?,?,?,?,?) 
+      ');
+
+      $stmt->execute([
+        $this->seller,
+        $this->brand,
+        $this->category,
+        $this->location,
+        $this->condition,
+        $this->title,
+        $this->description,
+        $this->price,
+      ]);
+
+      $stmt = $db->prepare('
+        INSERT INTO PHOTO (photoID, productID, photoURL) VALUES
+        (9, 9, "../assets/products/redmicase.jpg") 
+      ');
+
+      $stmt->execute();
+    } 
 
     static function getFiltered(PDO $db, string $title = '', string $price_min = '', string $price_max = '', string $condition = '', string $district = '', string $category = '', string $brand = ''): array {
       // Start building the query
@@ -33,6 +58,7 @@
           JOIN PHOTO USING (productID)
           JOIN CATEGORY USING (categoryID)
           JOIN BRAND USING (brandID)
+          JOIN CONDITION USING (conditionID)
           WHERE 1=1 '; // 1=1 always true, acts as a starting point for further conditions
   
       $params = array(); // Array to hold parameters for execution
@@ -53,7 +79,7 @@
           $params[] = $price_max;
       }
       if (!empty($condition)) {
-          $query .= 'AND condition = ? ';
+          $query .= 'AND conditionName = ? ';
           $params[] = $condition;
       }
       if (!empty($district)) {
@@ -141,14 +167,15 @@
 
     static function getProduct(PDO $db, $id): array{
         $stmt = $db->prepare('
-        SELECT productID, sellerID, brandID, categoryID, product.locationID, title, description, price, condition, photoURL, username AS seller, locationName AS location
+        SELECT productID, sellerID, brandID, categoryID, product.locationID, title, description, price, conditionName AS condition, photoURL, username AS seller, locationName AS location
         FROM PRODUCT 
         JOIN USERS ON PRODUCT.sellerID=USERS.userID
         JOIN BRAND USING (brandID)
         JOIN CATEGORY USING (categoryID)
         JOIN LOCATION_ USING (locationID)
         JOIN PHOTO USING (productID)
-        WHERE ProductId = ?
+        JOIN CONDITION USING (conditionID)
+        WHERE productId = ?
         GROUP BY productID
       ');
 
@@ -161,7 +188,7 @@
       return $product;
     }
 
-    static function getMyListings(PDO $db, int $userID): array {
+    static function getUserListings(PDO $db, int $userID): array {
       $stmt = $db->prepare('
         SELECT productID, title, price, locationName AS location, photoURL, categoryName, sellerID
         FROM PRODUCT

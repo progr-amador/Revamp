@@ -59,6 +59,7 @@
                     <a href="profile.php"><button class="abtn" >Perfil</button></a>
                     <button onclick="openCartDrawer()" class="abtn"> Carrinho </button>
                     <button onclick="openFavoritesDrawer()" class="abtn"> Favoritos </button>
+                    <a href="new_product.php"> <button class="abtn"> Vender </button></a>
                 <?php else: ?>
                     <a href="login.php"> <button class="abtn"> Iniciar Sessão </button></a>
                     <a href="register.php"> <button class="abtn"> Criar Conta </button></a>

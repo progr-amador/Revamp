@@ -18,5 +18,5 @@
       $newUser->save($db, $password);  // Save the user
   }
 
-header('Location: ../code/home.php');
+header('Location: ../code/login.php');
 ?>

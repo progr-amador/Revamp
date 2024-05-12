@@ -1,32 +1,42 @@
 <?php
-  declare(strict_types = 1);
+declare(strict_types = 1);
 
-  session_start();
+session_start();
 
-  require_once('../database/connection.db.php');
-  require_once('../database/users.class.php');
+require_once('../database/connection.db.php');
+require_once('../database/users.class.php');
 
-  $db = getDatabaseConnection();
+$db = getDatabaseConnection();
 
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    // Attempt to retrieve the user from the database
     $user = Users::getUsersWithPassword($email, $password);
 
     if ($user) {
-        // Password verification
+        // Assuming you have a method to verify the password
         
             // Set session variables
             $_SESSION['user_id'] = $user->id;
             $_SESSION['user_name'] = $user->name;
             $_SESSION['email'] = $user->email;
+            $_SESSION['phoneNumber'] = $user->phone;
+            $_SESSION['creationDate'] = $user->date;
+            // Redirect to home page if the login is successful
+            header('Location: ../code/home.php');
+            exit();
         
-    } else {
-        echo '<p>Invalid email or password.</p>';
     }
+
+    // Set an error message in $_SESSION if login fails
+    $_SESSION['error_message'] = 'Invalid email or password.';
+    // Redirect back to the login page or another appropriate page
+    header('Location: ../code/login.php');
+    exit();
 }
 
-header('Location: ../code/home.php');
+// Fallback redirection
+header('Location: ../code/login.php');
+exit();
 ?>

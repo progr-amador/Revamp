@@ -36,8 +36,10 @@ a {
 
 .header-content {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content:space-between;
     align-items: center;
+    
     background-color: var(--main-color);
     color: whitesmoke;
     padding: 10px 20px;
@@ -53,7 +55,8 @@ header > h1 {
 /********** SEARCH ***********/
 
 .search-container {
-    width: 50em;
+    width: 50%;
+    padding: 8px;
 }
 
 .search-input {
@@ -87,6 +90,7 @@ nav ul li a:hover, .categories ul li a:hover {
 .categories {
     background-color: var(--accent-color) ;
     padding: 5px 0;
+    margin: 0;
     
 }
 .categories ul {
@@ -119,7 +123,10 @@ nav ul li a:hover, .categories ul li a:hover {
 
 .flex-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: column;  /* ou 'column' se quiser que eles sejam empilhados verticalmente em dispositivos móveis */
+    justify-content: center;  /* Alinha horizontalmente ao centro */
+    align-items: center;  /* Alinha verticalmente ao centro */
+    flex-wrap: wrap;  /* Permite que itens sejam envolvidos em várias linhas */
 }
 
 .flex-row {
@@ -221,15 +228,18 @@ nav ul li a:hover, .categories ul li a:hover {
 
 .abtn {
     background-color: var(--accent-color); /* Botão com a cor de fundo do site */
-    border: none; /* Sem borda */
-    border-radius: 5px; /* Bordas arredondadas */
+    border-radius: 5px;
+     /* Sem borda */
+     border: 0;
+     /* Bordas arredondadas */
     color: var(--main-color); /* Cor do texto para contraste */
-    padding: 8px 16px;
+    padding: 12px;
     cursor: pointer;
     font-family: 'Prompt', sans-serif; /* Fonte consistente com o site */
     font-size: 14px;
     font-weight: bold;
     transition: background-color 0.3s;
+    
 }
 
 .abtn:hover {
@@ -242,7 +252,7 @@ nav ul li a:hover, .categories ul li a:hover {
     border: none; /* Sem borda */
     border-radius: 5px; /* Bordas arredondadas */
     color: var(--accent-color); /* Cor do texto para contraste */
-    padding: 8px 16px;
+    padding: 12px;
     cursor: pointer;
     font-family: 'Prompt', sans-serif; /* Fonte consistente com o site */
     font-size: 14px;
@@ -302,6 +312,23 @@ h3 {
         flex-direction: column;
         text-align: center;
     }    
+    body {
+        font-size: 14px; /* Smaller font size on mobile */
+    }
+
+    .form-box {
+        width: 100%; /* Full width to use the available space */
+    }
+
+    .header-content, .drawer-header {
+        flex-direction: column; /* Stack elements vertically */
+    }
+
+    .flex-row {
+        flex-direction: column;
+    }
+
+    
 }
 
 
@@ -407,6 +434,7 @@ input[type="checkbox"]:checked + #estado>label {
     color: whitesmoke; /* Texto branco */
     padding: 10px 20px; /* Espaçamento interno */
     display: flex;
+    flex-direction: row;
     justify-content: space-between; /* Espaçamento entre o título e o botão */
     align-items: center;
     
@@ -435,11 +463,13 @@ input[type="checkbox"]:checked + #estado>label {
 }
 
 .product-image img {
-    width: 600px;
-    height: 600px;
+    width: 100%; /* Makes the image responsive */
+    height: auto; /* Maintains aspect ratio */
+    max-width: 600px; /* Ensures it doesn't grow beyond 600px */
     border-radius: 10px;
     margin-right: 20px;
 }
+
 
 .product-details {
     flex-grow: 1;

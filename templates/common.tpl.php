@@ -27,6 +27,11 @@
         <div class="drawer-content">
             <p>Nome: <b><?php echo $_SESSION['user_name'];?></b></p>
             <p>Email: <b><?php echo $_SESSION['email'];?></b></p>
+            
+            <a href="profile.php"><button class="abtn" >Editar Perfil</button></a>
+            <form action="../actions/action_logout.php" method="post">
+                <button type="submit" class="abtn"> Terminar Sessão </button>
+            </form>
         </div>
     </div>
     <div id="cartDrawer" class="profile-drawer">
@@ -66,12 +71,10 @@
             </div>
             <div class="authentication-buttons">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <button onclick="openProfileDrawer()" class="abtn"> Perfil </button>
+                    <button onclick="openProfileDrawer()" class="abtn"> Perfl </button>
                     <button onclick="openCartDrawer()" class="abtn"> Carrinho </button>
                     <button onclick="openFavoritesDrawer()" class="abtn"> Favoritos </button>
-                    <form action="../actions/action_logout.php" method="post">
-                        <button type="submit" class="abtn"> Terminar Sessão </button>
-                    </form>
+                    
                     <a href="my_listings.php"> <button class="abtn"> Meus Produtos </button></a>
                 <?php else: ?>
                     <a href="login.php"> <button class="abtn"> Iniciar Sessão </button></a>
@@ -95,7 +98,7 @@
 <?php } ?>
 
 <?php function drawFooter() { ?>
-    </div> <!-- Fim do container do conteúdo principal -->
+    </div> 
     <footer>
         <div class="footer-container">   
             <h3><a href="home.php"> R E V A M P © 2024 </a></h3>

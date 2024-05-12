@@ -19,22 +19,7 @@
         <title>Revamp - <?php echo $name; ?></title>
     </head>
     <body>
-    <div id="profileDrawer" class="profile-drawer">
-        <div class="drawer-header">
-        <h1> Perfil </h1>
-            <button class="abtn" onclick="closeProfileDrawer()">Fechar</button>
-        </div>
-        <div class="drawer-content">
-            <p>Nome: <b><?php echo $_SESSION['user_name'];?></b></p>
-            <p>Email: <b><?php echo $_SESSION['email'];?></b></p>
-            
-            <a href="profile.php"><button class="abtn" >Editar Perfil</button></a>
-            <form action="../actions/action_logout.php" method="post">
-                <button type="submit" class="abtn"> Terminar Sessão </button>
-            </form>
-        </div>
-    </div>
-    <div id="cartDrawer" class="profile-drawer">
+    <div id="cartDrawer" class="header-drawer">
         <div class="drawer-header">
         <h1> Carrinho </h1>
             <a href="shipping.php"><button class="abtn" onclick="closeCartDrawer()">Comprar</button></a>
@@ -46,7 +31,7 @@
             </div>
         </div>
     </div>
-    <div id="favoritesDrawer" class="profile-drawer">
+    <div id="favoritesDrawer" class="header-drawer">
         <div class="drawer-header">
             <h1> Favoritos </h1>
             <button class="abtn" onclick="closeFavoritesDrawer()">Fechar</button>
@@ -71,11 +56,9 @@
             </div>
             <div class="authentication-buttons">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <button onclick="openProfileDrawer()" class="abtn"> Perfl </button>
+                    <a href="profile.php"><button class="abtn" >Perfil</button></a>
                     <button onclick="openCartDrawer()" class="abtn"> Carrinho </button>
                     <button onclick="openFavoritesDrawer()" class="abtn"> Favoritos </button>
-                    
-                    <a href="my_listings.php"> <button class="abtn"> Meus Produtos </button></a>
                 <?php else: ?>
                     <a href="login.php"> <button class="abtn"> Iniciar Sessão </button></a>
                     <a href="register.php"> <button class="abtn"> Criar Conta </button></a>
@@ -105,13 +88,6 @@
         </div>
     </footer>
     <script>
-    function openProfileDrawer() {
-        document.getElementById('profileDrawer').classList.add('open');
-    }
-
-    function closeProfileDrawer() {
-        document.getElementById('profileDrawer').classList.remove('open');
-    }
     function openCartDrawer() {
         document.getElementById('cartDrawer').classList.add('open');
     }

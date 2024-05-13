@@ -17,5 +17,10 @@
       $stmt = $db->prepare('INSERT OR IGNORE INTO FAVORITES (buyerID, productID) VALUES (?,?)');
       $stmt->execute([$buyerID, $productID]);
     }
+
+    static function emptyFavorites(PDO $db, int $buyerID) {
+      $stmt = $db->prepare('DELETE FROM FAVORITES WHERE buyerID = ?');
+      $stmt->execute([$buyerID]);
+    }
     }
 ?>

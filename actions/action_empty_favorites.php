@@ -8,11 +8,7 @@
 
   $db = getDatabaseConnection();
 
-  Baskets::emptyCart($db, $_SESSION['user_id']);
-
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {      
-    header('Location: ../code/home.php');
-  }
+  Baskets::emptyFavorites($db, $_SESSION['user_id']);
 
   header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>

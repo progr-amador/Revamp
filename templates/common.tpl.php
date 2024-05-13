@@ -22,6 +22,7 @@
         <div class="drawer-header">
         <h1> Carrinho </h1>
             <a href="shipping.php"><button class="abtn" onclick="closeCartDrawer()">Comprar</button></a>
+            <a href="../actions/action_empty_cart.php"><button class="abtn">Esvaziar</button></a>
             <button class="abtn" onclick="closeCartDrawer()">Fechar</button>
         </div>
         <div class="drawer-content">
@@ -33,6 +34,7 @@
     <div id="favoritesDrawer" class="header-drawer">
         <div class="drawer-header">
             <h1> Favoritos </h1>
+            <a href="../actions/action_empty_favorites.php"><button class="abtn">Esvaziar</button></a>
             <button class="abtn" onclick="closeFavoritesDrawer()">Fechar</button>
         </div>
         <div class="drawer-content">

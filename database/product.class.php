@@ -24,7 +24,7 @@
       $this->description = $description;
     }
 
-    public function save(PDO $db, $path) {
+    public function save(PDO $db, $paths) {
       $stmt = $db->prepare('
         INSERT INTO PRODUCT (sellerID, brandID, categoryID, locationID, conditionID, title, description, price) 
         VALUES (?,?,?,?,?,?,?,?) 
@@ -48,11 +48,12 @@
         (?, ?) 
       ');
 
-      $stmt->execute([$productID, $path]);
+      foreach ($paths as $path) {
+        $stmt->execute([$productID, $path]);
+      }
     } 
 
     static function getFiltered(PDO $db, string $title = '', string $price_min = '', string $price_max = '', string $condition = '', string $district = '', string $category = '', string $brand = ''): array {
-      // Start building the query
       $query = '
           SELECT productID, title, price, locationName AS location, photoURL
           FROM PRODUCT
@@ -61,11 +62,10 @@
           JOIN CATEGORY USING (categoryID)
           JOIN BRAND USING (brandID)
           JOIN CONDITION USING (conditionID)
-          WHERE 1=1 '; // 1=1 always true, acts as a starting point for further conditions
+          WHERE 1=1 ';
   
-      $params = array(); // Array to hold parameters for execution
+      $params = array();
   
-      // Add conditions based on provided parameters
       if (!empty($title)) {
           $query .= 'AND title LIKE ? ';
           $params[] = "%$title%";
@@ -97,11 +97,11 @@
           $params[] = $brand;
       }
   
-      $query .= 'ORDER BY price ASC'; // Add the final ordering
+      $query .= 'ORDER BY price ASC';
   
       $stmt = $db->prepare($query);
       $stmt->execute($params); 
-      $products = $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch the results
+      $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
       return $products;
   }
 
@@ -111,6 +111,7 @@
       FROM PRODUCT
       JOIN LOCATION_ USING (locationID)
       JOIN PHOTO USING (productID)
+      GROUP BY productID
       ORDER BY price ASC
       LIMIT 20
     ');
@@ -128,6 +129,7 @@
       JOIN PHOTO USING (productID)
       JOIN FAVORITES USING (productID)
       WHERE buyerID = ?
+      GROUP BY productID
     ');
 
     $stmt->execute(array($userID));
@@ -143,6 +145,7 @@
       JOIN PHOTO USING (productID)
       JOIN CART USING (productID)
       WHERE buyerID = ?
+      GROUP BY productID
     ');
 
     $stmt->execute(array($userID));
@@ -160,6 +163,7 @@
         JOIN CATEGORY USING (categoryID)
         WHERE categoryName LIKE ?
         ORDER BY price ASC
+        GROUP BY productID
       ');
   
       $stmt->execute(array("%$category%")); 
@@ -198,6 +202,7 @@
         JOIN PHOTO USING (productID)
         JOIN CATEGORY USING (categoryID)
         WHERE sellerID LIKE ?
+        GROUP BY productID
       ');
   
       $stmt->execute(array($userID)); 

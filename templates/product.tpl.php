@@ -15,7 +15,7 @@
                 <?php if (isset($_SESSION['user_id'])) { ?>
                     <div class="buttons">
                         <?php if($_SESSION['user_id'] === $product['sellerID']): ?>
-                            <form action="../actions/action_product.php" method="post">
+                            <form action="../actions/action_remove_product.php" method="post">
                                 <input type="hidden" name="productID" value="<?php echo $ID ?>">
                                 <button type="submit" class="abtn"> Remover </button>
                             </form>

@@ -17,7 +17,7 @@
       $price = $_POST['price'] ?? 0;
       $title = $_POST['title'] ?? '';
       $description = $_POST['description'] ?? '';
-      $destination;
+      $destinations = array();
 
       //print_r($_FILES);
             
@@ -27,7 +27,8 @@
         $numFiles = count($uploadedImages['name']);
 
         if($numFiles > 4) {
-          echo "Error: You can upload a maximum of 4 images.";
+          $_SESSION['error_message'] = "Error: You can upload a maximum of 4 images.";
+          header('Location: ../code/new_product.php');
           exit;
         }
 
@@ -39,19 +40,19 @@
             $fileType = $uploadedImages['type'][$i];
             if($fileError === 0) {
                 $destination = '../assets/products/' . $fileName;
+                $destinations[] = $destination;
                 move_uploaded_file($fileTmpName, $destination);
             } else {
-                echo "Error uploading file: $fileName";
+              $_SESSION['error_message'] = "Error uploading file: $fileName";
+              header('Location: ../code/new_product.php');
+              exit;
             }
         }
       }
-      echo $destination;
-      $newProduct->save($db, $destination);
-
+      
+      $newProduct->save($db, $destinations);
 
     }
-
-  
 
 header('Location: ../code/profile.php');
 ?>

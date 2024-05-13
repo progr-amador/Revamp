@@ -1,6 +1,12 @@
 <?php declare(strict_types = 1); ?>
 
-<?php function drawNewProduct($districts, $categories, $brands, $conditions) { ?>
+<?php function drawNewProduct($districts, $categories, $brands, $conditions) { 
+    $errorMessage = '';
+    if (isset($_SESSION['error_message'])) {
+        $errorMessage = '<p>' . $_SESSION['error_message'] . '</p>';
+        unset($_SESSION['error_message']);
+    }
+    ?>
     <main id="shipping">
         <h1>Novo Produto</h1>
         <section id="shipping-details">
@@ -65,6 +71,7 @@
                     <legend>Imagens</legend>
                     <label for="images">Selecione até 4 imagens (PNG, JPEG ou JPG)</label>
                     <input type="file" name="image[]" id="images" accept=".jpeg,.jpg,.png" multiple required>
+                    <?php echo $errorMessage; ?>
                 </fieldset>
 
                 <button type="submit" class = "abtn" >Continuar</button>

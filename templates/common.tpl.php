@@ -1,7 +1,6 @@
 <?php declare(strict_types = 1); ?>
 
 <?php function drawHead($name) {
-
     require_once('../database/connection.db.php');
     require_once('../database/product.class.php');
 
@@ -45,7 +44,15 @@
     <div class="body-container"> 
 <?php } ?>
 
-<?php function drawHeader() { ?>
+<?php function drawHeader() { 
+    require_once('../database/connection.db.php');
+    require_once('../database/category.class.php');
+
+    $db = getDatabaseConnection();
+    $categories = Category::getCategories($db);
+
+
+?>
     <header>
         <div class="header-content">
             <h1><a href="home.php"> R E V A M P </a></h1>
@@ -71,12 +78,7 @@
     </header>
     <div class="categories">
         <ul>
-            <li><a href="category.php?id=Telemóveis">Telemóveis</a></li>
-            <li><a href="category.php?id=Tablets">Tablets</a></li>
-            <li><a href="category.php?id=Capas e Películas">Capas e Películas</a></li>
-            <li><a href="category.php?id=Carregadores e Cabos">Carregadores e cabos</a></li>
-            <li><a href="category.php?id=Power Banks">Power Banks</a></li>
-        
+            <?php drawcategories($categories) ?>
         </ul>
     </div>
 <?php } ?>
@@ -123,5 +125,11 @@
             </a>
         </div>
     <?php } 
+} ?>
+
+<?php function drawcategories($categories) {
+    foreach ($categories as $category) { ?>
+        <li><a href="category.php?id=<?php echo $category['categoryName']; ?>"><?php echo $category['categoryName']; ?></a></li>
+    <?php }
 } ?>
 

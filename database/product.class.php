@@ -162,8 +162,8 @@
         JOIN PHOTO USING (productID)
         JOIN CATEGORY USING (categoryID)
         WHERE categoryName LIKE ?
-        ORDER BY price ASC
         GROUP BY productID
+        ORDER BY price ASC
       ');
   
       $stmt->execute(array("%$category%")); 
@@ -173,7 +173,7 @@
 
     static function getProduct(PDO $db, $id): array{
         $stmt = $db->prepare('
-        SELECT productID, sellerID, brandID, categoryID, product.locationID, title, description, price, conditionName AS condition, photoURL, username AS seller, locationName AS location
+        SELECT productID, sellerID, brandID, categoryID, categoryName, product.locationID, title, description, price, conditionName AS condition, photoURL, username AS seller, locationName AS location
         FROM PRODUCT 
         JOIN USERS ON PRODUCT.sellerID=USERS.userID
         JOIN BRAND USING (brandID)

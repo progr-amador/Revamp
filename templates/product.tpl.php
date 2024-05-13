@@ -9,7 +9,7 @@
             <div class="product-details">
                 <h1><?php echo $product['title']; ?></h1>
                 <p class="price"><?php echo $product['price']; ?>€</p>
-                <p class="user"><?php echo $product['seller']; ?></p>
+                <a href="profile.php?id=<?php echo $product['sellerID']; ?>"><p class="user"><?php echo $product['seller']; ?></p></a>
                 <p class="description"><?php echo $product['description']; ?></p>
                 <p class="location">Localização: <?php echo $product['location']; ?></p>
                 <?php if (isset($_SESSION['user_id'])) { ?>

@@ -62,23 +62,18 @@ class Users {
         } else return null;
     }
 
-    public static function getUser(PDO $db, int $id) : ?Users {
-        $stmt = $db->prepare('SELECT userId, username, email, phoneNumber, creationDate, address, locationID, isAdmin FROM USERS WHERE userId = ?');
-        $stmt->execute([$id]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    public static function getUser(PDO $db, $id) : array {
+        $stmt = $db->prepare('
+            SELECT userId, username, email, phoneNumber, creationDate, address, locationID, isAdmin 
+            FROM USERS 
+            WHERE userId = ?
+        ');
         
-        if ($user) {
-            return new Users(
-                $user['userId'],
-                $user['username'],
-                $user['email'],
-                $user['phoneNumber'],
-                $user['creationDate'],
-                $user['address'],
-                $user['locationID'],
-                $user['isAdmin'] == '1' ? true : false
-            );
-        } else return null;
+        $stmt->execute(array($id));
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $user;
     }
 }
 ?>

@@ -187,14 +187,12 @@
 
       $stmt->execute(array($id));
 
-      // Fetch a single row
       $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-      // Return the product data
       return $product;
     }
 
-    static function getUserListings(PDO $db, int $userID): array {
+    static function getUserListings(PDO $db, $userID): array {
       $stmt = $db->prepare('
         SELECT productID, title, price, locationName AS location, photoURL, categoryName, sellerID
         FROM PRODUCT

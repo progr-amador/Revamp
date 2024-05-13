@@ -56,7 +56,7 @@
             </div>
             <div class="authentication-buttons">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <a href="profile.php"><button class="abtn" >Perfil</button></a>
+                    <a href="profile.php?id=<?php echo $_SESSION['user_id']; ?>"><button class="abtn" >Perfil</button></a>
                     <button onclick="openCartDrawer()" class="abtn"> Carrinho </button>
                     <button onclick="openFavoritesDrawer()" class="abtn"> Favoritos </button>
                     <a href="new_product.php"> <button class="abtn"> Vender </button></a>

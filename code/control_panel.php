@@ -3,18 +3,21 @@
 
   session_start();
 
+  if(!$_SESSION['admin']) header('Location: ' . $_SERVER['HTTP_REFERER']);
+
   require_once('../database/connection.db.php');
   require_once('../database/product.class.php');
+  require_once('../database/baskets.class.php');
+  require_once('../database/users.class.php');
 
   require_once('../templates/common.tpl.php');
-  require_once('../templates/home.tpl.php');
+  require_once('../templates/control_panel.tpl.php');
 
-  $name = "Página inicial";
+  $name = "Painel de Controlo";
   $db = getDatabaseConnection();
-  $featured = Product::getFeatured($db);
 
   drawHead($name);
   drawHeader();
-  drawHome($featured);
+  drawControlPanel($featured);
   drawFooter();
 ?>

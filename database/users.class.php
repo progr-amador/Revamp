@@ -64,9 +64,9 @@ class Users {
 
     public static function getUser(PDO $db, $id) : array {
         $stmt = $db->prepare('
-            SELECT userId, username, email, phoneNumber, creationDate, address, locationID, isAdmin 
+            SELECT userID, username, email, phoneNumber, creationDate, address, locationID, isAdmin 
             FROM USERS 
-            WHERE userId = ?
+            WHERE userID = ?
         ');
         
         $stmt->execute(array($id));

@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1); ?>
 
-<?php function drawProfile($listings,$user) { ?>
+<?php function drawProfile($listings, $user) { ?>
     <main>
         <body>
             <div class="profile-container">
@@ -13,9 +13,11 @@
                     <p><strong>Telefone:</strong> <?php echo $user['phoneNumber'];?></p>
                     <p><strong>Juntou-se em:</strong> <?php echo $user['creationDate'];?> </p>
                 </div>
+                <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $user['userID']): ?>
                 <form action="../actions/action_logout.php" method="post">
-                        <button type="submit" class="abtn"> Terminar Sessão </button>
-                    </form>
+                    <button type="submit" class="abtn"> Terminar Sessão </button>
+                </form>
+                <?php endif; ?>
             </div>
             <div class="item-list">
                     <h2>Os Meus Produtos</h2>

@@ -4,7 +4,7 @@
     <main id="shipping">
         <h1>Novo Produto</h1>
         <section id="shipping-details">
-            <form action="../actions/action_new_product.php" method="post">
+            <form action="../actions/action_new_product.php" method="post" enctype="multipart/form-data">
                 <fieldset>
                     <legend>Texto</legend>
                     <label for="name">Título
@@ -13,7 +13,7 @@
                     <br>
                     <label for="description"> Descrição</label>
                     <br>
-                    <textarea id="description" name="description" rows="5" cols="60"></textarea>
+                    <textarea id="description" name="description" rows="5" cols="60" required></textarea>
                     
                 </fieldset>
 
@@ -25,7 +25,7 @@
                     <br>
                     <label id = "categoria">
                         Categoria
-                        <select name="category">
+                        <select name="category" required>
                             <option value="">&mdash;</option>
                             <?php foreach ($categories as $category) { ?>
                                 <option value="<?php echo $category['categoryID']; ?>"><?php echo $category['categoryName']; ?></option>
@@ -34,7 +34,7 @@
                     </label>
                     <label id = "marca">
                         Marca
-                        <select name="brand">
+                        <select name="brand" required>
                             <option value="">&mdash;</option>
                             <?php foreach ($brands as $brand) { ?>
                                 <option value="<?php echo $brand['brandID']; ?>"><?php echo $brand['brandName']; ?></option>
@@ -43,7 +43,7 @@
                     </label>
                     <label id = "condition">
                         Condição
-                        <select name="condition">
+                        <select name="condition" required>
                             <option value="">&mdash;</option>
                             <?php foreach ($conditions as $condition) { ?>
                                 <option value="<?php echo $condition['conditionID']; ?>"><?php echo $condition['conditionName']; ?></option>
@@ -52,7 +52,7 @@
                     </label>
                     <label id = "regiao">
                         Distrito
-                        <select name="location">
+                        <select name="location" required>
                             <option value="">&mdash;</option>
                             <?php foreach ($districts as $district) { ?>
                                 <option value="<?php echo $district['locationID']; ?>"><?php echo $district['locationName']; ?></option>
@@ -64,7 +64,7 @@
                 <fieldset>
                     <legend>Imagens</legend>
                     <label for="images">Selecione até 4 imagens (PNG, JPEG ou JPG)</label>
-                    <input type="file" id="images" name="images[]" accept="image/png, image/jpeg" multiple>
+                    <input type="file" name="image[]" id="images" accept=".jpeg,.jpg,.png" multiple required>
                 </fieldset>
 
                 <button type="submit" class = "abtn" >Continuar</button>

@@ -24,7 +24,7 @@
       $this->description = $description;
     }
 
-    public function save(PDO $db) {
+    public function save(PDO $db, $path) {
       $stmt = $db->prepare('
         INSERT INTO PRODUCT (sellerID, brandID, categoryID, locationID, conditionID, title, description, price) 
         VALUES (?,?,?,?,?,?,?,?) 
@@ -41,12 +41,14 @@
         $this->price,
       ]);
 
+      $productID = $db->lastInsertId();
+
       $stmt = $db->prepare('
-        INSERT INTO PHOTO (photoID, productID, photoURL) VALUES
-        (9, 9, "../assets/products/redmicase.jpg") 
+        INSERT INTO PHOTO (productID, photoURL) VALUES
+        (?, ?) 
       ');
 
-      $stmt->execute();
+      $stmt->execute([$productID, $path]);
     } 
 
     static function getFiltered(PDO $db, string $title = '', string $price_min = '', string $price_max = '', string $condition = '', string $district = '', string $category = '', string $brand = ''): array {

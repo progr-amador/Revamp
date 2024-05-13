@@ -1,11 +1,15 @@
 <?php declare(strict_types = 1); ?>
 
-<?php function drawShipping($districts) { ?>
+<?php function drawShipping($districts, $cart) { ?>
     <main id="shipping">
-        <h1>Informações de Envio</h1>
+        <h1>Checkout</h1>
+            <div class="flex-container">
+                <div class="flex-row">
+                <?php drawProductCard($cart) ?>
+                </div>
+        </div>
         <section id="shipping-details">
             <form action="payment.php" method="get">
-                <!-- Detalhes do Cliente -->
                 <fieldset>
                     <legend>Detalhes Pessoais</legend>
                     <label for="name">Nome
@@ -19,7 +23,6 @@
                     </label>
                 </fieldset>
 
-                <!-- Detalhes de Endereço -->
                 <fieldset>
                     <legend>Detalhes de Endereço</legend>
                     <label id = "regiao">
@@ -38,7 +41,6 @@
                     
                 </fieldset>
 
-                <!-- Opções de Entrega -->
                 <fieldset>
                     <legend>Opções de Entrega</legend>
                     <div class="radio-option">

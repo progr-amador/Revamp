@@ -4,7 +4,7 @@
 <?php function drawPaypal() { ?>
     <main id="payment">
         <h1>Pagamento com PayPal</h1>
-        <form>
+        <form action="../actions/action_empty_cart.php">
             <label for="email">Email
                 <input type="email" id="email" name="email" required>
             </label>
@@ -19,7 +19,7 @@
 <?php function drawCredit() { ?>
     <main id="payment">
         <h1>Pagamento com Cartão de Crédito</h1>
-        <form>
+        <form action="../actions/action_empty_cart.php">
             <label for="name">Nome do Titular
                 <input type="text" id="name" name="name" required>
             </label>
@@ -40,7 +40,7 @@
 <?php function drawMB() { ?>
     <main id="payment">
         <h1>Pagamento com MB Way</h1>
-        <form>
+        <form action="../actions/action_empty_cart.php">
             <label for="mobile">Número de Telemóvel
                 <input type="tel" id="mobile" name="mobile" required>
             </label>

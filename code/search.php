@@ -17,6 +17,7 @@
   $categories = Category::getCategories($db);
   $districts = Category::getDistricts($db);
   $brands = Category::getBrands($db);
+  $conditions = Category::getConditions($db);
 
   $name = "Pesquisa";
 
@@ -38,7 +39,7 @@
 
   drawHead($name);
   drawHeader();
-  drawSearch($searched, $categories, $districts, $brands, $query);
+  drawSearch($searched, $categories, $districts, $brands, $conditions, $query);
   drawFooter();
 ?>
 

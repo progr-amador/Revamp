@@ -3,7 +3,10 @@
 
   session_start();
 
-  if(!$_SESSION['admin']) header('Location: ' . $_SERVER['HTTP_REFERER']);
+  if((!isset($_SESSION['user_id'])) || (!$_SESSION['admin'])) {
+    header('Location: ../code/home.php');
+    exit;
+  }
 
   require_once('../database/connection.db.php');
   require_once('../database/product.class.php');

@@ -13,9 +13,23 @@
                     <p><strong>Telefone:</strong> <?php echo $user['phoneNumber'];?></p>
                     <p><strong>Juntou-se em:</strong> <?php echo $user['creationDate'];?> </p>
                 </div>
-                <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $user['userID']): ?>
+                <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $user['userID']): ?>
                 <form action="../actions/action_logout.php" method="post">
                     <button type="submit" class="abtn"> Terminar Sessão </button>
+                </form>
+                <form action="../actions/control_panel/action_remove_user.php" method="get">
+                    <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Apagar Conta </button>
+                </form>
+                <?php endif; ?>
+                <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] !== $user['userID'] && $_SESSION['admin']): ?>
+                <form action="../actions/control_panel/action_make_admin.php" method="get">
+                    <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Tornar Admin </button>
+                </form>
+                <form action="../actions/control_panel/action_remove_admin.php" method="get">
+                    <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Retirar Admin </button>
+                </form>
+                <form action="../actions/control_panel/action_remove_user.php" method="get">
+                    <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Remover Utilizador </button>
                 </form>
                 <?php endif; ?>
             </div>

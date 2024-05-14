@@ -9,10 +9,18 @@
   $db = getDatabaseConnection();
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $name = $_POST['name'];
-            
-      Users::removeUser($db, $name);
+    $name = $_POST['name'];
+          
+    Users::removeUser($db, $name);
   }
+
+  if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $name = $_GET['name'];
+          
+    Users::removeUser($db, $name);
+    header('Location: ../action_logout.php');
+    exit;
+}
 
   header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>

@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1); ?>
 
-<?php function drawSearch($searched, $categories, $districts, $brands, $query) { ?>
+<?php function drawSearch($searched, $categories, $districts, $brands, $conditions, $query) { ?>
     <main id = "search">
         <section id="listings">
             <div class="item-list">
@@ -21,13 +21,14 @@
                 <input type="number" name="price_max" placeholder="1000€">
             </fieldset>
             </label>
-            <label>
+            <label id="condição">
             Condição
-            <fieldset id="estado">
-                <label>Novo<input value="Novo" type="checkbox" name="condition" ></label>
-                <label>Como Novo<input value="Como novo" type="checkbox" name="condition"></label>
-                <label>Usado<input value="Usado" type="checkbox" name="condition"></label>
-            </fieldset>
+            <select name="condition">
+                <option value="">&mdash;</option>
+                <?php foreach ($conditions as $condition) { ?>
+                    <option value="<?php echo $condition['conditionName']; ?>"><?php echo $condition['conditionName']; ?></option>
+                <?php } ?>
+            </select>
             </label>
             <label id = "regiao">
             Distrito

@@ -47,7 +47,7 @@
     <div class="body-container"> 
 <?php } ?>
 
-<?php function drawHeader() { 
+<?php function drawHeader($value = "") { 
     require_once('../database/connection.db.php');
     require_once('../database/category.class.php');
 
@@ -61,7 +61,7 @@
             <h1><a href="home.php"> R E V A M P </a></h1>
             <div class="search-container">
                 <form action="search.php" method="get">
-                    <input id="searchproduct" type="text" name="query" placeholder="Search..." class="search-input">
+                    <input id="searchproduct" type="text" name="query" placeholder="Search..." class="search-input" autocomplete="off" value="<?php echo $value?>">
                 </form>
             </div>
             <div class="authentication-buttons">

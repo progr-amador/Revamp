@@ -59,54 +59,67 @@
       $stmt->execute([$productID]);
     }
 
-    static function getFiltered(PDO $db, string $title = '', string $price_min = '', string $price_max = '', string $condition = '', string $district = '', string $category = '', string $brand = ''): array {
-      $query = '
+    static function searchProducts(PDO $db, $filters, $count) : array {
+      $sql = '
           SELECT productID, title, price, locationName AS location, photoURL
           FROM PRODUCT
           JOIN LOCATION_ USING (locationID)
           JOIN PHOTO USING (productID)
           JOIN CATEGORY USING (categoryID)
           JOIN BRAND USING (brandID)
-          JOIN CONDITION USING (conditionID)
-          WHERE 1=1 ';
+          JOIN CONDITION USING (conditionID) 
+          WHERE title LIKE ?
+      ';
+
+      $search = $filters['search'];
+      $params = ["%$search%"];
   
-      $params = array();
-  
-      if (!empty($title)) {
-          $query .= 'AND title LIKE ? ';
-          $params[] = "%$title%";
-      }
-      if (!empty($price_min)) {
-          $price_min = intval($price_min);
-          $query .= 'AND price >= ? ';
-          $params[] = $price_min;
-      }
-      if (!empty($price_max)) {
-          $price_max = intval($price_max);
-          $query .= 'AND price <= ? ';
-          $params[] = $price_max;
-      }
-      if (!empty($condition)) {
-          $query .= 'AND conditionName = ? ';
-          $params[] = $condition;
-      }
-      if (!empty($district)) {
-          $query .= 'AND locationName = ? ';
-          $params[] = $district;
-      }
-      if (!empty($category)) {
-          $query .= 'AND categoryName = ? ';
-          $params[] = $category;
-      }
-      if (!empty($brand)) {
-          $query .= 'AND brandName = ? ';
-          $params[] = $brand;
+      if (!empty($filters['condition'])) {
+          $sql .= ' AND conditionName = ?';
+          $params[] = $filters['condition'];
       }
   
-      $query .= 'ORDER BY price ASC';
+      if (!empty($filters['district'])) {
+          $sql .= ' AND locationName = ?';
+          $params[] = $filters['district'];
+      }
   
-      $stmt = $db->prepare($query);
-      $stmt->execute($params); 
+      if (!empty($filters['category'])) {
+          $sql .= ' AND categoryName = ?';
+          $params[] = $filters['category'];
+      }
+  
+      if (!empty($filters['brand'])) {
+          $sql .= ' AND brandName = ?';
+          $params[] = $filters['brand'];
+      }
+
+      if (!empty($filters['price_min'])) {
+        $sql .= ' AND price >= ?';
+        $params[] = $filters['price_min'];
+      }
+
+      if (!empty($filters['price_max'])) {
+        $sql .= ' AND price <= ?';
+        $params[] = $filters['price_max'];
+      }
+
+      $sql .= ' GROUP BY productID';
+
+      if (!empty($filters['order'])) {
+        $orderParts = explode(' ', $filters['order']);
+        $orderBy = $orderParts[0];
+        $orderDirection = $orderParts[1] ?? 'ASC';
+    
+        $sql .= " ORDER BY $orderBy $orderDirection";
+    }
+  
+      $sql .= ' LIMIT ?';
+      $params[] = $count;
+  
+      $stmt = $db->prepare($sql);
+      $stmt->execute($params);
+  
       $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
       return $products;
   }
@@ -140,7 +153,7 @@
       ');
   
       $stmt->execute(array("%$category%")); 
-      $products = $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch the results
+      $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
       return $products;
     }
 
@@ -177,27 +190,10 @@
       ');
   
       $stmt->execute(array($userID)); 
-      $products = $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch the results
-      return $products;
-    }
-
-    static function searchProducts(PDO $db, string $search, int $count) : array {
-      $stmt = $db->prepare('
-        SELECT productID, title, price, locationName AS location, photoURL
-        FROM PRODUCT
-        JOIN LOCATION_ USING (locationID)
-        JOIN PHOTO USING (productID)
-        JOIN CATEGORY USING (categoryID)
-        JOIN BRAND USING (brandID)
-        JOIN CONDITION USING (conditionID) 
-        WHERE title LIKE ? 
-        LIMIT ?');
-      $stmt->execute(array("%$search%", $count));
-  
       $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  
       return $products;
     }
+  
   }
 
 ?>

@@ -19,8 +19,6 @@
   $brands = Category::getBrands($db);
   $conditions = Category::getConditions($db);
 
-  $name = "Pesquisa";
-
   if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $title = $_GET['title'] ?? $query;
     $price_min = $_GET["price_min"] ?? "";
@@ -37,7 +35,7 @@
     // Process the filtered products, display them, etc.
   }
 
-  drawHead($name);
+  drawHead("Pesquisa");
   drawHeader();
   drawSearch($searched, $categories, $districts, $brands, $conditions, $query);
   drawFooter();

@@ -53,6 +53,12 @@
       }
     } 
 
+
+    static function removeProduct(PDO $db, int $productID) {
+      $stmt = $db->prepare('DELETE FROM PRODUCT WHERE productID = ?');
+      $stmt->execute([$productID]);
+    }
+
     static function getFiltered(PDO $db, string $title = '', string $price_min = '', string $price_max = '', string $condition = '', string $district = '', string $category = '', string $brand = ''): array {
       $query = '
           SELECT productID, title, price, locationName AS location, photoURL
@@ -121,39 +127,6 @@
     return $featured;
   }
 
-  static function getFavorites(PDO $db, $userID): array{
-    $stmt = $db->prepare( '
-      SELECT productID, title, price, locationName AS location, photoURL
-      FROM PRODUCT
-      LEFT JOIN LOCATION_ USING (locationID)
-      JOIN PHOTO USING (productID)
-      JOIN FAVORITES USING (productID)
-      WHERE buyerID = ?
-      GROUP BY productID
-    ');
-
-    $stmt->execute(array($userID));
-    $favorites = $stmt->fetchAll();
-    return $favorites;
-  }
-
-  static function getCart(PDO $db, $userID): array{
-    $stmt = $db->prepare( '
-      SELECT productID, title, price, locationName AS location, photoURL
-      FROM PRODUCT
-      LEFT JOIN LOCATION_ USING (locationID)
-      JOIN PHOTO USING (productID)
-      JOIN CART USING (productID)
-      WHERE buyerID = ?
-      GROUP BY productID
-    ');
-
-    $stmt->execute(array($userID));
-    $favorites = $stmt->fetchAll();
-    return $favorites;
-  }
-  
-
     static function getCategory(PDO $db, string $category): array {
       $stmt = $db->prepare('
         SELECT productID, title, price, locationName AS location, photoURL, categoryName
@@ -208,9 +181,22 @@
       return $products;
     }
 
-    static function removeProduct(PDO $db, int $productID) {
-      $stmt = $db->prepare('DELETE FROM PRODUCT WHERE productID = ?');
-      $stmt->execute([$productID]);
+    static function searchProducts(PDO $db, string $search, int $count) : array {
+      $stmt = $db->prepare('
+        SELECT productID, title, price, locationName AS location, photoURL
+        FROM PRODUCT
+        JOIN LOCATION_ USING (locationID)
+        JOIN PHOTO USING (productID)
+        JOIN CATEGORY USING (categoryID)
+        JOIN BRAND USING (brandID)
+        JOIN CONDITION USING (conditionID) 
+        WHERE title LIKE ? 
+        LIMIT ?');
+      $stmt->execute(array("%$search%", $count));
+  
+      $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  
+      return $products;
     }
   }
 

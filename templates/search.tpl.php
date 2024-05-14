@@ -5,7 +5,7 @@
         <section id="listings">
             <div class="item-list">
                 <div class="flex-container">
-                    <div class="flex-row">
+                    <div class="flex-row" id="listing-item">
                         <?php drawProductCard($searched) ?>
                     </div>
                 </div>

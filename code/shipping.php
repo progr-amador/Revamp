@@ -5,7 +5,7 @@
 
   require_once('../database/connection.db.php');
   require_once('../database/category.class.php');
-  require_once('../database/product.class.php');
+  require_once('../database/baskets.class.php');
 
   require_once('../templates/common.tpl.php');
   require_once('../templates/shipping.tpl.php');
@@ -14,7 +14,7 @@
   $name = 'Envio';
 
   $districts = Category::getDistricts($db);
-  $cart = Product::getCart($db, $_SESSION['user_id']);
+  $cart = Baskets::getCart($db, $_SESSION['user_id']);
 
   drawHead($name);
   drawHeader();

@@ -1,25 +1,33 @@
 <?php declare(strict_types = 1); ?>
 
-<?php function drawSearch($searched, $categories, $districts, $brands, $conditions, $query) { ?>
+<?php function drawSearch($searched, $categories, $districts, $brands, $conditions) { ?>
     <main id = "search">
         <section id="listings">
             <div class="item-list">
                 <div class="flex-container">
-                    <div class="flex-row">
+                    <div class="flex-row" id="listing-item">
                         <?php drawProductCard($searched) ?>
                     </div>
                 </div>
             </div>
         </section>
         <section id="filters">
-        <form action="search.php" method="get">
-            <input type="hidden" name="title" value="<?php echo $query; ?>">
             <label> 
             Preço
             <fieldset>
-                <input type="number" name="price_min" placeholder="0€">
-                <input type="number" name="price_max" placeholder="1000€">
+                <label id="price_min"><input type="number" name="price_min" placeholder="0€"></label>
+                <label id="price_max"><input type="number" name="price_max" placeholder="1000€"></label>
             </fieldset>
+            </label>
+            <label id="ordem">
+            Ordenar
+            <select name="order">
+                <option value="">&mdash;</option>
+                <option value="price ASC">Preço ascendente</option>
+                <option value="price DESC">Preço descendente</option>
+                <option value="title ASC">Nome ascendente</option>
+                <option value="title DESC">Nome descendente</option>
+            </select>
             </label>
             <label id="condição">
             Condição
@@ -57,12 +65,6 @@
                 <?php } ?>
             </select>
             </label>
-            <label>
-                <button type="submit" class="abtn">
-                Filtrar
-                </button>
-            </label>
-        </form>
         </section>
     </main>
 <?php } ?>

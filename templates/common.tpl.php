@@ -2,20 +2,21 @@
 
 <?php function drawHead($name) {
     require_once('../database/connection.db.php');
-    require_once('../database/product.class.php');
+    require_once('../database/baskets.class.php');
 
     $db = getDatabaseConnection();
-    $favorites = Product::getFavorites($db, $_SESSION['user_id']);
-    $cart = Product::getCart($db, $_SESSION['user_id']);
+    $favorites = Baskets::getFavorites($db, $_SESSION['user_id']);
+    $cart = Baskets::getCart($db, $_SESSION['user_id']);
 ?>
     <!DOCTYPE html>
     <html lang="en">
     <head>
+        <title>Revamp - <?php echo $name; ?></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
         <link rel="icon" href="../assets/icons/revamp.jpg">
-        <title>Revamp - <?php echo $name; ?></title>
+        <script src="../javascript/script.js" defer></script>
     </head>
     <body>
     <div id="cartDrawer" class="header-drawer">
@@ -56,7 +57,7 @@
     <div class="body-container"> 
 <?php } ?>
 
-<?php function drawHeader() { 
+<?php function drawHeader($value = "") { 
     require_once('../database/connection.db.php');
     require_once('../database/category.class.php');
 
@@ -70,7 +71,7 @@
             <h1><a href="home.php"> R E V A M P </a></h1>
             <div class="search-container">
                 <form action="search.php" method="get">
-                    <input type="text" name="query" placeholder="Search..." class="search-input">
+                    <input id="searchproduct" type="text" name="query" placeholder="Search..." class="search-input" autocomplete="off" value="<?php echo $value?>">
                 </form>
             </div>
             <div class="authentication-buttons">
@@ -86,8 +87,6 @@
                     <a href="login.php"> <button class="abtn"> Iniciar Sessão </button></a>
                     <a href="register.php"> <button class="abtn"> Criar Conta </button></a>
                 <?php endif; ?>
-    
-                <script src="script.js"></script>
             </div>
         </div>
     </header>

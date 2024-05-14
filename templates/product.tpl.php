@@ -15,7 +15,7 @@
                 <p class="location">Localização: <?php echo $product['location']; ?></p>
                 <?php if (isset($_SESSION['user_id'])) { ?>
                     <div class="buttons">
-                        <?php if($_SESSION['user_id'] === $product['sellerID']): ?>
+                        <?php if(($_SESSION['user_id'] === $product['sellerID']) || ($_SESSION['admin'])): ?>
                             <form action="../actions/action_remove_product.php" method="post">
                                 <input type="hidden" name="productID" value="<?php echo $ID ?>">
                                 <button type="submit" class="abtn"> Remover </button>

@@ -21,7 +21,7 @@ DROP TABLE IF EXISTS RATING;
 
 -- Create a table for physical locations (optional)
 CREATE TABLE LOCATION_ (
-    locationID INT PRIMARY KEY,
+    locationID INTEGER PRIMARY KEY AUTOINCREMENT,
     locationName VARCHAR(255) NOT NULL
 );
 
@@ -41,19 +41,19 @@ CREATE TABLE USERS (
 
 -- Create a table for product brands
 CREATE TABLE BRAND (
-    brandID INT PRIMARY KEY,
+    brandID INTEGER PRIMARY KEY AUTOINCREMENT,
     brandName VARCHAR(255) NOT NULL
 );
 
 -- Create a table for product categories
 CREATE TABLE CATEGORY (
-    categoryID INT PRIMARY KEY,
+    categoryID INTEGER PRIMARY KEY AUTOINCREMENT,
     categoryName VARCHAR(255) NOT NULL
 );
 
 -- Create a table for product condition
 CREATE TABLE CONDITION (
-    conditionID INT PRIMARY KEY,
+    conditionID INTEGER PRIMARY KEY AUTOINCREMENT,
     conditionName VARCHAR(255) NOT NULL
 );
 

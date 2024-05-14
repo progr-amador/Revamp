@@ -75,5 +75,34 @@ class Users {
 
         return $user;
     }
+
+    static function removeUser(PDO $db, $name) {
+        $stmt = $db->prepare('
+          DELETE FROM USERS
+          WHERE (isAdmin = 0) and (username = ?)
+        ');
+
+        $stmt->execute(array($name));
+    }
+
+    static function makeAdmin(PDO $db, $name) {
+        $stmt = $db->prepare('
+            UPDATE USERS 
+            SET isAdmin = 1
+            WHERE username = ?;
+        ');
+
+        $stmt->execute(array($name));
+    }
+
+    static function removeAdmin(PDO $db, $name) {
+        $stmt = $db->prepare('
+            UPDATE USERS 
+            SET isAdmin = 0
+            WHERE username = ?;
+        ');
+
+        $stmt->execute(array($name));
+    }
 }
 ?>

@@ -11,7 +11,7 @@
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $name = $_POST['name'];
             
-      Users::makeAdmin($db, $name);
+      Users::removeAdmin($db, $name);
   }
 
   header('Location: ' . $_SERVER['HTTP_REFERER']);

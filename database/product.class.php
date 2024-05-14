@@ -109,7 +109,7 @@
     $stmt = $db->prepare('
       SELECT productID, title, price, locationName AS location, photoURL
       FROM PRODUCT
-      JOIN LOCATION_ USING (locationID)
+      LEFT JOIN LOCATION_ USING (locationID)
       JOIN PHOTO USING (productID)
       GROUP BY productID
       ORDER BY price ASC
@@ -125,7 +125,7 @@
     $stmt = $db->prepare( '
       SELECT productID, title, price, locationName AS location, photoURL
       FROM PRODUCT
-      JOIN LOCATION_ USING (locationID)
+      LEFT JOIN LOCATION_ USING (locationID)
       JOIN PHOTO USING (productID)
       JOIN FAVORITES USING (productID)
       WHERE buyerID = ?
@@ -141,7 +141,7 @@
     $stmt = $db->prepare( '
       SELECT productID, title, price, locationName AS location, photoURL
       FROM PRODUCT
-      JOIN LOCATION_ USING (locationID)
+      LEFT JOIN LOCATION_ USING (locationID)
       JOIN PHOTO USING (productID)
       JOIN CART USING (productID)
       WHERE buyerID = ?
@@ -158,9 +158,9 @@
       $stmt = $db->prepare('
         SELECT productID, title, price, locationName AS location, photoURL, categoryName
         FROM PRODUCT
-        JOIN LOCATION_ USING (locationID)
+        LEFT JOIN LOCATION_ USING (locationID)
+        LEFT JOIN CATEGORY USING (categoryID)
         JOIN PHOTO USING (productID)
-        JOIN CATEGORY USING (categoryID)
         WHERE categoryName LIKE ?
         GROUP BY productID
         ORDER BY price ASC
@@ -176,11 +176,11 @@
         SELECT productID, sellerID, brandID, categoryID, categoryName, product.locationID, title, description, price, conditionName AS condition, photoURL, username AS seller, locationName AS location
         FROM PRODUCT 
         JOIN USERS ON PRODUCT.sellerID=USERS.userID
-        JOIN BRAND USING (brandID)
-        JOIN CATEGORY USING (categoryID)
-        JOIN LOCATION_ USING (locationID)
+        LEFT JOIN BRAND USING (brandID)
+        LEFT JOIN CATEGORY USING (categoryID)
+        LEFT JOIN LOCATION_ USING (locationID)
+        LEFT JOIN CONDITION USING (conditionID)
         JOIN PHOTO USING (productID)
-        JOIN CONDITION USING (conditionID)
         WHERE productId = ?
         GROUP BY productID
       ');
@@ -196,9 +196,9 @@
       $stmt = $db->prepare('
         SELECT productID, title, price, locationName AS location, photoURL, categoryName, sellerID
         FROM PRODUCT
-        JOIN LOCATION_ USING (locationID)
+        LEFT JOIN LOCATION_ USING (locationID)
+        LEFT JOIN CATEGORY USING (categoryID)
         JOIN PHOTO USING (productID)
-        JOIN CATEGORY USING (categoryID)
         WHERE sellerID LIKE ?
         GROUP BY productID
       ');

@@ -14,14 +14,24 @@
                     <p><strong>Juntou-se em:</strong> <?php echo $user['creationDate'];?> </p>
                 </div>
                 <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $user['userID']): ?>
-                <form action="../actions/action_logout.php" method="post">
-                    <button type="submit" class="abtn"> Terminar Sessão </button>
-                </form>
-                <form action="../actions/control_panel/action_remove_user.php" method="get">
-                    <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Apagar Conta </button>
-                </form>
-                <a href="edit_profile.php?type=email"><button class="abtn">Editar Email</button></a>
-                <a href="edit_profile.php?type=username"><button class="abtn">Editar Username</button></a>
+                    <form action="edit_profile.php" method="get">
+                        <button name="type" type="submit" value="email" class="abtn">Editar Email</button>
+                    </form>
+
+                    <form action="edit_profile.php" method="get">
+                        <button name="type" type="submit" value="username" class="abtn">Editar Username</button>
+                    </form>
+                    <form action="../actions/action_logout.php" method="post">
+                         <button type="submit" class="abtn"> Terminar Sessão </button>
+                    </form>
+
+                    <form action="../actions/control_panel/action_remove_user.php" method="get">
+                        <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Apagar Conta </button>
+                    </form>
+
+                    
+
+                
 
                 <?php endif; ?>
                 <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] !== $user['userID'] && $_SESSION['admin']): ?>

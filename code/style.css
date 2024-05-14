@@ -172,7 +172,6 @@ nav ul li a:hover, .categories ul li a:hover {
 
 .small-flex-item {
     display: flex;
-    width: 30em; 
     height: 10em; 
     margin: 5px;
     background-color: whitesmoke;
@@ -278,6 +277,10 @@ nav ul li a:hover, .categories ul li a:hover {
     transition: background-color 0.3s;
     
     
+}
+
+.abtn a {
+    width: 50%;
 }
 
 .abtn:hover {
@@ -474,7 +477,7 @@ input[type="checkbox"]:checked + #estado>label {
     position: fixed;
     right: 0;
     top: 0;
-    width: 500px; /* Largura do drawer */
+    width: 400px; /* Largura do drawer */
     height: 100%;
     
     background-color: whitesmoke; /* Fundo branco */

@@ -26,8 +26,15 @@
                                 <input type="hidden" name="productID" value="<?php echo $ID ?>">
                                 <button type="submit" class="abtn"> Remover </button>
                             </form>
-                            <a href="shipping.php"><button class="abtn"> Compre agora </button></a>
-                            <a href="message.php"><button class="abtn"> Envie mensagem </button></a>
+                            
+                            <form action="shipping.php" method="get">
+                                <button type="submit" class="abtn">Compre agora</button>
+                            </form>
+
+                            <form action="message.php" method="get">
+                                <button type="submit" class="abtn">Envie mensagem</button>
+                            </form>
+
                             <form action="../actions/action_cart.php" method="post">
                                 <input type="hidden" name="productID" value="<?php echo $ID ?>">
                                 <button type="submit" class="abtn"> Adicionar ao Carrinho </button>

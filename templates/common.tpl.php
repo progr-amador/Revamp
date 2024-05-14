@@ -21,27 +21,37 @@
     <div id="cartDrawer" class="header-drawer">
         <div class="drawer-header">
         <h1> Carrinho </h1>
-            <a href="shipping.php"><button class="abtn" onclick="closeCartDrawer()">Comprar</button></a>
-            <a href="../actions/action_empty_cart.php"><button class="abtn">Esvaziar</button></a>
+            
             <button class="abtn" onclick="closeCartDrawer()">Fechar</button>
         </div>
         <div class="drawer-content">
             <div class="flex-row">
-                <?php drawProductCard($cart) ?>
+                <?php drawSmallProductCard($cart) ?>
+            </div>
+            <div class="cart-buttons">
+                <a href="shipping.php"><button class="abtn2" onclick="closeCartDrawer()">Comprar</button></a>
+    
+                <a href="../actions/action_empty_cart.php"><button class="abtn2">Esvaziar</button></a>
             </div>
         </div>
+        
     </div>
     <div id="favoritesDrawer" class="header-drawer">
         <div class="drawer-header">
             <h1> Favoritos </h1>
-            <a href="../actions/action_empty_favorites.php"><button class="abtn">Esvaziar</button></a>
+            
             <button class="abtn" onclick="closeFavoritesDrawer()">Fechar</button>
         </div>
         <div class="drawer-content">
             <div class="flex-row">
-                    <?php drawProductCard($favorites) ?>
-                </div>
+                <?php drawSmallProductCard($cart) ?>
             </div>
+            <div class="cart-buttons">
+                
+    
+                <a href="../actions/action_empty_cart.php"><button class="abtn2">Esvaziar</button></a>
+            </div>
+        </div>
         </div>
     <div class="body-container"> 
 <?php } ?>
@@ -131,6 +141,23 @@
         </div>
     <?php } 
 } ?>
+
+<?php function drawSmallProductCard($products) {
+    foreach ($products as $product) { ?>
+        <div class="small-flex-item">
+            <a href="product.php?id=<?php echo $product['productID']; ?>">
+                <div class="small-item-image">
+                    <img src="<?php echo $product['photoURL']; ?>" alt="Image of <?php echo $product['title']; ?>">
+                </div>
+                <div class="small-item-details">
+                    <h3 id="title"><?php echo $product['title']; ?></h3>
+                    <p id="price"><?php echo $product['price']; ?> €</p>
+                </div>
+            </a>
+        </div>
+    <?php }
+} ?>
+
 
 <?php function drawcategories($categories) {
     foreach ($categories as $category) { ?>

@@ -5,7 +5,7 @@
         <h1>Checkout</h1>
             <div class="flex-container">
                 <div class="flex-row">
-                <?php drawProductCard($cart) ?>
+                    <?php drawSmallProductCard($cart) ?>
                 </div>
         </div>
         <section id="shipping-details">

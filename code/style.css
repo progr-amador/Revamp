@@ -136,16 +136,18 @@ nav ul li a:hover, .categories ul li a:hover {
     flex-wrap: wrap;
 }
 
+/* Cards */
+
 .flex-item {
     width: 20em;
-    height: 30em; /* Adjusted to match the width of the image */
-    flex-direction: column; /* Disposição horizontal */
-    justify-content: center; /* Centraliza itens verticalmente */
+    height: 30em; 
+    flex-direction: column; 
+    justify-content: center; 
     margin: 5px;
     text-align: center;
     background-color: whitesmoke;
     border: 1px solid #ccc;
-    border-radius: 10px; /* Bordas arredondadas para o item */
+    border-radius: 10px; 
 }
 
 .item-image {
@@ -162,10 +164,45 @@ nav ul li a:hover, .categories ul li a:hover {
 }
 
 .item-details {
-    text-align: center; /* Ocupa a outra metade do flex-item */
+    text-align: center; 
     padding: 5px;
     color: black;
     font-weight: 600;
+}
+
+.small-flex-item {
+    display: flex;
+    width: 30em; 
+    height: 10em; 
+    margin: 5px;
+    background-color: whitesmoke;
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+    overflow: hidden;
+}
+
+.small-item-image {
+    width: 30%;
+    height: 100%;
+    border-radius: 5px 0 0 5px; /* Only round the left side corners */
+}
+
+.small-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the div without distorting */
+}
+
+.small-item-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.small-item-details p {
+    margin: 5px 0 0 0; /* Spacing above the price only */
+    font-size: 5em;
+    color: black;
 }
 
 
@@ -240,9 +277,32 @@ nav ul li a:hover, .categories ul li a:hover {
     font-weight: bold;
     transition: background-color 0.3s;
     
+    
 }
 
 .abtn:hover {
+    background-color: var(--hover-color); /* Efeito hover */
+    color: whitesmoke;
+}
+
+.abtn2 {
+    background-color: var(--accent-color); /* Botão com a cor de fundo do site */
+    border-radius: 5px;
+     /* Sem borda */
+     border: 0;
+     /* Bordas arredondadas */
+    color: var(--main-color); /* Cor do texto para contraste */
+    padding: 12px;
+    cursor: pointer;
+    font-family: 'Prompt', sans-serif; /* Fonte consistente com o site */
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    width: 90%;
+    
+}
+
+.abtn2:hover {
     background-color: var(--hover-color); /* Efeito hover */
     color: whitesmoke;
 }
@@ -258,6 +318,7 @@ nav ul li a:hover, .categories ul li a:hover {
     font-size: 14px;
     font-weight: bold;
     transition: background-color 0.3s;
+    width: 100%;
 }
 
 .bbtn:hover {
@@ -413,7 +474,7 @@ input[type="checkbox"]:checked + #estado>label {
     position: fixed;
     right: 0;
     top: 0;
-    width: 400px; /* Largura do drawer */
+    width: 500px; /* Largura do drawer */
     height: 100%;
     
     background-color: whitesmoke; /* Fundo branco */
@@ -446,8 +507,14 @@ input[type="checkbox"]:checked + #estado>label {
     font-size: 16px; /* Tamanho da fonte legível */
     line-height: 1.5; /* Espaçamento de linha para melhor legibilidade */
     color: black; /* Cor de texto primária do site */
+     /* Espaçamento entre o título e o botão */
+    align-items: center;
+    text-align: center;
 }
 
+.cart-buttons {
+    padding: 20px;
+}
 .drawer-content p {
     margin-bottom: 10px; /* Espaço entre parágrafos */
 }

@@ -76,6 +76,57 @@ class Users {
         return $user;
     }
 
+    public static function isEmailAvailable(PDO $db,string $newEmail) : bool {
+
+        $stmt = $db->prepare('SELECT COUNT(*) FROM USERS WHERE email = :email');
+        $stmt->bindParam(':email', $newEmail, PDO::PARAM_STR);
+        $stmt->execute();
+        
+        $count = $stmt->fetchColumn();
+        
+        return $count == 0; 
+    }
+
+    public static function updateUserEmail(PDO $db,int $id, string $newEmail) : bool {
+
+        try {
+            $stmt = $db->prepare('UPDATE USERS SET email = :newEmail WHERE userID = :userId');
+            $stmt->bindParam(':newEmail', $newEmail, PDO::PARAM_STR);
+            $stmt->bindParam(':userId', $id, PDO::PARAM_INT);
+            return $stmt->execute(); 
+        } catch (PDOException $e) {
+            
+            return false;
+        }
+    }
+
+    public static function isUsernameAvailable(PDO $db,string $newUsername) : bool {
+
+        $stmt = $db->prepare('SELECT COUNT(*) FROM USERS WHERE username = :username');
+        $stmt->bindParam(':username', $newUsername, PDO::PARAM_STR);
+        $stmt->execute();
+        
+        // Fetch the count of rows that have the email
+        $count = $stmt->fetchColumn();
+        
+        return $count == 0;  // Returns true if no rows are found
+    }
+
+    public static function updateUserName(PDO $db,int $id, string $newUsername) : bool {
+
+        try {
+            $stmt = $db->prepare('UPDATE USERS SET username = :newUsername WHERE userID = :userId');
+            $stmt->bindParam(':newUsername', $newUsername, PDO::PARAM_STR);
+            $stmt->bindParam(':userId', $id, PDO::PARAM_INT);
+            return $stmt->execute(); 
+        } catch (PDOException $e) {
+            
+            return false;
+        }
+    }
+
+
+
     static function removeUser(PDO $db, $name) {
         $stmt = $db->prepare('
           DELETE FROM USERS

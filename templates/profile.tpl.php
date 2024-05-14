@@ -9,7 +9,7 @@
                     <h1><?php echo $user['username'];?></h1>
                 </div>
                 <div class="profile-info">
-                    <p><strong>Email:</strong> <?php echo $user['email'];?></p>
+                <p><strong>Email:</strong> <span id="emailText"><?php echo $user['email'];?></p>
                     <p><strong>Telefone:</strong> <?php echo $user['phoneNumber'];?></p>
                     <p><strong>Juntou-se em:</strong> <?php echo $user['creationDate'];?> </p>
                 </div>
@@ -20,6 +20,9 @@
                 <form action="../actions/control_panel/action_remove_user.php" method="get">
                     <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Apagar Conta </button>
                 </form>
+                <a href="edit_profile.php?type=email"><button class="abtn">Editar Email</button></a>
+                <a href="edit_profile.php?type=username"><button class="abtn">Editar Username</button></a>
+
                 <?php endif; ?>
                 <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] !== $user['userID'] && $_SESSION['admin']): ?>
                 <form action="../actions/control_panel/action_make_admin.php" method="get">
@@ -45,3 +48,4 @@
     <main>
 
 <?php } ?>
+

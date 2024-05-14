@@ -17,7 +17,7 @@
                 <button type="submit" class="abtn"> Remover Utilizador </button>
             </form>
         </fieldset>
-
+ 
         <fieldset>
             <legend>Categorias</legend>
             <form action="../actions/control_panel/action_add_category.php" method="post">

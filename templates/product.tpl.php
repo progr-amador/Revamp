@@ -16,12 +16,16 @@
                 <p class="location">Localização: <?php echo $product['location']; ?></p>
                 <?php if (isset($_SESSION['user_id'])) { ?>
                     <div class="buttons">
-                        <?php if(($_SESSION['user_id'] === $product['sellerID']) || ($_SESSION['admin'])): ?>
+                        <?php if($_SESSION['user_id'] === $product['sellerID']){ ?>
                             <form action="../actions/action_remove_product.php" method="post">
                                 <input type="hidden" name="productID" value="<?php echo $ID ?>">
                                 <button type="submit" class="abtn"> Remover </button>
                             </form>
-                        <?php else: ?>
+                        <?php } else if($_SESSION['admin']){ ?>
+                            <form action="../actions/action_remove_product.php" method="post">
+                                <input type="hidden" name="productID" value="<?php echo $ID ?>">
+                                <button type="submit" class="abtn"> Remover </button>
+                            </form>
                             <a href="shipping.php"><button class="abtn"> Compre agora </button></a>
                             <a href="message.php"><button class="abtn"> Envie mensagem </button></a>
                             <form action="../actions/action_cart.php" method="post">
@@ -32,7 +36,18 @@
                                 <input type="hidden" name="productID" value="<?php echo $ID ?>">
                                 <button type="submit" class="abtn"> Adicionar aos Favoritos </button>
                             </form>
-                        <?php endif; ?>
+                        <?php } else { ?>
+                            <a href="shipping.php"><button class="abtn"> Compre agora </button></a>
+                            <a href="message.php"><button class="abtn"> Envie mensagem </button></a>
+                            <form action="../actions/action_cart.php" method="post">
+                                <input type="hidden" name="productID" value="<?php echo $ID ?>">
+                                <button type="submit" class="abtn"> Adicionar ao Carrinho </button>
+                            </form>
+                            <form action="../actions/action_favorite.php" method="post">
+                                <input type="hidden" name="productID" value="<?php echo $ID ?>">
+                                <button type="submit" class="abtn"> Adicionar aos Favoritos </button>
+                            </form>
+                        <?php } ?>
                     </div>
                 <?php } ?>
             </div>

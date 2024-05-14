@@ -18,8 +18,6 @@
       $title = $_POST['title'] ?? '';
       $description = $_POST['description'] ?? '';
       $destinations = array();
-
-      //print_r($_FILES);
             
       $newProduct = new Product($seller,intval($brand),intval($category),intval($location),intval($condition),intval($price),$title,$description);
       if(isset($_FILES['image'])) {
@@ -54,5 +52,5 @@
 
     }
 
-header('Location: ../code/profile.php');
+header('Location: ../code/home.php');
 ?>

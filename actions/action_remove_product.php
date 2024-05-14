@@ -14,5 +14,5 @@
       Product::removeProduct($db, intval($productID));
   }
 
-  header('Location: ../code/profile.php');
+  header('Location: ../code/home.php');
 ?>

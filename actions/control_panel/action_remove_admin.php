@@ -14,5 +14,11 @@
       Users::removeAdmin($db, $name);
   }
 
+  if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $name = $_GET['name'];
+          
+    Users::removeAdmin($db, $name);
+}
+
   header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>

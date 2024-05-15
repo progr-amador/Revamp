@@ -13,40 +13,42 @@
                     <p><strong>Telefone:</strong> <?php echo $user['phoneNumber'];?></p>
                     <p><strong>Juntou-se em:</strong> <?php echo $user['creationDate'];?> </p>
                 </div>
-                <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $user['userID']): ?>
-                    <?php if ($_SESSION['admin']): ?>
-                        <form action="control_panel.php" method="get">
-                            <button type="submit" class="abtn"> <i class="material-icons">tune</i> </button>
+                <div class="buttons">
+                    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $user['userID']): ?>
+                        <?php if ($_SESSION['admin']): ?>
+                            <form action="control_panel.php" method="get">
+                                <button type="submit" class="abtn"> <i class="material-icons">tune</i> </button>
+                            </form>
+                        <?php endif; ?>
+                        <form action="edit_profile.php" method="get">
+                            <button name="type" type="submit" value="email" class="abtn"><i class="material-icons">mail</i></button>
                         </form>
-                    <?php endif; ?>
-                    <form action="edit_profile.php" method="get">
-                        <button name="type" type="submit" value="email" class="abtn">Editar Email</button>
-                    </form>
-                    <form action="edit_profile.php" method="get">
-                        <button name="type" type="submit" value="username" class="abtn">Editar Username</button>
-                    </form>
-                    <form action="../actions/action_logout.php" method="post">
-                         <button type="submit" class="abtn"> <i class="material-icons">logout</i> </button>
-                    </form>
+                        <form action="edit_profile.php" method="get">
+                            <button name="type" type="submit" value="username" class="abtn"><i class="material-icons">person_edit</i></button>
+                        </form>
+                        <form action="../actions/action_logout.php" method="post">
+                            <button type="submit" class="abtn"> <i class="material-icons">logout</i> </button>
+                        </form>
 
-                    <form action="../actions/control_panel/action_remove_user.php" method="get">
-                        <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Apagar Conta </button>
-                    </form>
-                <?php endif; ?>
-                <?php if ((isset($_SESSION['user_id'])) && ($_SESSION['user_id'] !== $user['userID']) && ($_SESSION['admin'])): ?>
-                    <?php if ($user['isAdmin']): ?>
-                        <form action="../actions/control_panel/action_remove_admin.php" method="get">
-                            <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Retirar Admin </button>
-                        </form>
-                    <?php else: ?>
-                        <form action="../actions/control_panel/action_make_admin.php" method="get">
-                            <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> <i class="material-icons">shield_person</i> </button>
+                        <form action="../actions/control_panel/action_remove_user.php" method="get">
+                            <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"><i class="material-icons">person_off</i></button>
                         </form>
                     <?php endif; ?>
-                    <form action="../actions/control_panel/action_remove_user.php" method="get">
-                        <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> <i class="material-icons">person_remove</i> </button>
-                    </form>
-                <?php endif; ?>
+                    <?php if ((isset($_SESSION['user_id'])) && ($_SESSION['user_id'] !== $user['userID']) && ($_SESSION['admin'])): ?>
+                        <?php if ($user['isAdmin']): ?>
+                            <form action="../actions/control_panel/action_remove_admin.php" method="get">
+                                <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Retirar Admin </button>
+                            </form>
+                        <?php else: ?>
+                            <form action="../actions/control_panel/action_make_admin.php" method="get">
+                                <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> <i class="material-icons">shield_person</i> </button>
+                            </form>
+                        <?php endif; ?>
+                        <form action="../actions/control_panel/action_remove_user.php" method="get">
+                            <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> <i class="material-icons">person_cancel</i> </button>
+                        </form>
+                    <?php endif; ?>
+                </div>
             </div>
             <div class="item-list">
                     <h2>Os Meus Produtos</h2>

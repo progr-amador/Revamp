@@ -18,7 +18,7 @@
                     <label for="nif">NIF
                         <input type="text" id="nif" name="nif" required>
                     </label>
-                    <label for="mobile">Número de Telemóvel
+                    <label for="mobile">Telemóvel
                         <input type="tel" id="mobile" name="mobile" required>
                     </label>
                 </fieldset>

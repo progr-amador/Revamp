@@ -74,7 +74,7 @@
                     <?php echo $errorMessage; ?>
                 </fieldset>
 
-                <button type="submit" class = "abtn" >Continuar</button>
+                <button type="submit" class = "abtn">Publicar</button>
             </form>
         </section>
     </main>

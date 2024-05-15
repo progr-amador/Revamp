@@ -2,8 +2,9 @@
 
 <?php function drawControlPanel($featured) { ?>
     <main>
+        <h1>Painel de controlo</h1>
         <fieldset>
-            <legend>Utilizadores</legend>
+            <legend><h2>Utilizadores</h2></legend>
             <form action="../actions/control_panel/action_make_admin.php" method="post">
                 <input type="text" name="name" placeholder="Nome de Utilizador">
                 <button type="submit" class="abtn"> Tornar Admin </button>
@@ -19,7 +20,7 @@
         </fieldset>
  
         <fieldset>
-            <legend>Categorias</legend>
+            <legend><h2>Categorias</h2></legend>
             <form action="../actions/control_panel/action_add_category.php" method="post">
                 <input type="text" name="name" placeholder="Nome da Categoria">
                 <button type="submit" class="abtn"> Adicionar Categoria </button>
@@ -31,7 +32,7 @@
         </fieldset>
 
         <fieldset>
-            <legend>Distritos</legend>
+            <legend><h2>Distritos</h2></legend>
             <form action="../actions/control_panel/action_add_district.php" method="post">
                 <input type="text" name="name" placeholder="Nome do Distrito">
                 <button type="submit" class="abtn"> Adicionar Distrito </button>
@@ -43,7 +44,7 @@
         </fieldset>
 
         <fieldset>
-            <legend>Marcas</legend>
+            <legend><h2>Marcas</h2></legend>
             <form action="../actions/control_panel/action_add_brand.php" method="post">
                 <input type="text" name="name" placeholder="Nome da Marca">
                 <button type="submit" class="abtn"> Adicionar Marca </button>
@@ -55,7 +56,7 @@
             </fieldset>
 
         <fieldset>
-            <legend>Condições</legend>
+            <legend><h2>Condições</h2></legend>
             <form action="../actions/control_panel/action_add_condition.php" method="post">
                 <input type="text" name="name" placeholder="Nome da Condição">
                 <button type="submit" class="abtn"> Adicionar Condição </button>

@@ -14,10 +14,14 @@
                     <p><strong>Juntou-se em:</strong> <?php echo $user['creationDate'];?> </p>
                 </div>
                 <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $user['userID']): ?>
+                    <?php if ($_SESSION['admin']): ?>
+                        <form action="control_panel.php" method="get">
+                            <button type="submit" class="abtn"> Painel de Controlo </button>
+                        </form>
+                    <?php endif; ?>
                     <form action="edit_profile.php" method="get">
                         <button name="type" type="submit" value="email" class="abtn">Editar Email</button>
                     </form>
-
                     <form action="edit_profile.php" method="get">
                         <button name="type" type="submit" value="username" class="abtn">Editar Username</button>
                     </form>
@@ -28,22 +32,20 @@
                     <form action="../actions/control_panel/action_remove_user.php" method="get">
                         <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Apagar Conta </button>
                     </form>
-
-                    
-
-                
-
                 <?php endif; ?>
-                <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] !== $user['userID'] && $_SESSION['admin']): ?>
-                <form action="../actions/control_panel/action_make_admin.php" method="get">
-                    <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Tornar Admin </button>
-                </form>
-                <form action="../actions/control_panel/action_remove_admin.php" method="get">
-                    <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Retirar Admin </button>
-                </form>
-                <form action="../actions/control_panel/action_remove_user.php" method="get">
-                    <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Remover Utilizador </button>
-                </form>
+                <?php if ((isset($_SESSION['user_id'])) && ($_SESSION['user_id'] !== $user['userID']) && ($_SESSION['admin'])): ?>
+                    <?php if ($user['isAdmin']): ?>
+                        <form action="../actions/control_panel/action_remove_admin.php" method="get">
+                            <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Retirar Admin </button>
+                        </form>
+                    <?php else: ?>
+                        <form action="../actions/control_panel/action_make_admin.php" method="get">
+                            <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Tornar Admin </button>
+                        </form>
+                    <?php endif; ?>
+                    <form action="../actions/control_panel/action_remove_user.php" method="get">
+                        <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Remover Utilizador </button>
+                    </form>
                 <?php endif; ?>
             </div>
             <div class="item-list">

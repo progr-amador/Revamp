@@ -25,10 +25,12 @@
                             <form action="shipping.php" method="get">
                                 <button title="Buy now" type="submit" class="abtn"><i class="material-icons">shopping_bag</i></button>
                             </form>
-                            <form action="message.php" method="get">
+                            <form action="../actions/action_add_chat.php" method="get">
+                                <input type="hidden" name="buyerID" value="<?php echo $_SESSION['user_id'] ?>">
+                                <input type="hidden" name="sellerID" value="<?php echo $product['sellerID'] ?>">
+                                <input type="hidden" name="productID" value="<?php echo $product['productID'] ?>">
                                 <button title="Message Seller" type="submit" class="abtn"><i class="material-icons">chat</i></button>
                             </form>
-
                             <form action="../actions/action_cart.php" method="post">
                                 <input type="hidden" name="productID" value="<?php echo $ID ?>">
                                 <button title="Add to cart" type="submit" class="abtn"> <i class="material-icons">add_shopping_cart</i> </button>
@@ -42,8 +44,15 @@
                                 <button title="Delete product" type="submit" class="abtn"> <i class="material-icons">delete</i> </button>
                             </form>
                         <?php } else { ?>
-                            <a href="shipping.php"><button title="Buy now" class="abtn"> <i class="material-icons">shopping_bag</i> </button></a>
-                            <a href="message.php"><button title="Message Seller" class="abtn"><i class="material-icons">chat</i></button></a>
+                            <form action="shipping.php" method="post">
+                                <button title="Buy now" class="abtn"> <i class="material-icons">shopping_bag</i> </button>
+                            </form>
+                            <form action="../actions/action_add_chat.php" method="get">
+                                <input type="hidden" name="buyerID" value="<?php echo $_SESSION['user_id'] ?>">
+                                <input type="hidden" name="sellerID" value="<?php echo $product['sellerID'] ?>">
+                                <input type="hidden" name="productID" value="<?php echo $product['productID'] ?>">
+                                <button title="Message Seller" type="submit" class="abtn"><i class="material-icons">chat</i></button>
+                            </form>
                             <form action="../actions/action_cart.php" method="post">
                                 <input type="hidden" name="productID" value="<?php echo $ID ?>">
                                 <button title="Add to cart" type="submit" class="abtn"> <i class="material-icons">add_shopping_cart</i> </button>

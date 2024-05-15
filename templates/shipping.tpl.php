@@ -34,10 +34,18 @@
                             <?php } ?>
                         </select>
                     </label>
-                    <input type="text" name="street" placeholder="Rua" required>
-                    <input type="text" name="door" placeholder="Porta" required>
-                    <input type="text" name="localidade" placeholder="Localidade" required>
-                    <input type="text" name="postal_code" placeholder="Código Postal" required>
+                    <label for="street">Rua
+                        <input id="street" type="text" name="street"required>
+                    </label>
+                    <label for="door">Porta
+                        <input id="door" type="text" name="door"required>
+                    </label>
+                    <label for="localidade">Localidade
+                        <input id="localidade" type="text" name="localidade"required>
+                    </label>
+                    <label for="postal_code">Codigo Postal
+                        <input id="postal_code" type="text" name="postal_code"required>
+                    </label>
                     
                 </fieldset>
 

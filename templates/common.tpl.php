@@ -23,36 +23,34 @@
     <div id="cartDrawer" class="header-drawer">
         <div class="drawer-header">
         <h1> Carrinho </h1>
-            
+            <a href="shipping.php"><button class="abtn" onclick="closeCartDrawer()"><i class="material-icons">shopping_cart_checkout</i></button></a>
+            <a href="../actions/action_empty_cart.php"><button class="abtn"><i class="material-icons">remove_shopping_cart</i></button></a>
             <button class="abtn" onclick="closeCartDrawer()"><i class="material-icons">close</i></button>
         </div>
         <div class="drawer-content">
             <div class="flex-row">
                 <?php drawSmallProductCard($cart) ?>
             </div>
-            <div class="cart-buttons">
-                <a href="shipping.php"><button class="abtn2" onclick="closeCartDrawer()"><i class="material-icons">shopping_cart_checkout</i></button></a>
-    
-                <a href="../actions/action_empty_cart.php"><button class="abtn2"><i class="material-icons">shopping_cart_off</i></button></a>
-            </div>
+            <!--<div class="cart-buttons">
+                <a href="shipping.php"><button class="abtn" onclick="closeCartDrawer()"><i class="material-icons">shopping_cart_checkout</i></button></a>
+                <a href="../actions/action_empty_cart.php"><button class="abtn"><i class="material-icons">remove_shopping_cart</i></button></a>
+            </div>-->
         </div>
         
     </div>
     <div id="favoritesDrawer" class="header-drawer">
         <div class="drawer-header">
-            <h1> Favoritos </h1>
-            
+            <h1> Favoritos </h1>  
+            <a href="../actions/action_empty_favorites.php"><button class="abtn"><i class="material-icons">heart_broken</i></button></a>
             <button class="abtn" onclick="closeFavoritesDrawer()"><i class="material-icons">close</i></button>
         </div>
         <div class="drawer-content">
             <div class="flex-row">
-                <?php drawSmallProductCard($cart) ?>
+                <?php drawSmallProductCard($favorites) ?>
             </div>
-            <div class="cart-buttons">
-                
-    
-                <a href="../actions/action_empty_cart.php"><button class="abtn2"><i class="material-icons">heart_broken</i></button></a>
-            </div>
+            <!--<div class="cart-buttons">
+                <a href="../actions/action_empty_favorites.php"><button class="abtn"><i class="material-icons">heart_broken</i></button></a>
+            </div>-->
         </div>
         </div>
     <div class="body-container"> 
@@ -77,13 +75,13 @@
             </div>
             <div class="authentication-buttons">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <a href="profile.php?id=<?php echo $_SESSION['user_id']; ?>"><button class="abtn" ><i class="material-icons">person</i></button></a>
+                    <a href="profile.php?id=<?php echo $_SESSION['user_id']; ?>"><button class="abtn" ><i class="material-icons">account_circle</i></button></a>
                     <button onclick="openCartDrawer()" class="abtn"> <i class="material-icons">shopping_cart</i> </button>
                     <button onclick="openFavoritesDrawer()" class="abtn"> <i class="material-icons">favorite</i> </button>
                     <a href="new_product.php"> <button class="abtn"> <i class="material-icons">sell</i> </button></a>
                 <?php else: ?>
                     <a href="login.php"> <button class="abtn"> <i class="material-icons">login</i> </button></a>
-                    <a href="register.php"> <button class="abtn"> <i class="material-icons">logout</i> </button></a>
+                    <a href="register.php"> <button class="abtn"> <i class="material-icons">person_add</i> </button></a>
                 <?php endif; ?>
             </div>
         </div>

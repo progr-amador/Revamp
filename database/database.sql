@@ -105,7 +105,7 @@ CREATE TABLE SHIPPING (
 
 -- Create a table for chats between buyers and sellers
 CREATE TABLE CHAT (
-    chatID INT PRIMARY KEY,
+    chatID INTEGER PRIMARY KEY AUTOINCREMENT,
     buyerID INT NOT NULL,    
     sellerID INT NOT NULL,
     productID INT NOT NULL,
@@ -116,7 +116,7 @@ CREATE TABLE CHAT (
 
 -- Create a table for messages within chats
 CREATE TABLE MESSAGE_ (
-    messageID INT PRIMARY KEY,    
+    messageID INTEGER PRIMARY KEY AUTOINCREMENT,    
     chatID INT NOT NULL,
     senderID INT NOT NULL,
     messageText TEXT NOT NULL,

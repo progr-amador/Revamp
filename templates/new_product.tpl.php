@@ -19,7 +19,7 @@
                     <br>
                     <label for="description"> Descrição</label>
                     <br>
-                    <textarea id="description" name="description" rows="5" cols="60" required></textarea>
+                    <textarea id="description" name="description" rows="15" required></textarea>
                     
                 </fieldset>
 
@@ -69,7 +69,7 @@
 
                 <fieldset>
                     <legend>Imagens</legend>
-                    <label for="images">Selecione até 4 imagens (PNG, JPEG ou JPG)</label>
+                    <label for="images">Selecione até 4 imagens</label>
                     <input type="file" name="image[]" id="images" accept=".jpeg,.jpg,.png" multiple required>
                     <?php echo $errorMessage; ?>
                 </fieldset>

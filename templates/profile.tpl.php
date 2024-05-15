@@ -11,7 +11,7 @@
                 <div class="profile-info">
                 <p><strong>Email:</strong> <span id="emailText"><?php echo $user['email'];?></p>
                     <p><strong>Telefone:</strong> <?php echo $user['phoneNumber'];?></p>
-                    <p><strong>Juntou-se em:</strong> <?php echo $user['creationDate'];?> </p>
+                    <p><strong>Juntou-se em:</strong> <?php echo date('H:i d/m/Y', strtotime($user['creationDate'])) ;?> </p>
                 </div>
                 <div class="buttons">
                     <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $user['userID']): ?>
@@ -26,10 +26,12 @@
                         <form action="edit_profile.php" method="get">
                             <button name="type" type="submit" value="username" class="abtn"><i class="material-icons">person_edit</i></button>
                         </form>
+                        <form action="message.php?" method="get">
+                            <button type="submit" class="abtn"><i class="material-icons">chat</i></button>
+                        </form>
                         <form action="../actions/action_logout.php" method="post">
                             <button type="submit" class="abtn"> <i class="material-icons">logout</i> </button>
                         </form>
-
                         <form action="../actions/control_panel/action_remove_user.php" method="get">
                             <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"><i class="material-icons">person_off</i></button>
                         </form>
@@ -37,15 +39,15 @@
                     <?php if ((isset($_SESSION['user_id'])) && ($_SESSION['user_id'] !== $user['userID']) && ($_SESSION['admin'])): ?>
                         <?php if ($user['isAdmin']): ?>
                             <form action="../actions/control_panel/action_remove_admin.php" method="get">
-                                <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Retirar Admin </button>
+                                <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"><i class="material-icons">remove_moderator</i></button>
                             </form>
                         <?php else: ?>
                             <form action="../actions/control_panel/action_make_admin.php" method="get">
-                                <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> <i class="material-icons">shield_person</i> </button>
+                                <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> <i class="material-icons">add_moderator</i> </button>
                             </form>
                         <?php endif; ?>
                         <form action="../actions/control_panel/action_remove_user.php" method="get">
-                            <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> <i class="material-icons">person_cancel</i> </button>
+                            <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> <i class="material-icons">person_off</i> </button>
                         </form>
                     <?php endif; ?>
                 </div>

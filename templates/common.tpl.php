@@ -15,6 +15,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="icon" href="../assets/icons/revamp.jpg">
         <script src="../javascript/script.js" defer></script>
     </head>
@@ -23,16 +24,16 @@
         <div class="drawer-header">
         <h1> Carrinho </h1>
             
-            <button class="abtn" onclick="closeCartDrawer()">Fechar</button>
+            <button class="abtn" onclick="closeCartDrawer()"><i class="material-icons">close</i></button>
         </div>
         <div class="drawer-content">
             <div class="flex-row">
                 <?php drawSmallProductCard($cart) ?>
             </div>
             <div class="cart-buttons">
-                <a href="shipping.php"><button class="abtn2" onclick="closeCartDrawer()">Comprar</button></a>
+                <a href="shipping.php"><button class="abtn2" onclick="closeCartDrawer()"><i class="material-icons">shopping_cart_checkout</i></button></a>
     
-                <a href="../actions/action_empty_cart.php"><button class="abtn2">Esvaziar</button></a>
+                <a href="../actions/action_empty_cart.php"><button class="abtn2"><i class="material-icons">shopping_cart_off</i></button></a>
             </div>
         </div>
         
@@ -41,7 +42,7 @@
         <div class="drawer-header">
             <h1> Favoritos </h1>
             
-            <button class="abtn" onclick="closeFavoritesDrawer()">Fechar</button>
+            <button class="abtn" onclick="closeFavoritesDrawer()"><i class="material-icons">close</i></button>
         </div>
         <div class="drawer-content">
             <div class="flex-row">
@@ -50,7 +51,7 @@
             <div class="cart-buttons">
                 
     
-                <a href="../actions/action_empty_cart.php"><button class="abtn2">Esvaziar</button></a>
+                <a href="../actions/action_empty_cart.php"><button class="abtn2"><i class="material-icons">heart_broken</i></button></a>
             </div>
         </div>
         </div>
@@ -76,13 +77,13 @@
             </div>
             <div class="authentication-buttons">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <a href="profile.php?id=<?php echo $_SESSION['user_id']; ?>"><button class="abtn" >Perfil</button></a>
-                    <button onclick="openCartDrawer()" class="abtn"> Carrinho </button>
-                    <button onclick="openFavoritesDrawer()" class="abtn"> Favoritos </button>
-                    <a href="new_product.php"> <button class="abtn"> Vender </button></a>
+                    <a href="profile.php?id=<?php echo $_SESSION['user_id']; ?>"><button class="abtn" ><i class="material-icons">person</i></button></a>
+                    <button onclick="openCartDrawer()" class="abtn"> <i class="material-icons">shopping_cart</i> </button>
+                    <button onclick="openFavoritesDrawer()" class="abtn"> <i class="material-icons">favorite</i> </button>
+                    <a href="new_product.php"> <button class="abtn"> <i class="material-icons">sell</i> </button></a>
                 <?php else: ?>
-                    <a href="login.php"> <button class="abtn"> Iniciar Sessão </button></a>
-                    <a href="register.php"> <button class="abtn"> Criar Conta </button></a>
+                    <a href="login.php"> <button class="abtn"> <i class="material-icons">login</i> </button></a>
+                    <a href="register.php"> <button class="abtn"> <i class="material-icons">logout</i> </button></a>
                 <?php endif; ?>
             </div>
         </div>

@@ -262,6 +262,17 @@ nav ul li a:hover, .categories ul li a:hover {
     
 }
 
+i.material-icons {
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.authentication-buttons {
+    display: flex;
+  align-items: center;
+}
+
 .abtn {
     background-color: var(--accent-color); /* Botão com a cor de fundo do site */
     border-radius: 5px;
@@ -270,11 +281,13 @@ nav ul li a:hover, .categories ul li a:hover {
      /* Bordas arredondadas */
     color: var(--main-color); /* Cor do texto para contraste */
     padding: 12px;
+    margin: 2px;
     cursor: pointer;
     font-family: 'Prompt', sans-serif; /* Fonte consistente com o site */
     font-size: 14px;
     font-weight: bold;
     transition: background-color 0.3s;
+    height: 45px;
     
     
 }
@@ -453,10 +466,6 @@ select {
 
 #estado {
     display: grid;
-}
-
-button[type="submit"] {
-    width: 100%;
 }
 
 #estado label {

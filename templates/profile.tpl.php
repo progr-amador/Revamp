@@ -16,7 +16,7 @@
                 <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $user['userID']): ?>
                     <?php if ($_SESSION['admin']): ?>
                         <form action="control_panel.php" method="get">
-                            <button type="submit" class="abtn"> Painel de Controlo </button>
+                            <button type="submit" class="abtn"> <i class="material-icons">tune</i> </button>
                         </form>
                     <?php endif; ?>
                     <form action="edit_profile.php" method="get">
@@ -26,7 +26,7 @@
                         <button name="type" type="submit" value="username" class="abtn">Editar Username</button>
                     </form>
                     <form action="../actions/action_logout.php" method="post">
-                         <button type="submit" class="abtn"> Terminar Sessão </button>
+                         <button type="submit" class="abtn"> <i class="material-icons">logout</i> </button>
                     </form>
 
                     <form action="../actions/control_panel/action_remove_user.php" method="get">
@@ -40,11 +40,11 @@
                         </form>
                     <?php else: ?>
                         <form action="../actions/control_panel/action_make_admin.php" method="get">
-                            <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Tornar Admin </button>
+                            <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> <i class="material-icons">shield_person</i> </button>
                         </form>
                     <?php endif; ?>
                     <form action="../actions/control_panel/action_remove_user.php" method="get">
-                        <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> Remover Utilizador </button>
+                        <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> <i class="material-icons">person_remove</i> </button>
                     </form>
                 <?php endif; ?>
             </div>

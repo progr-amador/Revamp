@@ -416,6 +416,10 @@ h3 {
         flex-direction: column;
     }
 
+    .product-image img {
+        width: auto;
+        height: auto;
+    }
     
 }
 
@@ -570,14 +574,37 @@ input[type="checkbox"]:checked + #estado>label {
     background-color: whitesmoke;
 }
 
+.product-image {
+    position: relative;
+    text-align: center;
+}
+
 .product-image img {
-    width: 100%; /* Makes the image responsive */
-    height: auto; /* Maintains aspect ratio */
+    width: 90%; /* Makes the image responsive */
+    height: 80%; /* Maintains aspect ratio */
     max-width: 600px; /* Ensures it doesn't grow beyond 600px */
     border-radius: 10px;
     margin-right: 20px;
 }
 
+.photo-navigation {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.photo-navigation .thumbnail {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border 0.3s;
+}
+
+.photo-navigation .thumbnail:hover {
+    border: 2px solid var(--main-color);
+}
 
 .product-details {
     flex-grow: 1;

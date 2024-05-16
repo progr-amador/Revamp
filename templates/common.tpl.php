@@ -23,9 +23,9 @@
     <div id="cartDrawer" class="header-drawer">
         <div class="drawer-header">
         <h1> Carrinho </h1>
-            <a href="shipping.php"><button class="abtn" onclick="closeCartDrawer()"><i class="material-icons">shopping_cart_checkout</i></button></a>
-            <a href="../actions/action_empty_cart.php"><button class="abtn"><i class="material-icons">remove_shopping_cart</i></button></a>
-            <button class="abtn" onclick="closeCartDrawer()"><i class="material-icons">close</i></button>
+            <a href="shipping.php"><button class="abtn" title="Checkout" onclick="closeCartDrawer()"><i class="material-icons">shopping_cart_checkout</i></button></a>
+            <a href="../actions/action_empty_cart.php"><button class="abtn" title="Esvaziar"><i class="material-icons">remove_shopping_cart</i></button></a>
+            <button class="abtn" title="Fechar" onclick="closeCartDrawer()"><i class="material-icons">close</i></button>
         </div>
         <div class="drawer-content">
             <div class="flex-row">
@@ -41,8 +41,8 @@
     <div id="favoritesDrawer" class="header-drawer">
         <div class="drawer-header">
             <h1> Favoritos </h1>  
-            <a href="../actions/action_empty_favorites.php"><button class="abtn"><i class="material-icons">heart_broken</i></button></a>
-            <button class="abtn" onclick="closeFavoritesDrawer()"><i class="material-icons">close</i></button>
+            <a href="../actions/action_empty_favorites.php"><button class="abtn" title="Esvaziar"><i class="material-icons">heart_broken</i></button></a>
+            <button class="abtn" title="Fechar" onclick="closeFavoritesDrawer()"><i class="material-icons">close</i></button>
         </div>
         <div class="drawer-content">
             <div class="flex-row">
@@ -69,19 +69,19 @@
         <div class="header-content">
             <h1><a href="home.php"> R E V A M P </a></h1>
             <div class="search-container">
-                <form action="search.php" method="get">
+                <form action="search.php"  method="get">
                     <input id="searchproduct" type="text" name="query" placeholder="Search..." class="search-input" autocomplete="off" value="<?php echo $value?>">
                 </form>
             </div>
             <div class="authentication-buttons">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <a href="profile.php?id=<?php echo $_SESSION['user_id']; ?>"><button class="abtn" ><i class="material-icons">account_circle</i></button></a>
-                    <button onclick="openCartDrawer()" class="abtn"> <i class="material-icons">shopping_cart</i> </button>
-                    <button onclick="openFavoritesDrawer()" class="abtn"> <i class="material-icons">favorite</i> </button>
-                    <a href="new_product.php"> <button class="abtn"> <i class="material-icons">sell</i> </button></a>
+                    <a href="profile.php?id=<?php echo $_SESSION['user_id']; ?>"> <button class="abtn" title="Perfil"><i class="material-icons">account_circle</i></button></a>
+                    <button onclick="openCartDrawer()" title="Carrinho" class="abtn"> <i class="material-icons">shopping_cart</i> </button>
+                    <button onclick="openFavoritesDrawer()" title="Favoritos" class="abtn"> <i class="material-icons">favorite</i> </button>
+                    <a href="new_product.php"> <button class="abtn" title="Vender"> <i class="material-icons">sell</i> </button></a>
                 <?php else: ?>
-                    <a href="login.php"> <button class="abtn"> <i class="material-icons">login</i> </button></a>
-                    <a href="register.php"> <button class="abtn"> <i class="material-icons">person_add</i> </button></a>
+                    <a href="login.php"> <button class="abtn" title="Iniciar Sessão" > <i class="material-icons">login</i> </button></a>
+                    <a href="register.php"> <button class="abtn" title="Registar"> <i class="material-icons">person_add</i> </button></a>
                 <?php endif; ?>
             </div>
         </div>

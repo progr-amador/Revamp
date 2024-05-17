@@ -11,7 +11,7 @@
                 <div class="profile-info">
                 <p><strong>Email:</strong> <span id="emailText"><?php echo $user['email'];?></p>
                     <p><strong>Telefone:</strong> <?php echo $user['phoneNumber'];?></p>
-                    <p><strong>Juntou-se em:</strong> <?php echo date('H:i d/m/Y', strtotime($user['creationDate'])) ;?> </p>
+                    <p><strong>Juntou-se em:</strong> <?php echo date('d/m/Y', strtotime($user['creationDate'])) ;?> </p>
                 </div>
                 <div class="buttons">
                     <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $user['userID']): ?>
@@ -28,6 +28,9 @@
                         </form>
                         <form action="message.php?" method="get">
                             <button type="submit" class="abtn"><i title="Mensagens" class="material-icons">chat</i></button>
+                        </form>
+                        <form action="../code/reserved.php" method="get">
+                            <button type="submit" class="abtn"><i title="Produtos Vendidos" class="material-icons">task_alt</i></button>
                         </form>
                         <form action="../actions/action_logout.php" method="post">
                             <button type="submit" class="abtn" title="Terminar Sessão"> <i class="material-icons">logout</i> </button>

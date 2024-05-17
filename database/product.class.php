@@ -68,7 +68,7 @@
           JOIN CATEGORY USING (categoryID)
           JOIN BRAND USING (brandID)
           JOIN CONDITION USING (conditionID) 
-          WHERE title LIKE ?
+          WHERE title LIKE ? AND reserved = false
       ';
 
       $search = $filters['search'];
@@ -130,6 +130,7 @@
       FROM PRODUCT
       LEFT JOIN LOCATION_ USING (locationID)
       JOIN PHOTO USING (productID)
+      WHERE reserved = false
       GROUP BY productID
       ORDER BY price ASC
       LIMIT 20
@@ -147,7 +148,7 @@
         LEFT JOIN LOCATION_ USING (locationID)
         LEFT JOIN CATEGORY USING (categoryID)
         JOIN PHOTO USING (productID)
-        WHERE categoryName LIKE ?
+        WHERE categoryName LIKE ? AND reserved = false
         GROUP BY productID
         ORDER BY price ASC
       ');
@@ -167,7 +168,7 @@
         LEFT JOIN LOCATION_ USING (locationID)
         LEFT JOIN CONDITION USING (conditionID)
         JOIN PHOTO USING (productID)
-        WHERE productId = ?
+        WHERE productId = ? AND reserved = false
         GROUP BY productID
       ');
 
@@ -185,7 +186,23 @@
         LEFT JOIN LOCATION_ USING (locationID)
         LEFT JOIN CATEGORY USING (categoryID)
         JOIN PHOTO USING (productID)
-        WHERE sellerID LIKE ?
+        WHERE sellerID LIKE ? AND reserved = false
+        GROUP BY productID
+      ');
+  
+      $stmt->execute(array($userID)); 
+      $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $products;
+    }
+
+    static function getReserved(PDO $db, $userID): array {
+      $stmt = $db->prepare('
+        SELECT productID, title, price, locationName AS location, photoURL, categoryName, sellerID
+        FROM PRODUCT
+        LEFT JOIN LOCATION_ USING (locationID)
+        LEFT JOIN CATEGORY USING (categoryID)
+        JOIN PHOTO USING (productID)
+        WHERE sellerID LIKE ? AND reserved = true
         GROUP BY productID
       ');
   

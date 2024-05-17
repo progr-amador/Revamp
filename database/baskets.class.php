@@ -22,7 +22,7 @@
         LEFT JOIN LOCATION_ USING (locationID)
         JOIN PHOTO USING (productID)
         JOIN CART USING (productID)
-        WHERE buyerID = ?
+        WHERE buyerID = ? AND reserved = false
         GROUP BY productID
       ');
   
@@ -50,7 +50,7 @@
         LEFT JOIN LOCATION_ USING (locationID)
         JOIN PHOTO USING (productID)
         JOIN FAVORITES USING (productID)
-        WHERE buyerID = ?
+        WHERE buyerID = ? AND reserved = false
         GROUP BY productID
       ');
   

@@ -65,6 +65,7 @@ CREATE TABLE PRODUCT (
     categoryID INT,
     locationID INT,
     conditionID INT,
+    reserved BOOLEAN DEFAULT FALSE,
     title VARCHAR(60),
     description TEXT,
     price DECIMAL(10, 2) NOT NULL,

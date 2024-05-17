@@ -31,10 +31,6 @@
             <div class="flex-row">
                 <?php drawSmallProductCard($cart) ?>
             </div>
-            <!--<div class="cart-buttons">
-                <a href="shipping.php"><button class="abtn" onclick="closeCartDrawer()"><i class="material-icons">shopping_cart_checkout</i></button></a>
-                <a href="../actions/action_empty_cart.php"><button class="abtn"><i class="material-icons">remove_shopping_cart</i></button></a>
-            </div>-->
         </div>
         
     </div>
@@ -48,9 +44,6 @@
             <div class="flex-row">
                 <?php drawSmallProductCard($favorites) ?>
             </div>
-            <!--<div class="cart-buttons">
-                <a href="../actions/action_empty_favorites.php"><button class="abtn"><i class="material-icons">heart_broken</i></button></a>
-            </div>-->
         </div>
         </div>
     <div class="body-container"> 

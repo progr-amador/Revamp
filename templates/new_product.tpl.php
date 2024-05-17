@@ -14,7 +14,7 @@
                 <fieldset>
                     <legend>Texto</legend>
                     <label for="name">Título
-                        <input type="text" id="name" name="title" required>
+                        <input type="text" id="name" name="title" maxlength="42" required>
                     </label>
                     <br>
                     <label for="description"> Descrição</label>
@@ -26,7 +26,7 @@
                 <fieldset>
                     <legend> Detalhes </legend>
                     <label for="name">Preço
-                        <input type="text" id="name" name="price" required>
+                        <input type="number" id="name" name="price" required>
                     </label>
                     <br>
                     <label id = "categoria">

@@ -31,9 +31,6 @@
                                 <button title="Delete product" type="submit" class="abtn"> <i class="material-icons">delete</i> </button>
                             </form>
                         <?php } else if($_SESSION['admin']) { ?>
-                            <form action="shipping.php" method="get">
-                                <button title="Buy now" type="submit" class="abtn"><i class="material-icons">shopping_bag</i></button>
-                            </form>
                             <form action="../actions/action_add_chat.php" method="get">
                                 <input type="hidden" name="buyerID" value="<?php echo $_SESSION['user_id'] ?>">
                                 <input type="hidden" name="sellerID" value="<?php echo $product['sellerID'] ?>">
@@ -53,9 +50,6 @@
                                 <button title="Delete product" type="submit" class="abtn"> <i class="material-icons">delete</i> </button>
                             </form>
                         <?php } else { ?>
-                            <form action="shipping.php" method="post">
-                                <button title="Buy now" class="abtn"> <i class="material-icons">shopping_bag</i> </button>
-                            </form>
                             <form action="../actions/action_add_chat.php" method="get">
                                 <input type="hidden" name="buyerID" value="<?php echo $_SESSION['user_id'] ?>">
                                 <input type="hidden" name="sellerID" value="<?php echo $product['sellerID'] ?>">

@@ -441,7 +441,6 @@ h3 {
 }
 
 .flex-row {
-    flex-wrap: wrap-reverse;
     gap: 10px;
 }
 

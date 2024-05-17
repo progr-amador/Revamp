@@ -33,7 +33,7 @@
                             <button type="submit" class="abtn"><i title="Mensagens" class="material-icons">chat</i></button>
                         </form>
                         <form action="../code/reserved.php" method="get">
-                            <button type="submit" class="abtn"><i title="Produtos Vendidos" class="material-icons">task_alt</i></button>
+                            <button type="submit" class="abtn"><i title="Produtos Reservados" class="material-icons">task_alt</i></button>
                         </form>
                         <form action="../actions/action_logout.php" method="post">
                             <button type="submit" class="abtn" title="Terminar Sessão"> <i class="material-icons">logout</i> </button>

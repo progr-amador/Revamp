@@ -102,10 +102,9 @@ class Users {
         $stmt->bindParam(':username', $newUsername, PDO::PARAM_STR);
         $stmt->execute();
         
-        // Fetch the count of rows that have the email
         $count = $stmt->fetchColumn();
         
-        return $count == 0;  // Returns true if no rows are found
+        return $count == 0;
     }
 
     public static function updateUserName(PDO $db,int $id, string $newUsername) : bool {

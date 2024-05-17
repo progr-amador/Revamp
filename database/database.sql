@@ -4,28 +4,26 @@ DROP TABLE IF EXISTS MESSAGE_;
 DROP TABLE IF EXISTS CHAT;
 DROP TABLE IF EXISTS CART;
 DROP TABLE IF EXISTS FAVORITES;
-DROP TABLE IF EXISTS SHIPPING_PRODUCT;
-DROP TABLE IF EXISTS SHIPPING;
 DROP TABLE IF EXISTS PHOTO;
+DROP TABLE IF EXISTS RESERVED;
 DROP TABLE IF EXISTS PRODUCT;
 DROP TABLE IF EXISTS CATEGORY;
 DROP TABLE IF EXISTS CONDITION;
 DROP TABLE IF EXISTS BRAND;
 DROP TABLE IF EXISTS USERS;
 DROP TABLE IF EXISTS LOCATION_;
-DROP TABLE IF EXISTS RATING;
 
 /*******************************************************************************
    Create Tables
 ********************************************************************************/
 
--- Create a table for physical locations (optional)
+-- Creates a table for physical locations (optional)
 CREATE TABLE LOCATION_ (
     locationID INTEGER PRIMARY KEY AUTOINCREMENT,
     locationName VARCHAR(255) NOT NULL
 );
 
--- Create a table for users
+-- Creates a table for users
 CREATE TABLE USERS (
     userID INTEGER PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
@@ -35,25 +33,25 @@ CREATE TABLE USERS (
     isAdmin BOOLEAN DEFAULT FALSE
 );
 
--- Create a table for product brands
+-- Creates a table for product brands
 CREATE TABLE BRAND (
     brandID INTEGER PRIMARY KEY AUTOINCREMENT,
     brandName VARCHAR(255) NOT NULL
 );
 
--- Create a table for product categories
+-- Creates a table for product categories
 CREATE TABLE CATEGORY (
     categoryID INTEGER PRIMARY KEY AUTOINCREMENT,
     categoryName VARCHAR(255) NOT NULL
 );
 
--- Create a table for product condition
+-- Creates a table for product condition
 CREATE TABLE CONDITION (
     conditionID INTEGER PRIMARY KEY AUTOINCREMENT,
     conditionName VARCHAR(255) NOT NULL
 );
 
--- Create a table for products
+-- Creates a table for products
 CREATE TABLE PRODUCT (
     productID INTEGER PRIMARY KEY AUTOINCREMENT,
     sellerID INT NOT NULL,
@@ -61,7 +59,6 @@ CREATE TABLE PRODUCT (
     categoryID INT,
     locationID INT,
     conditionID INT,
-    reserved BOOLEAN DEFAULT FALSE,
     title VARCHAR(60),
     description TEXT,
     price DECIMAL(10, 2) NOT NULL,
@@ -72,7 +69,7 @@ CREATE TABLE PRODUCT (
     FOREIGN KEY(conditionID) REFERENCES CONDITION(conditionID) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
--- Create a table for photos associated with products
+-- Creates a table for photos associated with products
 CREATE TABLE PHOTO (
     photoID INTEGER PRIMARY KEY AUTOINCREMENT,
     productID INT NOT NULL,
@@ -80,7 +77,13 @@ CREATE TABLE PHOTO (
     FOREIGN KEY(productID) REFERENCES PRODUCT(productID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- Create a table for chats between buyers and sellers
+-- Creates a table for reserved products
+CREATE TABLE RESERVED (
+    productID INT NOT NULL,
+    FOREIGN KEY(productID) REFERENCES PRODUCT(productID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Creates a table for chats between buyers and sellers
 CREATE TABLE CHAT (
     chatID INTEGER PRIMARY KEY AUTOINCREMENT,
     buyerID INT NOT NULL,    
@@ -91,7 +94,7 @@ CREATE TABLE CHAT (
     FOREIGN KEY(productID) REFERENCES PRODUCT(productID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- Create a table for messages within chats
+-- Creates a table for messages within chats
 CREATE TABLE MESSAGE_ (
     messageID INTEGER PRIMARY KEY AUTOINCREMENT,    
     chatID INT NOT NULL,
@@ -102,7 +105,7 @@ CREATE TABLE MESSAGE_ (
     FOREIGN KEY(senderID) REFERENCES USERS(userID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- Create a table for carts
+-- Creates a table for carts
 CREATE TABLE CART (
     buyerID INT,
     productID INT,
@@ -112,7 +115,7 @@ CREATE TABLE CART (
     FOREIGN KEY(productID) REFERENCES PRODUCT(productID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- Create a table for favorite products
+-- Creates a table for favorite products
 CREATE TABLE FAVORITES (
     buyerID INT,
     productID INT,
@@ -206,31 +209,30 @@ INSERT INTO CONDITION (conditionID, conditionName) VALUES
 
 -- Insert statements for the PRODUCT table including titles
 INSERT INTO PRODUCT (productID, sellerID, brandID, categoryID, locationID, conditionID, title, description, price) VALUES
-(1, 3, 1, 3, 12, 1, 'Capa Magsafe iPhone 15 Pro', 'Em perfeitas condições, nunca usado.', 25.00), --capas
-(2, 2, 2, 1, 11, 3, 'Samsung Galaxy S21 FE Preto', 'Alguns sinais de uso na parte frontal. 6GB/128GB', 400.00), --telemovel
-(3, 1, 2, 2, 11, 1, 'Samsung Galaxy Tab S9', 'Novo, ainda selado, 256GB.', 650.00), --tablet
-(4, 3, 1, 3, 12, 1, 'Capa iPhone 12 Preta', 'Em perfeitas condições, nunca usado.', 20.00), --capas
-(5, 2, 3, 1, 11, 2, 'Google Pixel 8 Hazel', 'Como novo.', 600.00),  --telemovel
-(6, 4, 4, 2, 11, 1, 'Huawei MatePad Pro', 'Conjunto completo com caneta e capa com teclado', 800.00), --tablet
-(7, 1, 1, 1, 11, 2, 'iPhone 13 Branco', 'Com alguns arranhões', 700.00), --telemovel --capas 
-(8, 3, 1, 3, 12, 1, 'Capa iPhone XS Azul', 'Em perfeitas condições, nunca usado.', 20.00), --capas
-(9, 7, 5, 2, 11, 2, 'Redmi Pad SE Gray ', 'Como novo. 6GB de Ram e 128GB de armazenamento.', 200.00), --tablet
-(10, 6, 5, 2, 9, 1, 'Xiaomi Pad 6 Champagne', 'Novo, ainda selado. 8GB/256GB. ', 379.00), --tablet
-(11, 5, 6, 1, 2, 1, 'OnePlus 12R Azul', 'Novo, ainda selado. 16GB/256GB.', 600.00), --telemovel
-(12, 5, 6, 1, 2, 1, 'OnePlus CE 3 Lite Lima', 'Novo, ainda selado. 8GB/128GB', 220.00), --telemovel
-(13, 8, 4, 1, 5, 3, 'Huawei P50 Pocket Dourado', 'Alguns sinais de uso. 12GB/512GB', 500.00), --telemovel
-(14, 3, 1, 3, 12, 1, 'Capa iPhone 12 Azul', 'Em perfeitas condições, nunca usado.', 20.00), --capas
-(15, 3, 1, 3, 12, 1, 'Capa iPhone 12 Branca', 'Em perfeitas condições, nunca usado.', 20.00), --capas
-(16, 3, 1, 3, 12, 1, 'Capa iPhone 12 Pro Rosa', 'Em perfeitas condições, nunca usado.', 20.00), --capas
-(17, 3, 1, 3, 12, 1, 'Capa iPhone 15 Azul Claro', 'Em perfeitas condições, nunca usado.', 20.00), --capas
-(18, 3, 1, 3, 12, 1, 'Capa iPhone SE Vermelha', 'Em perfeitas condições, nunca usado.', 20.00), --capas
-(19, 5, 6, 1, 2, 1, 'Samsung A55 Navy', 'Novo, ainda selado. 8GB/128GB', 400.00), --telemovel
-(20, 5, 6, 1, 2, 1, 'Samsung A35 Ice', 'Novo, ainda selado. 6GB/128GB', 330.00), --telemovel
-(21, 10, 2, 4, 7, 3, 'Powerbank Samsung Bege', 'Usada várias vezes, 10000mAh', 25.00),
-(22, 2, 5, 4, 10, 1, 'Powerbank Xiaomi Azul', 'Nova, ainda selada. 10000mAh', 25.00),
-(23, 2, 5, 4, 10, 1, 'Powerbank Xiaomi Wireless', 'Nova, ainda selada. 10000mAh', 30.00),
-(24, 8, 5, 4, 7, 2, 'Powerbank Xiaomi Azul', 'Caixa aberta, mas não foi usada. 10000mAh', 19.00);
-
+(1, 3, 1, 3, 12, 1, 'Capa Magsafe iPhone 15 Pro', 'Esta é uma capa Magsafe de alta qualidade projetada especificamente para o iPhone 15 Pro. Feita com materiais duráveis e resistentes, oferece proteção máxima contra quedas e arranhões. Sua compatibilidade com o sistema de carregamento Magsafe garante uma experiência conveniente e sem fios. Nunca usada, está em perfeitas condições.', 25.00), --capas
+(2, 2, 2, 1, 11, 3, 'Samsung Galaxy S21 FE Preto', 'Este Samsung Galaxy S21 FE na cor preta é uma excelente opção para quem procura um smartphone poderoso e elegante. Equipado com um processador rápido e uma tela vibrante, oferece uma experiência de visualização imersiva. Apesar de apresentar alguns sinais de uso na parte frontal, está completamente funcional. Possui 6GB de RAM e 128GB de armazenamento para todas as suas necessidades de aplicativos e mídia.', 400.00), --telemovel
+(3, 1, 2, 2, 11, 1, 'Samsung Galaxy Tab S9', 'Este tablet Samsung Galaxy Tab S9 é a escolha perfeita para produtividade e entretenimento. Com uma impressionante tela de alta resolução e um processador rápido, oferece uma experiência de uso suave e fluida. Ainda selado na embalagem original, possui 256GB de armazenamento para todos os seus aplicativos, fotos e vídeos. Ideal para quem busca um dispositivo novo e de alta qualidade.', 650.00), --tablet
+(4, 3, 1, 3, 12, 1, 'Capa iPhone 12 Preta', 'Esta elegante capa para iPhone 12 na cor preta é feita de material resistente para proteger o seu dispositivo contra danos causados por quedas e arranhões. Nunca usada, está em condições impecáveis. Seu design fino e leve não adiciona volume ao seu telefone, mantendo-o confortável de segurar e fácil de transportar.', 20.00), --capas
+(5, 2, 3, 1, 11, 2, 'Google Pixel 8 Hazel', 'O Google Pixel 8 na cor Hazel é um smartphone que combina estilo e desempenho. Com uma câmera de alta qualidade e recursos avançados de inteligência artificial, captura fotos e vídeos incríveis em qualquer condição de iluminação. Este dispositivo está praticamente novo, oferecendo uma experiência semelhante à de um produto recém-saído da caixa. Perfeito para quem busca um telefone excepcional para fotografia e multitarefa.', 600.00),  --telemovel
+(6, 4, 4, 2, 11, 1, 'Huawei MatePad Pro', 'O Huawei MatePad Pro é mais do que apenas um tablet, é uma ferramenta versátil para produtividade e criatividade. Este conjunto completo inclui uma caneta e uma capa com teclado, transformando-o em uma estação de trabalho portátil. Sua tela grande e vibrante é perfeita para assistir a vídeos ou fazer anotações. Nunca usado, está pronto para desbloquear todo o seu potencial.', 800.00), --tablet
+(7, 1, 1, 1, 11, 2, 'iPhone 13 Branco', 'Este iPhone 13 na cor branca é uma escolha popular para entusiastas de tecnologia. Apesar de alguns arranhões, funciona perfeitamente. Com um design elegante e recursos avançados, como uma câmera de alta resolução e um processador rápido, oferece uma experiência premium. Ideal para quem busca um iPhone confiável a um preço acessível.', 700.00), --telemovel --capas 
+(8, 3, 1, 3, 12, 1, 'Capa iPhone XS Azul', 'Esta capa para iPhone XS na cor azul é uma maneira elegante de proteger o seu dispositivo contra danos diários. Feita de material durável, esta capa nunca foi usada e está em perfeitas condições. Seu design fino e leve não compromete a portabilidade do seu telefone.', 20.00), --capas
+(9, 7, 5, 2, 11, 2, 'Redmi Pad SE Gray', 'Este tablet Redmi Pad SE na cor cinza é uma excelente escolha para quem procura um dispositivo versátil para trabalho e entretenimento. Com 6GB de RAM e 128GB de armazenamento, oferece um desempenho sólido e amplo espaço para seus aplicativos e arquivos. Praticamente novo, este tablet está pronto para ser o seu companheiro digital em todas as atividades do dia a dia.', 200.00), --tablet
+(10, 6, 5, 2, 9, 1, 'Xiaomi Pad 6 Champagne', 'Este tablet Xiaomi Pad 6 na cor champagne é novo, ainda está selado na embalagem original. Com 8GB de RAM e 256GB de armazenamento, oferece desempenho de ponta e amplo espaço para todos os seus aplicativos e mídia. Seu design elegante e tela grande o tornam perfeito para produtividade e entretenimento.', 379.00), --tablet
+(11, 5, 6, 1, 2, 1, 'OnePlus 12R Azul', 'O OnePlus 12R na cor azul é um smartphone de alta qualidade com especificações poderosas. Com 16GB de RAM e 256GB de armazenamento, oferece desempenho excepcional para multitarefa e armazenamento amplo para todos os seus arquivos e aplicativos. Este dispositivo está novo, ainda selado na embalagem original, pronto para oferecer uma experiência premium.', 600.00), --telemovel
+(12, 5, 6, 1, 2, 1, 'OnePlus CE 3 Lite Lima', 'O OnePlus CE 3 Lite na cor lima é uma opção acessível para quem busca um smartphone com bom desempenho e design moderno. Com 8GB de RAM e 128GB de armazenamento, oferece um equilíbrio entre preço e desempenho. Este dispositivo está novo, ainda selado na embalagem original, pronto para ser seu parceiro digital do dia a dia.', 220.00), --telemovel
+(13, 8, 4, 1, 5, 3, 'Huawei P50 Pocket Dourado', 'O Huawei P50 Pocket na cor dourada é um smartphone compacto com especificações poderosas. Apesar de alguns sinais de uso, está totalmente funcional, com 12GB de RAM e 512GB de armazenamento. Capture fotos e vídeos incríveis com sua câmera de alta resolução e desfrute de um desempenho excepcional em todas as suas tarefas diárias.', 500.00), --telemovel
+(14, 3, 1, 3, 12, 1, 'Capa iPhone 12 Azul', 'Esta elegante capa para iPhone 12 na cor azul é uma escolha perfeita para quem busca proteção e estilo. Nunca usada, está em perfeitas condições. Adicione um toque de cor ao seu dispositivo e proteja-o contra danos causados por quedas e arranhões.', 20.00), --capas
+(15, 3, 1, 3, 12, 1, 'Capa iPhone 12 Branca', 'Esta capa para iPhone 12 na cor branca é uma maneira elegante de proteger o seu dispositivo. Nunca usada, está em perfeitas condições. Seu design fino e leve mantém o seu telefone seguro sem adicionar volume.', 20.00), --capas
+(16, 3, 1, 3, 12, 1, 'Capa iPhone 12 Pro Rosa', 'Esta capa para iPhone 12 Pro na cor rosa é uma escolha elegante e funcional para proteger o seu dispositivo. Nunca usada, está em perfeitas condições. Adicione um toque de cor e estilo ao seu iPhone sem comprometer sua proteção.', 20.00), --capas
+(17, 3, 1, 3, 12, 1, 'Capa iPhone 15 Azul Claro', 'Esta capa para iPhone 15 na cor azul claro é uma maneira elegante de proteger o seu dispositivo. Nunca usada, está em perfeitas condições. Adicione estilo e proteção ao seu iPhone com esta capa de qualidade.', 20.00), --capas
+(18, 3, 1, 3, 12, 1, 'Capa iPhone SE Vermelha', 'Esta capa para iPhone SE na cor vermelha é uma escolha vibrante para proteger o seu dispositivo. Nunca usada, está em perfeitas condições. Adicione um toque de cor e estilo ao seu iPhone com esta capa de qualidade.', 20.00), --capas
+(19, 5, 6, 1, 2, 1, 'Samsung A55 Navy', 'O Samsung A55 na cor navy é um smartphone de alta qualidade com um design elegante e especificações sólidas. Com 8GB de RAM e 128GB de armazenamento, oferece desempenho rápido e amplo espaço para todos os seus aplicativos e mídia. Novo e ainda selado na embalagem original, está pronto para ser seu companheiro digital diário.', 400.00), --telemovel
+(20, 5, 6, 1, 2, 1, 'Samsung A35 Ice', 'O Samsung A35 na cor ice é um smartphone novo e moderno, ainda selado na embalagem original. Com 6GB de RAM e 128GB de armazenamento, oferece um desempenho confiável e espaço suficiente para todos os seus aplicativos e fotos. Seu design elegante e tela vibrante fazem dele uma excelente escolha para usuários exigentes.', 330.00), --telemovel
+(21, 10, 2, 4, 7, 3, 'Powerbank Samsung Bege', 'Este powerbank Samsung na cor bege é uma opção prática para carregar seus dispositivos em movimento. Usado várias vezes, possui uma capacidade de 10000mAh para várias recargas. Pequeno e portátil, é perfeito para viagens e uso diário.', 25.00),
+(22, 2, 5, 4, 10, 1, 'Powerbank Xiaomi Azul', 'Este powerbank Xiaomi na cor azul é novo, ainda selado na embalagem original. Com uma capacidade de 10000mAh, oferece energia suficiente para carregar seus dispositivos várias vezes. Compacto e leve, é ideal para uso em viagens ou emergências.', 25.00),
+(23, 2, 5, 4, 10, 1, 'Powerbank Xiaomi Wireless', 'Este powerbank Xiaomi wireless é uma opção conveniente para carregar seus dispositivos sem fio. Novo e ainda selado na embalagem original, possui uma capacidade de 10000mAh para várias recargas. Compatível com dispositivos habilitados para carregamento sem fio, oferece uma solução de energia sem complicações.', 30.00),
+(24, 8, 5, 4, 7, 2, 'Powerbank Xiaomi Azul', 'Este powerbank Xiaomi na cor azul possui uma caixa aberta, mas nunca foi usado. Com uma capacidade de 10000mAh, oferece energia confiável para recarregar seus dispositivos. Compacto e leve, é perfeito para manter seus dispositivos carregados em movimento.', 19.00);
 
 
 -- Insert statements for the PHOTO table

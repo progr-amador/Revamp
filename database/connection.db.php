@@ -7,7 +7,7 @@
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $db->exec("PRAGMA foreign_keys = ON");
-        $db->exec('DELETE FROM CHAT WHERE chatID NOT IN (SELECT chatID FROM MESSAGE_)');
+        //$db->exec('DELETE FROM CHAT WHERE chatID NOT IN (SELECT chatID FROM MESSAGE_)');
 
 
         return $db;

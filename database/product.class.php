@@ -68,7 +68,8 @@
           JOIN CATEGORY USING (categoryID)
           JOIN BRAND USING (brandID)
           JOIN CONDITION USING (conditionID) 
-          WHERE title LIKE ? AND reserved = false
+          LEFT JOIN RESERVED USING (productID)
+          WHERE title LIKE ? AND RESERVED.productID IS NULL
       ';
 
       $search = $filters['search'];
@@ -130,7 +131,8 @@
       FROM PRODUCT
       LEFT JOIN LOCATION_ USING (locationID)
       JOIN PHOTO USING (productID)
-      WHERE reserved = false
+      LEFT JOIN RESERVED USING (productID)
+      WHERE RESERVED.productID IS NULL
       GROUP BY productID
       ORDER BY price ASC
       LIMIT 20
@@ -148,12 +150,13 @@
         LEFT JOIN LOCATION_ USING (locationID)
         LEFT JOIN CATEGORY USING (categoryID)
         JOIN PHOTO USING (productID)
-        WHERE categoryName LIKE ? AND reserved = false
+        LEFT JOIN RESERVED USING (productID)
+        WHERE categoryName = ? AND RESERVED.productID IS NULL
         GROUP BY productID
         ORDER BY price ASC
       ');
   
-      $stmt->execute(array("%$category%")); 
+      $stmt->execute(array($category)); 
       $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
       return $products;
     }
@@ -168,7 +171,7 @@
         LEFT JOIN LOCATION_ USING (locationID)
         LEFT JOIN CONDITION USING (conditionID)
         JOIN PHOTO USING (productID)
-        WHERE productId = ? AND reserved = false
+        WHERE productId = ?
         GROUP BY productID
       ');
 
@@ -186,7 +189,8 @@
         LEFT JOIN LOCATION_ USING (locationID)
         LEFT JOIN CATEGORY USING (categoryID)
         JOIN PHOTO USING (productID)
-        WHERE sellerID LIKE ? AND reserved = false
+        LEFT JOIN RESERVED USING (productID)
+        WHERE sellerID = ? AND RESERVED.productID IS NULL
         GROUP BY productID
       ');
   
@@ -202,13 +206,27 @@
         LEFT JOIN LOCATION_ USING (locationID)
         LEFT JOIN CATEGORY USING (categoryID)
         JOIN PHOTO USING (productID)
-        WHERE sellerID LIKE ? AND reserved = true
+        JOIN RESERVED USING (productID)
+        WHERE sellerID = ?
         GROUP BY productID
       ');
   
       $stmt->execute(array($userID)); 
       $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
       return $products;
+    }
+
+    static function setReserved(PDO $db, int $productID) {
+      $stmt = $db->prepare('
+        INSERT INTO RESERVED (productID) 
+        VALUES (?)
+      ');
+      $stmt->execute([$productID]);
+    }
+
+    static function removeReserved(PDO $db, int $productID) {
+      $stmt = $db->prepare('DELETE FROM RESERVED WHERE productID = ?');
+      $stmt->execute([$productID]);
     }
   
   }

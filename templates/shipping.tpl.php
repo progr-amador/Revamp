@@ -64,8 +64,6 @@
                     </label>
                     </div>
                 </fieldset>
-
-                <!-- Métodos de Pagamento -->
                 <fieldset>
                     <legend>Método de Pagamento</legend>
                     <div class="radio-option">

@@ -114,20 +114,36 @@
 <?php } ?>
 
 <?php function drawProductCard($products) {
-    foreach ($products as $product) { ?>
-        <div class="flex-item">
-            <a href="product.php?id=<?php echo $product['productID']; ?>">
-                <div class="item-image">
-                    <img src="<?php echo $product['photoURL']; ?>" alt="Image for <?php echo $product['title']; ?>">
-                </div>
-                <div class="item-details">                   
-                    <h3 id="title"><?php echo $product['title']; ?></h3>
-                    <p id="price"><?php echo $product['price']; ?> €</p>
-                    <p id="location"><?php echo $product['location']; ?></p>
-                </div>
-            </a>
-        </div>
-    <?php } 
+    if(!isMobile()){
+        foreach ($products as $product) { ?>
+            <div class="flex-item">
+                <a href="product.php?id=<?php echo $product['productID']; ?>">
+                    <div class="item-image">
+                        <img src="<?php echo $product['photoURL']; ?>" alt="Image for <?php echo $product['title']; ?>">
+                    </div>
+                    <div class="item-details">                   
+                        <h3 id="title"><?php echo $product['title']; ?></h3>
+                        <p id="price"><?php echo $product['price']; ?> €</p>
+                        <p id="location"><?php echo $product['location']; ?></p>
+                    </div>
+                </a>
+            </div>
+        <?php } 
+    } else {
+        foreach ($products as $product) { ?>
+            <div class="small-flex-item">
+                <a href="product.php?id=<?php echo $product['productID']; ?>">
+                    <div class="small-item-image">
+                        <img src="<?php echo $product['photoURL']; ?>" alt="Image of <?php echo $product['title']; ?>">
+                    </div>
+                    <div class="small-item-details">
+                        <h3 id="title"><?php echo $product['title']; ?></h3>
+                        <p id="price"><?php echo $product['price']; ?> €</p>
+                    </div>
+                </a>
+            </div>
+        <?php }
+    }
 } ?>
 
 <?php function drawSmallProductCard($products) {
@@ -151,5 +167,9 @@
     foreach ($categories as $category) { ?>
         <li><a href="category.php?id=<?php echo $category['categoryName']; ?>"><?php echo $category['categoryName']; ?></a></li>
     <?php }
+} ?>
+
+<?php function isMobile() {
+    return (bool) preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
 } ?>
 

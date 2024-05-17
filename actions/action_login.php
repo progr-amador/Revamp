@@ -21,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_id'] = $user->id;
             $_SESSION['user_name'] = $user->name;
             $_SESSION['email'] = $user->email;
-            $_SESSION['phoneNumber'] = $user->phone;
             $_SESSION['creationDate'] = $user->date;
             $_SESSION['admin'] = $user->isAdmin;
             // Redirect to home page if the login is successful

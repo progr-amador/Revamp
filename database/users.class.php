@@ -11,14 +11,13 @@ class Users {
     public int $location;
     public bool $isAdmin;
 
-    public function __construct(string $name, string $email, int $id = 0, string $phone = '', string $date = '', string $address = '', int $location = 0, bool $isAdmin = false) {
+    public function __construct(string $name, string $email, int $id = 0, string $date = '', bool $isAdmin = false) {
         $this->id = $id;
         $this->name = $name;
         $this->email = $email;
-        $this->phone = $phone;
+        
         $this->date = $date;
-        $this->address = $address;
-        $this->location = $location;
+        
         $this->isAdmin = $isAdmin;
     }
 
@@ -36,7 +35,7 @@ class Users {
     public static function getUsersWithPassword(string $email, string $password): ?Users {
         $db = getDatabaseConnection();
         $stmt = $db->prepare('
-            SELECT userID, username, email, phoneNumber, hashedPassword, creationDate, address, locationID, isAdmin 
+            SELECT userID, username, email, hashedPassword, creationDate, isAdmin 
             FROM USERS 
             WHERE lower(email) = ? AND hashedPassword = ?
         ');
@@ -53,10 +52,7 @@ class Users {
                 $user['username'],
                 $user['email'],
                 $user['userID'],
-                $phoneNumber,
                 $user['creationDate'],
-                $address,
-                $locationID,
                 $user['isAdmin'] == '1' ? true : false
             );
         } else return null;
@@ -64,7 +60,7 @@ class Users {
 
     public static function getUser(PDO $db, $id) : array {
         $stmt = $db->prepare('
-            SELECT userID, username, email, phoneNumber, creationDate, address, locationID, isAdmin 
+            SELECT userID, username, email, creationDate, isAdmin 
             FROM USERS 
             WHERE userID = ?
         ');

@@ -32,7 +32,7 @@ CREATE TABLE USERS (
     email VARCHAR(255) NOT NULL UNIQUE,
     creationDate DATE NOT NULL,
     hashedPassword VARCHAR(255) NOT NULL,
-    isAdmin BOOLEAN DEFAULT FALSE,
+    isAdmin BOOLEAN DEFAULT FALSE
 );
 
 -- Create a table for product brands
@@ -150,17 +150,17 @@ INSERT INTO LOCATION_ (locationID, locationName) VALUES
 
 
 -- Insert statements for the USER_ table
-INSERT INTO USERS (username, email, creationDate, hashedPassword, address, isAdmin) VALUES
-('FranciscoA', 'franciscompaf@gmail.com', '2023-04-01', 'd604daee58908ad200df132f555bf67fb3f10686', 'Rua das Flores, Porto', TRUE), -- pass: meusamigos
-('AnaP', 'ana.pereira@example.com', '2023-04-02', 'd604daee58908ad200df132f555bf67fb3f10686', 'Avenida Liberdade, Lisboa', FALSE),
-('MiguelC', 'miguel.correia@example.com', '2023-04-03', 'd604daee58908ad200df132f555bf67fb3f10686', 'Praça do Comércio, Braga', FALSE),
-('SofiaG', 'sofia.gomes@example.com', '2023-04-04', 'd604daee58908ad200df132f555bf67fb3f10686', 'Largo da Sé, Faro', FALSE),
-('RicardoR', 'ricardo.reis@example.com', '2023-04-05', 'd604daee58908ad200df132f555bf67fb3f10686', 'Rua Major Ávila, Coimbra', FALSE),
-('CarlaM', 'carla.mendes@example.com', '2023-04-06', 'd604daee58908ad200df132f555bf67fb3f10686', 'Rua das Oliveiras, Aveiro', TRUE),
-('PedroL', 'pedro.lima@example.com', '2023-04-07', 'd604daee58908ad200df132f555bf67fb3f10686', 'Rua do Comércio, Beja', FALSE),
-('JoanaF', 'joana.ferreira@example.com', '2023-04-08', 'd604daee58908ad200df132f555bf67fb3f10686', 'Avenida Central, Braga', TRUE),
-('LuisN', 'luis.nunes@example.com', '2023-04-09', 'd604daee58908ad200df132f555bf67fb3f10686', 'Praça da República, Lisboa', TRUE),
-('MartaS', 'marta.silva@example.com', '2023-04-10', 'd604daee58908ad200df132f555bf67fb3f10686', 'Rua Nova, Porto', FALSE);
+INSERT INTO USERS (userID, username, email, creationDate, hashedPassword, isAdmin) VALUES
+(1,'FranciscoA', 'franciscompaf@gmail.com', '2023-04-01', 'd604daee58908ad200df132f555bf67fb3f10686', TRUE), -- pass: meusamigos
+(2,'AnaP', 'ana.pereira@example.com', '2023-04-02', 'd604daee58908ad200df132f555bf67fb3f10686', FALSE),
+(3,'MiguelC', 'miguel.correia@example.com', '2023-04-03', 'd604daee58908ad200df132f555bf67fb3f10686', FALSE),
+(4,'SofiaG', 'sofia.gomes@example.com', '2023-04-04', 'd604daee58908ad200df132f555bf67fb3f10686', FALSE),
+(5,'RicardoR', 'ricardo.reis@example.com', '2023-04-05', 'd604daee58908ad200df132f555bf67fb3f10686', FALSE),
+(6,'CarlaM', 'carla.mendes@example.com', '2023-04-06', 'd604daee58908ad200df132f555bf67fb3f10686', TRUE),
+(7,'PedroL', 'pedro.lima@example.com', '2023-04-07', 'd604daee58908ad200df132f555bf67fb3f10686', FALSE),
+(8,'JoanaF', 'joana.ferreira@example.com', '2023-04-08', 'd604daee58908ad200df132f555bf67fb3f10686', TRUE),
+(9,'LuisN', 'luis.nunes@example.com', '2023-04-09', 'd604daee58908ad200df132f555bf67fb3f10686', TRUE),
+(10,'MartaS', 'marta.silva@example.com', '2023-04-10', 'd604daee58908ad200df132f555bf67fb3f10686', FALSE);
 
 INSERT INTO BRAND (brandID, brandName) VALUES
 (1, 'Apple'),
@@ -193,9 +193,8 @@ INSERT INTO BRAND (brandID, brandName) VALUES
 INSERT INTO CATEGORY (categoryID, categoryName) VALUES
 (1, 'Telemóveis'),
 (2, 'Tablets'),
-(3, 'Capas e Películas'),
-(4, 'Carregadores e Cabos'),
-(5, 'Power Banks');
+(3, 'Capas'),
+(4, 'Power Banks');
 
 
 -- Insert statements for the CONDITION table
@@ -207,38 +206,63 @@ INSERT INTO CONDITION (conditionID, conditionName) VALUES
 
 -- Insert statements for the PRODUCT table including titles
 INSERT INTO PRODUCT (productID, sellerID, brandID, categoryID, locationID, conditionID, title, description, price) VALUES
-(1, 1, 1, 1, 11, 2, 'iPhone 13, 128GB', 'Com alguns arranhões', 800.00),
-(2, 2, 2, 1, 11, 3, 'Samsung Galaxy S21, 256GB', 'Alguns sinais de uso na parte frontal', 750.00),
-(3, 1, 2, 2, 11, 1, 'Samsung Galaxy Tab S9, 256GB', 'Novo, ainda selado', 650.00),
-(4, 3, 1, 3, 12, 1, 'Capa Protetora para iPhone 12 ', 'Em perfeitas condições, nunca usado.', 20.00),
-(5, 2, 3, 1, 11, 2, 'Google Pixel 6, 128GB', 'Como novo.', 700.00),
-(6, 4, 4, 2, 11, 1, 'Huawei MatePad Pro, 256GB', 'Conjunto completo com caneta e capa com teclado', 800.00),
-(7, 3, 1, 3, 12, 1, 'Película de vidro para Iphone 13', 'Vidro temperado, grande durabilidade.', 15.00),
-(8, 1, 5, 3, 11, 1, 'Capa para Xiaomi Redmi Note 10 ', 'Capa protetora, anti-quedas.', 10.00);
+(1, 3, 1, 3, 12, 1, 'Capa Magsafe iPhone 15 Pro', 'Em perfeitas condições, nunca usado.', 25.00), --capas
+(2, 2, 2, 1, 11, 3, 'Samsung Galaxy S21 FE Preto', 'Alguns sinais de uso na parte frontal. 6GB/128GB', 400.00), --telemovel
+(3, 1, 2, 2, 11, 1, 'Samsung Galaxy Tab S9', 'Novo, ainda selado, 256GB.', 650.00), --tablet
+(4, 3, 1, 3, 12, 1, 'Capa iPhone 12 Preta', 'Em perfeitas condições, nunca usado.', 20.00), --capas
+(5, 2, 3, 1, 11, 2, 'Google Pixel 8 Hazel', 'Como novo.', 600.00),  --telemovel
+(6, 4, 4, 2, 11, 1, 'Huawei MatePad Pro', 'Conjunto completo com caneta e capa com teclado', 800.00), --tablet
+(7, 1, 1, 1, 11, 2, 'iPhone 13 Branco', 'Com alguns arranhões', 700.00), --telemovel --capas 
+(8, 3, 1, 3, 12, 1, 'Capa iPhone XS Azul', 'Em perfeitas condições, nunca usado.', 20.00), --capas
+(9, 7, 5, 2, 11, 2, 'Redmi Pad SE Gray ', 'Como novo. 6GB de Ram e 128GB de armazenamento.', 200.00), --tablet
+(10, 6, 5, 2, 9, 1, 'Xiaomi Pad 6 Champagne', 'Novo, ainda selado. 8GB/256GB. ', 379.00), --tablet
+(11, 5, 6, 1, 2, 1, 'OnePlus 12R Azul', 'Novo, ainda selado. 16GB/256GB.', 600.00), --telemovel
+(12, 5, 6, 1, 2, 1, 'OnePlus CE 3 Lite Lima', 'Novo, ainda selado. 8GB/128GB', 220.00), --telemovel
+(13, 8, 4, 1, 5, 3, 'Huawei P50 Pocket Dourado', 'Alguns sinais de uso. 12GB/512GB', 500.00), --telemovel
+(14, 3, 1, 3, 12, 1, 'Capa iPhone 12 Azul', 'Em perfeitas condições, nunca usado.', 20.00), --capas
+(15, 3, 1, 3, 12, 1, 'Capa iPhone 12 Branca', 'Em perfeitas condições, nunca usado.', 20.00), --capas
+(16, 3, 1, 3, 12, 1, 'Capa iPhone 12 Pro Rosa', 'Em perfeitas condições, nunca usado.', 20.00), --capas
+(17, 3, 1, 3, 12, 1, 'Capa iPhone 15 Azul Claro', 'Em perfeitas condições, nunca usado.', 20.00), --capas
+(18, 3, 1, 3, 12, 1, 'Capa iPhone SE Vermelha', 'Em perfeitas condições, nunca usado.', 20.00), --capas
+(19, 5, 6, 1, 2, 1, 'Samsung A55 Navy', 'Novo, ainda selado. 8GB/128GB', 400.00), --telemovel
+(20, 5, 6, 1, 2, 1, 'Samsung A35 Ice', 'Novo, ainda selado. 6GB/128GB', 330.00), --telemovel
+(21, 10, 2, 4, 7, 3, 'Powerbank Samsung Bege', 'Usada várias vezes, 10000mAh', 25.00),
+(22, 2, 5, 4, 10, 1, 'Powerbank Xiaomi Azul', 'Nova, ainda selada. 10000mAh', 25.00),
+(23, 2, 5, 4, 10, 1, 'Powerbank Xiaomi Wireless', 'Nova, ainda selada. 10000mAh', 30.00),
+(24, 8, 5, 4, 7, 2, 'Powerbank Xiaomi Azul', 'Caixa aberta, mas não foi usada. 10000mAh', 19.00);
 
 
-
--- Insert statements for the RATING table
-INSERT INTO RATING (ratedID, raterID, score) VALUES
-(1, 3, 5),  -- User 3 rates User 1 with a score of 5
-(2, 1, 4);  -- User 1 rates User 2 with a score of 4
-
-
--- Insert statements for the SHIPPING table
-INSERT INTO SHIPPING (shippingID, sellerID, buyerID, weight) VALUES
-(1, 1, 3, 500),
-(2, 2, 1, 300);
 
 -- Insert statements for the PHOTO table
 INSERT INTO PHOTO (photoID, productID, photoURL) VALUES
-(1, 1, '../assets/products/iphone13.jpg'),
+(1, 1, '../assets/products/magsafecase.jpg'),
 (2, 2, '../assets/products/samsung.jpg'),
 (3, 3, '../assets/products/ipad.jpg'),
 (4, 4, '../assets/products/13case.jpg'),
 (5, 5, '../assets/products/pixel6.jpg'),
 (6, 6, '../assets/products/huawei.jpg'),
-(7, 7, '../assets/products/13screen.jpg'),
-(8, 8, '../assets/products/redmicase.jpg');
+(7, 7, '../assets/products/iphone13.jpg'),
+(8,8, '../assets/products/xscase.jpg'),
+(9, 9, '../assets/products/redmipad1.jpg'),
+(10,9, '../assets/products/redmipad2.jpg'),
+(11,10, '../assets/products/xiaomipad1.jpg'),
+(12,10, '../assets/products/xiaomipad2.jpg'),
+(13,11, '../assets/products/oneplus12r1.jpg'),
+(14,11, '../assets/products/oneplus12r2.jpg'),
+(15,12, '../assets/products/oneplusnord1.jpg'),
+(16,13, '../assets/products/p50pocket1.jpg'),
+(17,13, '../assets/products/p50pocket2.jpg'),
+(18,14, '../assets/products/12case3.jpg'),
+(19,15, '../assets/products/12case2.jpg'),
+(20,16, '../assets/products/12procase.jpg'),
+(21,17, '../assets/products/15case.jpg'),
+(22,18, '../assets/products/secase.jpg'),
+(23,19, '../assets/products/a55_navy.jpg'),
+(24,20, '../assets/products/a35_ice.jpg'),
+(25,21, '../assets/products/powerbanksam.jpg'),
+(26,22, '../assets/products/powerbankxiaomi1.jpg'),
+(27,23, '../assets/products/powerbankxiaomi2.jpg'),
+(28,24, '../assets/products/powerbankxiaomi3.jpg');
 
 -- Insert statements for the FAVORITES table
 INSERT INTO FAVORITES (buyerID, productID) VALUES

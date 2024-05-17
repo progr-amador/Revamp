@@ -10,7 +10,7 @@
                 </div>
                 <div class="profile-info">
                 <p><strong>Email:</strong> <span id="emailText"><?php echo $user['email'];?></p>
-                    <p><strong>Telefone:</strong> <?php echo $user['phoneNumber'];?></p>
+                    
                     <p><strong>Juntou-se em:</strong> <?php echo date('d/m/Y', strtotime($user['creationDate'])) ;?> </p>
                 </div>
                 <div class="buttons">

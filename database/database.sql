@@ -30,13 +30,9 @@ CREATE TABLE USERS (
     userID INTEGER PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
-    phoneNumber VARCHAR(20),
     creationDate DATE NOT NULL,
     hashedPassword VARCHAR(255) NOT NULL,
-    address TEXT,
-    locationID INT,
     isAdmin BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY(locationID) REFERENCES LOCATION_(locationID) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 -- Create a table for product brands
@@ -84,26 +80,6 @@ CREATE TABLE PHOTO (
     FOREIGN KEY(productID) REFERENCES PRODUCT(productID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- Create a table for ratings given by users to products
-CREATE TABLE RATING (
-    ratedID INT,
-    raterID INT,
-    score INT CHECK (score >= 1 AND score <= 5),
-    PRIMARY KEY(ratedID, raterID),
-    FOREIGN KEY(ratedID) REFERENCES USERS(userID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(raterID) REFERENCES USERS(userID) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
--- Create a table for shipping information
-CREATE TABLE SHIPPING (
-    shippingID INT PRIMARY KEY,
-    sellerID INT NOT NULL,    
-    buyerID INT NOT NULL,
-    weight INT NOT NULL,
-    FOREIGN KEY(sellerID) REFERENCES USERS(userID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(buyerID) REFERENCES USERS(userID) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 -- Create a table for chats between buyers and sellers
 CREATE TABLE CHAT (
     chatID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -124,15 +100,6 @@ CREATE TABLE MESSAGE_ (
     messageDate DATE NOT NULL,
     FOREIGN KEY(chatID) REFERENCES CHAT(chatID) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(senderID) REFERENCES USERS(userID) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
--- Create a table for managing shipping details linked to products
-CREATE TABLE SHIPPING_PRODUCT (
-    shippingID INT,
-    productID INT,
-    PRIMARY KEY(shippingID, productID),
-    FOREIGN KEY(shippingID) REFERENCES SHIPPING(shippingID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(productID) REFERENCES PRODUCT(productID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Create a table for carts
@@ -181,13 +148,19 @@ INSERT INTO LOCATION_ (locationID, locationName) VALUES
 (19, 'Açores'),
 (20, 'Madeira');
 
+
 -- Insert statements for the USER_ table
-INSERT INTO USERS (username, email, phoneNumber, creationDate, hashedPassword, address, isAdmin, locationID) VALUES
-('FranciscoA', 'franciscompaf@gmail.com', '937222411', '2023-04-01', 'd604daee58908ad200df132f555bf67fb3f10686', 'Rua das Flores, Porto', TRUE, 13), -- pass: meusamigos
-('AnaP', 'ana.pereira@example.com', '923456789', '2023-04-02', 'd604daee58908ad200df132f555bf67fb3f10686', 'Avenida Liberdade, Lisboa', FALSE, 11),
-('MiguelC', 'miguel.correia@example.com', '934567890', '2023-04-03', 'd604daee58908ad200df132f555bf67fb3f10686', 'Praça do Comércio, Braga', FALSE, 3),
-('SofiaG', 'sofia.gomes@example.com', '945678901', '2023-04-04', 'd604daee58908ad200df132f555bf67fb3f10686', 'Largo da Sé, Faro', FALSE, 8),
-('RicardoR', 'ricardo.reis@example.com', '956789012', '2023-04-05', 'd604daee58908ad200df132f555bf67fb3f10686', 'Rua Major Ávila, Coimbra', FALSE, 6);
+INSERT INTO USERS (username, email, creationDate, hashedPassword, address, isAdmin) VALUES
+('FranciscoA', 'franciscompaf@gmail.com', '2023-04-01', 'd604daee58908ad200df132f555bf67fb3f10686', 'Rua das Flores, Porto', TRUE), -- pass: meusamigos
+('AnaP', 'ana.pereira@example.com', '2023-04-02', 'd604daee58908ad200df132f555bf67fb3f10686', 'Avenida Liberdade, Lisboa', FALSE),
+('MiguelC', 'miguel.correia@example.com', '2023-04-03', 'd604daee58908ad200df132f555bf67fb3f10686', 'Praça do Comércio, Braga', FALSE),
+('SofiaG', 'sofia.gomes@example.com', '2023-04-04', 'd604daee58908ad200df132f555bf67fb3f10686', 'Largo da Sé, Faro', FALSE),
+('RicardoR', 'ricardo.reis@example.com', '2023-04-05', 'd604daee58908ad200df132f555bf67fb3f10686', 'Rua Major Ávila, Coimbra', FALSE),
+('CarlaM', 'carla.mendes@example.com', '2023-04-06', 'd604daee58908ad200df132f555bf67fb3f10686', 'Rua das Oliveiras, Aveiro', TRUE),
+('PedroL', 'pedro.lima@example.com', '2023-04-07', 'd604daee58908ad200df132f555bf67fb3f10686', 'Rua do Comércio, Beja', FALSE),
+('JoanaF', 'joana.ferreira@example.com', '2023-04-08', 'd604daee58908ad200df132f555bf67fb3f10686', 'Avenida Central, Braga', TRUE),
+('LuisN', 'luis.nunes@example.com', '2023-04-09', 'd604daee58908ad200df132f555bf67fb3f10686', 'Praça da República, Lisboa', TRUE),
+('MartaS', 'marta.silva@example.com', '2023-04-10', 'd604daee58908ad200df132f555bf67fb3f10686', 'Rua Nova, Porto', FALSE);
 
 INSERT INTO BRAND (brandID, brandName) VALUES
 (1, 'Apple'),
@@ -214,7 +187,7 @@ INSERT INTO BRAND (brandID, brandName) VALUES
 (22, 'Meizu'),
 (23, 'Honor'),
 (24, 'Poco'),
-(25, 'Tecno');
+(25, 'Outra');
 
 -- Insert statements for the CATEGORY table
 INSERT INTO CATEGORY (categoryID, categoryName) VALUES
@@ -242,6 +215,7 @@ INSERT INTO PRODUCT (productID, sellerID, brandID, categoryID, locationID, condi
 (6, 4, 4, 2, 11, 1, 'Huawei MatePad Pro, 256GB', 'Conjunto completo com caneta e capa com teclado', 800.00),
 (7, 3, 1, 3, 12, 1, 'Película de vidro para Iphone 13', 'Vidro temperado, grande durabilidade.', 15.00),
 (8, 1, 5, 3, 11, 1, 'Capa para Xiaomi Redmi Note 10 ', 'Capa protetora, anti-quedas.', 10.00);
+
 
 
 -- Insert statements for the RATING table

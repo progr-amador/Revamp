@@ -10,8 +10,30 @@ function drawEditProfile(string $type) {
         unset($_SESSION['error_message']);
     }
 
-    $action = $type === 'email' ? 'action_changeEmail.php' : 'action_changeUsername.php';
-    $newLabel1 = $type === 'email' ? 'Email novo' : 'Username novo';
+    switch ($type) {
+        case 'email':
+            $action = 'action_changeEmail.php';
+            $newLabel1 = 'Email novo';
+            $inputType = 'email';
+            break;
+        case 'username':
+            $action = 'action_changeUsername.php';
+            $newLabel1 = 'Username novo';
+            $inputType = 'text';
+            break;
+        case 'password':
+            $action = 'action_changePassword.php';
+            $newLabel1 = 'Password novo';
+            $inputType = 'password';
+            break;
+        default:
+            // Handle unknown type if necessary
+            $action = 'default_action.php';
+            $newLabel1 = 'Default label';
+            $inputType = 'text';
+            break;
+    }
+    
     
 ?>
 
@@ -30,9 +52,9 @@ function drawEditProfile(string $type) {
                 </div>
                 <div class="field input">
                     <label for="new"><?php echo $newLabel1; ?></label>
-                    <input type="<?php echo $type === 'email' ? 'email' : 'text'; ?>" name="new" id="new" required>
+                    <input type="<?php echo $inputType; ?>" name="new" id="new" required>
                 </div>
-                
+
                 <div class="field">
                     <input type="submit" class="bbtn" value="Alterar <?php echo $type; ?>">
                 </div>

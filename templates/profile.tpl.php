@@ -26,6 +26,9 @@
                         <form action="edit_profile.php" method="get">
                             <button name="type" type="submit" value="username" title="Editar username" class="abtn"><i class="material-icons">badge</i></button>
                         </form>
+                        <form action="edit_profile.php" method="get">
+                            <button name="type" type="submit" value="password" title="Editar password" class="abtn"><i class="material-icons">password</i></button>
+                        </form>
                         <form action="message.php?" method="get">
                             <button type="submit" class="abtn"><i title="Mensagens" class="material-icons">chat</i></button>
                         </form>

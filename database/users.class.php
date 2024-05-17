@@ -121,6 +121,19 @@ class Users {
         }
     }
 
+    public static function updateUserPassword(PDO $db, int $id, string $hashedNewPassword): bool {
+        try {
+            $stmt = $db->prepare('UPDATE USERS SET hashedPassword = :newPassword WHERE userID = :userId');
+            $stmt->bindParam(':newPassword', $hashedNewPassword, PDO::PARAM_STR);
+            $stmt->bindParam(':userId', $id, PDO::PARAM_INT);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+
+
 
 
     static function removeUser(PDO $db, $name) {

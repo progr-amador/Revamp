@@ -2,7 +2,7 @@
 
 <?php function drawShipping($districts, $cart) { ?>
     <main id="shipping">
-        <h1>Checkout</h1>
+        <h1>Checkout</h1> 
             <div class="flex-container">
                 <div class="flex-row">
                     <?php drawSmallProductCard($cart) ?>

@@ -32,6 +32,20 @@
       return $favorites;
     }
 
+    static function getCartTotalPrice(PDO $db, int $buyerID): float {
+      $stmt = $db->prepare('
+          SELECT SUM(price) as totalPrice
+          FROM PRODUCT
+          JOIN CART USING (productID)
+          LEFT JOIN RESERVED USING (productID)
+          WHERE buyerID = ? AND RESERVED.productID IS NULL
+      ');
+      
+      $stmt->execute([$buyerID]);
+      $result = $stmt->fetch();
+      return (float) $result['totalPrice'];
+  }
+
     // FAVORITES
 
     static function saveFavorite(PDO $db, int $buyerID, int $productID) {

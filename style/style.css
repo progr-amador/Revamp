@@ -21,12 +21,6 @@ main {
     align-self: center;
 }
 
-@media (max-width: 768px) {
-    main {
-        width: 95%;
-    }
-}
-
 a {
     text-decoration: none;
     color: inherit;
@@ -406,34 +400,6 @@ h3 {
     font-family: 'Prompt', sans-serif;
 }
 
-@media (max-width: 768px) {
-    .footer-container {
-        flex-direction: column;
-        text-align: center;
-    }    
-    body {
-        font-size: 14px;
-    }
-
-    .form-box {
-        width: 98%;
-    }
-
-    .header-content, .drawer-header {
-        flex-direction: column;
-    }
-
-    .flex-row {
-        flex-direction: row;
-    }
-
-    .product-image img {
-        width: auto;
-        height: auto;
-    }
-    
-}
-
 
 /*** Search ****/
 
@@ -481,8 +447,6 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-/*input::file-selector-button {}*/
 
 textarea {
     resize: none;
@@ -643,18 +607,6 @@ input[type="checkbox"]:checked + #estado>label {
     font-style: italic;
 }
 
-@media (max-width: 768px) {
-    .product-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }  
-
-    .product-details {
-        max-width: 100%;
-    }
-    
-}
 
 .radio-option {
     display: flex;
@@ -718,22 +670,6 @@ input[type="checkbox"]:checked + #estado>label {
     background-color: whitesmoke;
     border: 1px solid #ccc;
     border-radius: 10px;
-}
-
-@media (max-width: 768px) {
-    #message-page {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 20px;
-    }
-
-    #sidebar {
-        width: 100%;
-    }
-
-    #message {
-        width: 100%;
-    }
 }
 
 #message-display {

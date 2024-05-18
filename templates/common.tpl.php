@@ -14,7 +14,9 @@
         <title>Revamp - <?php echo $name; ?></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="../style/style.css">
+        <link rel="stylesheet" href="../style/responsive.css">
+        <link rel="stylesheet" href="../style/print.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="icon" href="../assets/icons/revamp.jpg">
         <script src="../javascript/script.js" defer></script>

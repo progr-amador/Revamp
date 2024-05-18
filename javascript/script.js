@@ -70,3 +70,29 @@ filterInputs.forEach(input => {
     searchProduct.dispatchEvent(new Event('input')); // Trigger input event on searchProduct to update search results
   });
 });
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var paymentRadios = document.querySelectorAll('input[name="payment_method"]');
+  var paymentGroups = document.querySelectorAll('[data-toggle-group]');
+
+  paymentRadios.forEach(function(radio) {
+      radio.addEventListener('change', function() {
+          var selectedOption = this.getAttribute('data-toggle-value');
+
+          // Hide all payment groups
+          paymentGroups.forEach(function(group) {
+              group.style.display = 'none';
+          });
+
+          // Show the selected payment group
+          var selectedGroup = document.querySelector('[data-toggle-group="' + selectedOption + '"]');
+          if (selectedGroup) {
+              selectedGroup.style.display = 'block';
+          }
+      });
+  });
+});
+
+

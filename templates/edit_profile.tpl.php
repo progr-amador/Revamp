@@ -12,17 +12,17 @@ function drawEditProfile(string $type) {
 
     switch ($type) {
         case 'email':
-            $action = 'action_changeEmail.php';
+            $action = 'action_change_email.php';
             $newLabel1 = 'Email novo';
             $inputType = 'email';
             break;
         case 'username':
-            $action = 'action_changeUsername.php';
+            $action = 'action_change_username.php';
             $newLabel1 = 'Username novo';
             $inputType = 'text';
             break;
         case 'password':
-            $action = 'action_changePassword.php';
+            $action = 'action_change_password.php';
             $newLabel1 = 'Password novo';
             $inputType = 'password';
             break;

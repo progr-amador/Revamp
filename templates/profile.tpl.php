@@ -44,15 +44,15 @@
                     <?php endif; ?>
                     <?php if ((isset($_SESSION['user_id'])) && ($_SESSION['user_id'] !== $user['userID']) && ($_SESSION['admin'])): ?>
                         <?php if ($user['isAdmin']): ?>
-                            <form action="../actions/control_panel/action_remove_admin.php" method="get">
+                            <form action="../actions/control_panel/action_remove_admin.php" method="post">
                                 <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"><i class="material-icons">remove_moderator</i></button>
                             </form>
                         <?php else: ?>
-                            <form action="../actions/control_panel/action_make_admin.php" method="get">
+                            <form action="../actions/control_panel/action_make_admin.php" method="post">
                                 <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> <i class="material-icons">add_moderator</i> </button>
                             </form>
                         <?php endif; ?>
-                        <form action="../actions/control_panel/action_remove_user.php" method="get">
+                        <form action="../actions/control_panel/action_remove_user.php" method="post">
                             <button name="name" type="submit" value="<?php echo $user['username'];?>" class="abtn"> <i class="material-icons">person_off</i> </button>
                         </form>
                     <?php endif; ?>

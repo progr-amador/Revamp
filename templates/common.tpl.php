@@ -7,6 +7,7 @@
     $db = getDatabaseConnection();
     $favorites = Baskets::getFavorites($db, $_SESSION['user_id']);
     $cart = Baskets::getCart($db, $_SESSION['user_id']);
+    if ($_SESSION['user_id'] != null) $cartTotal = Baskets::getCartTotalPrice($db, $_SESSION['user_id']);
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -31,8 +32,10 @@
         </div>
         <div class="drawer-content">
             <div class="flex-row">
+                <h3><strong>Preço Total:</strong> <?php echo $cartTotal?> € </h3>
                 <?php drawSmallProductCard($cart) ?>
             </div>
+            
         </div>
         
     </div>

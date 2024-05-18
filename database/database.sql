@@ -160,16 +160,16 @@ INSERT INTO LOCATION_ (locationID, locationName) VALUES
 
 -- Insert statements for the USER_ table
 INSERT INTO USERS (userID, username, email, creationDate, hashedPassword, isAdmin) VALUES
-(1,'FranciscoA', 'franciscompaf@gmail.com', '2023-04-01', 'd604daee58908ad200df132f555bf67fb3f10686', TRUE), -- pass: meusamigos
-(2,'AnaP', 'ana.pereira@example.com', '2023-04-02', 'd604daee58908ad200df132f555bf67fb3f10686', FALSE),
-(3,'MiguelC', 'miguel.correia@example.com', '2023-04-03', 'd604daee58908ad200df132f555bf67fb3f10686', FALSE),
-(4,'SofiaG', 'sofia.gomes@example.com', '2023-04-04', 'd604daee58908ad200df132f555bf67fb3f10686', FALSE),
-(5,'RicardoR', 'ricardo.reis@example.com', '2023-04-05', 'd604daee58908ad200df132f555bf67fb3f10686', FALSE),
-(6,'CarlaM', 'carla.mendes@example.com', '2023-04-06', 'd604daee58908ad200df132f555bf67fb3f10686', TRUE),
-(7,'PedroL', 'pedro.lima@example.com', '2023-04-07', 'd604daee58908ad200df132f555bf67fb3f10686', FALSE),
-(8,'JoanaF', 'joana.ferreira@example.com', '2023-04-08', 'd604daee58908ad200df132f555bf67fb3f10686', TRUE),
-(9,'LuisN', 'luis.nunes@example.com', '2023-04-09', 'd604daee58908ad200df132f555bf67fb3f10686', TRUE),
-(10,'MartaS', 'marta.silva@example.com', '2023-04-10', 'd604daee58908ad200df132f555bf67fb3f10686', FALSE);
+(1,'FranciscoA', 'franciscompaf@gmail.com', '2023-04-01', '$2y$10$KWJxiEhWrbAWzge8I3SmG.niaUc2S2yVgrMYZ4d.Um9TeZ0OFTKvG', TRUE), -- pass: meusamigos
+(2,'AnaP', 'ana.pereira@example.com', '2023-04-02', '$2y$10$KWJxiEhWrbAWzge8I3SmG.niaUc2S2yVgrMYZ4d.Um9TeZ0OFTKvG', FALSE),
+(3,'MiguelC', 'miguel.correia@example.com', '2023-04-03', '$2y$10$KWJxiEhWrbAWzge8I3SmG.niaUc2S2yVgrMYZ4d.Um9TeZ0OFTKvG', FALSE),
+(4,'SofiaG', 'sofia.gomes@example.com', '2023-04-04', '$2y$10$KWJxiEhWrbAWzge8I3SmG.niaUc2S2yVgrMYZ4d.Um9TeZ0OFTKvG', FALSE),
+(5,'RicardoR', 'ricardo.reis@example.com', '2023-04-05', '$2y$10$KWJxiEhWrbAWzge8I3SmG.niaUc2S2yVgrMYZ4d.Um9TeZ0OFTKvG', FALSE),
+(6,'CarlaM', 'carla.mendes@example.com', '2023-04-06', '$2y$10$KWJxiEhWrbAWzge8I3SmG.niaUc2S2yVgrMYZ4d.Um9TeZ0OFTKvG', TRUE),
+(7,'PedroL', 'pedro.lima@example.com', '2023-04-07', '$2y$10$KWJxiEhWrbAWzge8I3SmG.niaUc2S2yVgrMYZ4d.Um9TeZ0OFTKvG', FALSE),
+(8,'JoanaF', 'joana.ferreira@example.com', '2023-04-08', '$2y$10$KWJxiEhWrbAWzge8I3SmG.niaUc2S2yVgrMYZ4d.Um9TeZ0OFTKvG', TRUE),
+(9,'LuisN', 'luis.nunes@example.com', '2023-04-09', '$2y$10$KWJxiEhWrbAWzge8I3SmG.niaUc2S2yVgrMYZ4d.Um9TeZ0OFTKvG', TRUE),
+(10,'MartaS', 'marta.silva@example.com', '2023-04-10', '$2y$10$KWJxiEhWrbAWzge8I3SmG.niaUc2S2yVgrMYZ4d.Um9TeZ0OFTKvG', FALSE);
 
 INSERT INTO BRAND (brandID, brandName) VALUES
 (1, 'Apple'),

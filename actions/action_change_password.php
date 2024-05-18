@@ -6,28 +6,35 @@ session_start();
 require_once('../database/connection.db.php');
 require_once('../database/users.class.php');
 
-$db = getDatabaseConnection();
 
+
+// Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
-    $oldPassword = $_POST['old'] ?? '';
+    // Get form inputs
+    $email = $_POST['old'] ?? '';
+    $oldPassword = $_POST['password'] ?? '';
     $newPassword = $_POST['new'] ?? '';
-    $password = $_POST['password'] ?? '';
     $userId = $_SESSION['user_id'] ?? null;
 
-    
+    // Redirect if there's no active session
     if ($userId === null) {
         $_SESSION['error_message'] = 'No active session. Please login.';
         header('Location: ../code/login.php');
         exit();
     }
 
-    
-    $user = Users::getUser($db, $userId);
+    $db = getDatabaseConnection();
+    $user = Users::getUserByEmail($db, $email);
 
     
-    if ($user && Users::getUsersWithPassword($oldEmail, $password) != null) {
+    if ($user && password_verify($oldPassword, $user['hashedPassword'])) {
         
+        if (strlen($newPassword) < 8 || !preg_match('/[A-Z]/', $newPassword) || !preg_match('/[a-z]/', $newPassword) || !preg_match('/[0-9]/', $newPassword)) {
+            $_SESSION['error_message'] = 'New password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.';
+            header('Location: ../code/edit_profile.php?type=password');
+            exit();
+        }
+
         $success = Users::updateUserPassword($db, $userId, $newPassword);
         if ($success) {
             $_SESSION['success_message'] = 'Password successfully updated.';
@@ -37,15 +44,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['error_message'] = 'Failed to update password.';
         }
     } else {
-        $_SESSION['error_message'] = 'Invalid password.';
+        $_SESSION['error_message'] = 'Invalid old password.';
     }
 
-    
     header('Location: ../code/edit_profile.php?type=password');
     exit();
 }
 
-// Fallback redirection if not POST
 header('Location: ../code/home.php');
 exit();
 ?>

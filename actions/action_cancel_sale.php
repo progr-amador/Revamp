@@ -7,19 +7,19 @@ require_once('../database/connection.db.php');
 require_once('../database/baskets.class.php');
 require_once('../database/product.class.php');
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
-    $productID = intval($_GET['id']);
-    if ($productID > 0) {
-
+    $productID = filter_var($_GET['id'], FILTER_VALIDATE_INT);
+    
+    if ($productID !== false && $productID > 0) {
         $db = getDatabaseConnection();
         Product::removeReserved($db, $productID);
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit();
+    } else {
+        $_SESSION['error_message'] = 'Invalid product ID.';
     }
 }
 
-// If input parameter is invalid
 header("Location: ../code/home.php");
 exit();
 ?>

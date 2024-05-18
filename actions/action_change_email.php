@@ -6,10 +6,9 @@ session_start();
 require_once('../database/connection.db.php');
 require_once('../database/users.class.php');
 
-$db = getDatabaseConnection();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Trim and sanitize input data
+    
     $oldEmail = filter_var(trim($_POST['old'] ?? ''), FILTER_SANITIZE_EMAIL);
     $newEmail = filter_var(trim($_POST['new'] ?? ''), FILTER_SANITIZE_EMAIL);
     $password = $_POST['password'] ?? '';
@@ -27,16 +26,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    $user = Users::getUser($db, $userId);
+    $db = getDatabaseConnection();
+    $user = Users::getUserByEmail($db, $oldEmail);
 
-    // Check if the user exists and password is correct
     if ($user && password_verify($password, $user['hashedPassword'])) {
-        // Check if the new email is available
+        
         if (Users::isEmailAvailable($db, $newEmail)) {
-            // Update the email address
+            
             $success = Users::updateUserEmail($db, $userId, $newEmail);
             if ($success) {
-                // Update email in the session and redirect
+                
                 $_SESSION['email'] = $newEmail;
                 $_SESSION['success_message'] = 'Email successfully updated.';
                 header('Location: ../code/home.php');
@@ -51,13 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['error_message'] = 'Invalid password.';
     }
 
-    // Redirect back to change email page or profile page with an error message
     header('Location: ../code/edit_profile.php?type=email');
     exit();
 }
 
-// Fallback redirection if not POST
 header('Location: ../code/home.php');
 exit();
 ?>
-

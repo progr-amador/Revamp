@@ -52,7 +52,7 @@
 
                     <div class="radio-option">
                         <label>
-                        <input type="radio" name="payment_method" value="card" data-toggle-value="card">   
+                        <input type="radio" name="payment_method" value="card" data-toggle-value="card" required>   
                              <img src="../assets/icons/creditcard.png" alt="Credit Card Logo"> Cartão de crédito
                                 
                         </label>
@@ -61,44 +61,42 @@
                         <label>
                             <input type="radio" name="payment_method" value="paypal" data-toggle-value="paypal"> 
                              <img src="../assets/icons/paypal.png" alt="PayPal Logo"> PayPal
-                            
                         </label>
                     </div>
                     <div class="radio-option">
                         <label>
                             <input type="radio" name="payment_method" value="mbway" data-toggle-value="mbway">
                              <img src="../assets/icons/mbway.png" alt="MB WAY Logo"> MB Way
-                            
                         </label>
                     </div> 
                      
                     <div data-toggle-group="card" style="display: none;">
                         <label for="name">Nome do titular
-                            <input type="text" id="name-pay" name="name-pay">
+                            <input type="text" id="name-pay" name="payment">
                         </label>
                         <label for="nif">Número do cartão
-                            <input type="number" id="cardID" name="cardID" maxlength="16">
+                            <input type="number" id="cardID" name="payment" maxlength="16">
                         </label>
                         <label for="nif">Validade
-                            <input type="month" id="date" name="date">
+                            <input type="month" id="date" name="payment">
                         </label>
                         <label for="nif">CVV
-                            <input type="number" id="cvv" name="cvv" maxlength="3">
+                            <input type="number" id="cvv" name="payment" maxlength="3">
                         </label>
                     </div>
 
                     <div data-toggle-group="paypal" style="display: none;">
                         <label for="email">Email
-                            <input type="email" id="email" name="email">
+                            <input type="email" id="email" name="payment">
                         </label>
                         <label for="nif">Password
-                            <input type="password" id="password" name="password" >
+                            <input type="password" id="password" name="payment">
                         </label>
                     </div>
 
                     <div data-toggle-group="mbway" style="display: none;">
                         <label for="mobile">Número de telemóvel
-                            <input type="tel" id="mobile-pay" name="mobile-pay" maxlength="13" >
+                            <input type="tel" id="mobile-pay" name="payment" maxlength="13">
                         </label>
                     </div>
                 </fieldset>
@@ -107,3 +105,4 @@
         </section>
     </main>
 <?php } ?>
+

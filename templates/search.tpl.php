@@ -1,16 +1,7 @@
 <?php declare(strict_types = 1); ?>
 
 <?php function drawSearch($searched, $categories, $districts, $brands, $conditions) { ?>
-    <main id = "search">
-        <section id="listings">
-            <div class="item-list">
-                <div class="flex-container">
-                    <div class="flex-row" id="listing-item">
-                        <?php drawProductCard($searched) ?>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <main id="search">
         <section id="filters">
             <label> 
             Preço
@@ -65,6 +56,15 @@
                 <?php } ?>
             </select>
             </label>
+        </section>
+        <section id="listings">
+            <div class="item-list">
+                <div class="flex-container">
+                    <div class="flex-row" id="listing-item">
+                        <?php drawProductCard($searched) ?>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 <?php } ?>

@@ -73,25 +73,25 @@ filterInputs.forEach(input => {
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
-  var paymentRadios = document.querySelectorAll('input[name="payment_method"]');
-  var paymentGroups = document.querySelectorAll('[data-toggle-group]');
+function handlePaymentMethodChange() {
+  const selectedMethod = document.querySelector('input[name="payment_method"]:checked');
+  const toggleGroups = document.querySelectorAll('[data-toggle-group]');
 
-  paymentRadios.forEach(function(radio) {
-      radio.addEventListener('change', function() {
-          var selectedOption = this.getAttribute('data-toggle-value');
+  if (selectedMethod) {
+    const selectedGroup = document.querySelector(`[data-toggle-group="${selectedMethod.dataset.toggleValue}"]`);
 
-          // Hide all payment groups
-          paymentGroups.forEach(function(group) {
-              group.style.display = 'none';
-          });
-
-          // Show the selected payment group
-          var selectedGroup = document.querySelector('[data-toggle-group="' + selectedOption + '"]');
-          if (selectedGroup) {
-              selectedGroup.style.display = 'block';
-          }
+    toggleGroups.forEach(group => {
+      const inputs = group.querySelectorAll('input[type]');
+      inputs.forEach(input => {
+        input.required = group === selectedGroup; // Set required only for the selected group
       });
-  });
+      group.style.display = group === selectedGroup ? 'block' : 'none'; // Toggle visibility
+    });
+  }
+}
+
+// Add event listener to radio buttons on page load or after dynamic generation
+document.querySelectorAll('input[name="payment_method"]').forEach(radio => {
+  radio.addEventListener('change', handlePaymentMethodChange);
 });
 

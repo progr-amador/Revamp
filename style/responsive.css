@@ -16,7 +16,7 @@
         width: 98%;
     }
 
-    .header-content, .drawer-header {
+    .header-content {
         flex-direction: column;
     }
 
@@ -25,7 +25,8 @@
     }
 
     .product-image img {
-        width: auto;
+        width: 100%;
+        max-width: 100%;
         height: auto;
     }
     
@@ -45,11 +46,17 @@
         margin-bottom: 20px;
     }
 
-    #sidebar {
+    #sidebar, #message, #filters, #listings {
         width: 100%;
     }
 
-    #message {
-        width: 100%;
+    #search {
+        display: flex;
+        flex-direction: column;
     }
+
+    .buttons{
+        justify-content: center;
+    }
+
 }

@@ -13,7 +13,7 @@
                     
                     <p><strong>Juntou-se em:</strong> <?php echo date('d/m/Y', strtotime($user['creationDate'])) ;?> </p>
                 </div>
-                <div class="buttons">
+                <div class="buttons" id="buttons-profile">
                     <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $user['userID']): ?>
                         <?php if ($_SESSION['admin']): ?>
                             <form action="control_panel.php" method="get">

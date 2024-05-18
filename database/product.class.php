@@ -220,6 +220,10 @@
           GROUP BY productID
       ');
 
+      $stmt->execute([$userID]); 
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     static function getReservedProduct(PDO $db, int $productID): array {
       $stmt = $db->prepare('
         SELECT name, district, street, door, localidade, postalCode AS postal_code
@@ -233,36 +237,28 @@
       return $product;
     }
 
-    static function setReserved(PDO $db, int $productID, $name, $district, $street, $door, $localidade, $postalCode) {
-      $stmt = $db->prepare('
-        INSERT INTO RESERVED (productID, name, district, street, door, localidade, postalCode) 
-        VALUES (?,?,?,?,?,?,?)
-      ');
-      $stmt->execute([$productID, $name, $district, $street, $door, $localidade, $postalCode]);
+    public static function setReserved(PDO $db, int $productID): bool {
+      try {
+          $stmt = $db->prepare('
+              INSERT INTO RESERVED (productID) 
+              VALUES (?)
+          ');
+          return $stmt->execute([$productID]);
+      } catch (PDOException $e) {
+          error_log('Failed to set product as reserved: ' . $e->getMessage());
+          return false;
+      }
     }
 
-  public static function setReserved(PDO $db, int $productID): bool {
-    try {
-        $stmt = $db->prepare('
-            INSERT INTO RESERVED (productID) 
-            VALUES (?)
-        ');
-        return $stmt->execute([$productID]);
-    } catch (PDOException $e) {
-        error_log('Failed to set product as reserved: ' . $e->getMessage());
-        return false;
+    public static function removeReserved(PDO $db, int $productID): bool {
+      try {
+          $stmt = $db->prepare('DELETE FROM RESERVED WHERE productID = ?');
+          return $stmt->execute([$productID]);
+      } catch (PDOException $e) {
+          error_log('Failed to remove reserved product: ' . $e->getMessage());
+          return false;
+      }
     }
-}
-
-public static function removeReserved(PDO $db, int $productID): bool {
-  try {
-      $stmt = $db->prepare('DELETE FROM RESERVED WHERE productID = ?');
-      return $stmt->execute([$productID]);
-  } catch (PDOException $e) {
-      error_log('Failed to remove reserved product: ' . $e->getMessage());
-      return false;
-  }
-}
   
   }
 

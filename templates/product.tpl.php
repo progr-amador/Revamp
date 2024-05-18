@@ -32,6 +32,7 @@
                         <div class="buttons">
                             <?php if($_SESSION['user_id'] === $product['sellerID']) { ?>
                                 <form action="../actions/action_remove_product.php" method="post">
+                                    <input type="hidden" name="whereTo" value="home">
                                     <input type="hidden" name="productID" value="<?php echo $ID ?>">
                                     <button title="Delete product" type="submit" class="abtn"> <i class="material-icons">delete</i> </button>
                                 </form>
@@ -51,6 +52,7 @@
                                     <button title="Add to favorites" type="submit" class="abtn"> <i class="material-icons">favorite</i> </button>
                                 </form>
                                 <form action="../actions/action_remove_product.php" method="post">
+                                    <input type="hidden" name="whereTo" value="reserved">
                                     <input type="hidden" name="productID" value="<?php echo $ID ?>">
                                     <button title="Delete product" type="submit" class="abtn"> <i class="material-icons">delete</i> </button>
                                 </form>

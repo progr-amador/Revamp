@@ -52,7 +52,8 @@
                 <label for="postal_code">Código postal</label>
                 <input type="text" id="postal_code" name="postal_code" readonly value="<?php echo $postal_code ?>">
 
-                <form action="../actions/action_remove_product.php" method="get">
+                <form action="../actions/action_remove_product.php" method="post">
+                    <input type="hidden" name="whereTo" value="reserved">
                     <button type="submit" value="<?php echo $ID ?>" name="productID" title="Confirmar Venda" class="abtn"><i class="material-icons">check</i></button>
                     <button name="print" title="Imprimir" class="abtn" onclick="window.print();return false;"><i class="material-icons">print</i></button>
                 </form>

@@ -8,6 +8,41 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $productID = $_POST['productID'];
+        $whereTo = $_POST['whereTo'];
+
+        if($whereTo === 'home'){
+            if (!is_numeric($productID)) {
+                $_SESSION['error_message'] = 'Invalid product ID.';
+                header('Location: ../code/home.php');
+                exit;
+            }
+    
+            try {
+                $db = getDatabaseConnection();
+                Product::removeProduct($db, intval($productID));
+            } catch (PDOException $e) {
+    
+                $_SESSION['error_message'] = 'Failed to remove product: ' . $e->getMessage();
+                header('Location: ../code/home.php');
+                exit;
+            }
+        } else {
+            if (!is_numeric($productID)) {
+                $_SESSION['error_message'] = 'Invalid product ID.';
+                header('Location: ../code/reserved.php');
+                exit;
+            }
+    
+            try {
+                $db = getDatabaseConnection();
+                Product::removeProduct($db, intval($productID));
+            } catch (PDOException $e) {
+    
+            $_SESSION['error_message'] = 'Failed to remove product: ' . $e->getMessage();
+                header('Location: ../code/reserved.php');
+                exit;
+            }
+        }
         
         if (!is_numeric($productID)) {
             $_SESSION['error_message'] = 'Invalid product ID.';
@@ -22,26 +57,6 @@
 
             $_SESSION['error_message'] = 'Failed to remove product: ' . $e->getMessage();
             header('Location: ../code/home.php');
-            exit;
-        }
-    }   
-
-    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        $productID = $_GET['productID'];
-            
-        if (!is_numeric($productID)) {
-            $_SESSION['error_message'] = 'Invalid product ID.';
-            header('Location: ../code/reserved.php');
-            exit;
-        }
-
-        try {
-            $db = getDatabaseConnection();
-            Product::removeProduct($db, intval($productID));
-        } catch (PDOException $e) {
-
-        $_SESSION['error_message'] = 'Failed to remove product: ' . $e->getMessage();
-            header('Location: ../code/reserved.php');
             exit;
         }
     }

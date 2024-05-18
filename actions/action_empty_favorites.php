@@ -1,14 +1,21 @@
 <?php
-  declare(strict_types = 1);
+declare(strict_types = 1);
 
-  session_start();
+session_start();
 
-  require_once('../database/connection.db.php');
-  require_once('../database/baskets.class.php');
+require_once('../database/connection.db.php');
+require_once('../database/baskets.class.php');
 
-  $db = getDatabaseConnection();
+if (!isset($_SESSION['user_id'])) {
+    $_SESSION['error_message'] = 'You need to login first.';
+    header('Location: ../code/login.php');
+    exit();
+}
 
-  Baskets::emptyFavorites($db, $_SESSION['user_id']);
+$db = getDatabaseConnection();
 
-  header('Location: ' . $_SERVER['HTTP_REFERER']);
+Baskets::emptyFavorites($db, $_SESSION['user_id']);
+
+header('Location: ' . $_SERVER['HTTP_REFERER']);
+exit();
 ?>

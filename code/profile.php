@@ -13,7 +13,7 @@
   $name = "Perfil";
 
   $db = getDatabaseConnection();
-  $userID = $_GET['id'];
+  $userID = intval($_GET['id']);
   $listings = Product::getUserListings($db, $userID);
   $user = Users::getUser($db, $userID);
 

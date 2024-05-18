@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 session_start();
 
@@ -9,25 +9,32 @@ require_once('../database/users.class.php');
 $db = getDatabaseConnection();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $oldEmail = $_POST['old'] ?? '';
-    $newEmail = $_POST['new'] ?? '';
+    // Trim and sanitize input data
+    $oldEmail = filter_var(trim($_POST['old'] ?? ''), FILTER_SANITIZE_EMAIL);
+    $newEmail = filter_var(trim($_POST['new'] ?? ''), FILTER_SANITIZE_EMAIL);
     $password = $_POST['password'] ?? '';
     $userId = $_SESSION['user_id'] ?? null;
 
     if ($userId === null) {
-        // Redirect if no user is logged in
         $_SESSION['error_message'] = 'No active session. Please login.';
         header('Location: ../code/login.php');
         exit();
     }
 
-    // Retrieve user from database
+    if (!filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['error_message'] = 'Invalid email format.';
+        header('Location: ../code/edit_profile.php?type=email');
+        exit();
+    }
+
     $user = Users::getUser($db, $userId);
-    if ($user && Users::getUsersWithPassword($oldEmail, $password) != null) {
-        // Check if the new email is valid (not already taken and properly formatted)
+
+    // Check if the user exists and password is correct
+    if ($user && password_verify($password, $user['hashedPassword'])) {
+        // Check if the new email is available
         if (Users::isEmailAvailable($db, $newEmail)) {
-            // Update the email if the password is correct and new email is valid
-            $success = Users::updateUserEmail($db, $userId, $newEmail );
+            // Update the email address
+            $success = Users::updateUserEmail($db, $userId, $newEmail);
             if ($success) {
                 // Update email in the session and redirect
                 $_SESSION['email'] = $newEmail;
@@ -53,3 +60,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 header('Location: ../code/home.php');
 exit();
 ?>
+

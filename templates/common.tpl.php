@@ -5,9 +5,11 @@
     require_once('../database/baskets.class.php');
 
     $db = getDatabaseConnection();
-    $favorites = Baskets::getFavorites($db, $_SESSION['user_id']);
-    $cart = Baskets::getCart($db, $_SESSION['user_id']);
-    if ($_SESSION['user_id'] != null) $cartTotal = Baskets::getCartTotalPrice($db, $_SESSION['user_id']);
+    if ($_SESSION['user_id'] != null) {
+        $favorites = Baskets::getFavorites($db, $_SESSION['user_id']);
+        $cart = Baskets::getCart($db, $_SESSION['user_id']);
+        $cartTotal = Baskets::getCartTotalPrice($db, $_SESSION['user_id']);
+    }
 ?>
     <!DOCTYPE html>
     <html lang="en">

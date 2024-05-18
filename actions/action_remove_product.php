@@ -1,26 +1,50 @@
 <?php
-  declare(strict_types = 1);
+    declare(strict_types=1);
 
-  session_start();
+    session_start();
 
-  require_once('../database/connection.db.php');
-  require_once('../database/product.class.php');
+    require_once('../database/connection.db.php');
+    require_once('../database/product.class.php');
 
-  $db = getDatabaseConnection();
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $productID = $_POST['productID'];
+        
+        if (!is_numeric($productID)) {
+            $_SESSION['error_message'] = 'Invalid product ID.';
+            header('Location: ../code/home.php');
+            exit;
+        }
 
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $productID = $_POST['productID'];
+        try {
+            $db = getDatabaseConnection();
+            Product::removeProduct($db, intval($productID));
+        } catch (PDOException $e) {
+
+            $_SESSION['error_message'] = 'Failed to remove product: ' . $e->getMessage();
+            header('Location: ../code/home.php');
+            exit;
+        }
+    }   
+
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        $productID = $_GET['productID'];
             
-      Product::removeProduct($db, intval($productID));
-      header('Location: ../code/home.php');
-  }
+        if (!is_numeric($productID)) {
+            $_SESSION['error_message'] = 'Invalid product ID.';
+            header('Location: ../code/reserved.php');
+            exit;
+        }
 
-  if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $productID = $_GET['productID'];
-          
-    Product::removeProduct($db, intval($productID));
-    header('Location: ../code/reserved.php');
-}
+        try {
+            $db = getDatabaseConnection();
+            Product::removeProduct($db, intval($productID));
+        } catch (PDOException $e) {
 
-  header('Location: ../code/home.php');
+        $_SESSION['error_message'] = 'Failed to remove product: ' . $e->getMessage();
+            header('Location: ../code/reserved.php');
+            exit;
+        }
+    }
+
+    header('Location: ../code/home.php');
 ?>

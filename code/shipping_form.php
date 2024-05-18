@@ -31,8 +31,8 @@
         <link rel="icon" href="../assets/icons/revamp.jpg">
     </head>
     <body>
-        <main>
-            <div class="body-container" id="shipping-form">
+        <div class="body-container" id="shipping-form">
+            <main>
                 <h2>Formulário de envio</h2>
                 <label for="name">Nome</label>
                 <input type="text" id="name" name="name" readonly value="<?php echo $name ?>">
@@ -56,7 +56,7 @@
                     <button type="submit" value="<?php echo $ID ?>" name="productID" title="Confirmar Venda" class="abtn"><i class="material-icons">check</i></button>
                     <button name="print" title="Imprimir" class="abtn" onclick="window.print();return false;"><i class="material-icons">print</i></button>
                 </form>
-            </div>
-        </main>
+            </main>
+        </div>
     </body>
 </html>

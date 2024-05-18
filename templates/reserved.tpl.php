@@ -25,12 +25,12 @@
                     <h3 id="title"><?php echo $product['title']; ?></h3>
                     <div class="bottom-details-reserved">
                         <p id="price"><?php echo $product['price']; ?> €</p>
-                        <form action="../actions/action_accept_sale.php" method="get">
+                        <form action="../code/shipping_form.php?id=<?php echo $product['productID']; ?>">
                             <input type="hidden" name="id" value="<?php echo $product['productID']; ?>">
-                            <button  type="submit" title="Aceitar Venda" class="abtn"><i class="material-icons">check</i></button>
+                            <button  type="submit" title="Aceitar Venda" class="abtn"><i class="material-icons">description</i></button>
                         </form>
                         <form action="../actions/action_cancel_sale.php" method="get">
-                        <input type="hidden" name="id" value="<?php echo $product['productID']; ?>">
+                            <input type="hidden" name="id" value="<?php echo $product['productID']; ?>">
                             <button type="submit" title="Cancelar Venda" class="abtn"><i class="material-icons">close</i></button>
                         </form>
                     </div>

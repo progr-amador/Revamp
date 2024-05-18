@@ -216,12 +216,25 @@
       return $products;
     }
 
-    static function setReserved(PDO $db, int $productID) {
+    static function getReservedProduct(PDO $db, int $productID): array {
       $stmt = $db->prepare('
-        INSERT INTO RESERVED (productID) 
-        VALUES (?)
+        SELECT name, district, street, door, localidade, postalCode AS postal_code
+        FROM RESERVED
+        WHERE productID = ?
+        GROUP BY productID
       ');
-      $stmt->execute([$productID]);
+  
+      $stmt->execute([$productID]); 
+      $product = $stmt->fetch(PDO::FETCH_ASSOC);
+      return $product;
+    }
+
+    static function setReserved(PDO $db, int $productID, $name, $district, $street, $door, $localidade, $postalCode) {
+      $stmt = $db->prepare('
+        INSERT INTO RESERVED (productID, name, district, street, door, localidade, postalCode) 
+        VALUES (?,?,?,?,?,?,?)
+      ');
+      $stmt->execute([$productID, $name, $district, $street, $door, $localidade, $postalCode]);
     }
 
     static function removeReserved(PDO $db, int $productID) {

@@ -9,17 +9,17 @@
                 </div>
         </div>
         <section id="shipping-details">
-            <form action="payment.php" method="get">
+            <form action="../actions/action_set_reserved.php" method="post">
                 <fieldset>
                     <legend>Detalhes Pessoais</legend>
                     <label for="name">Nome
                         <input type="text" id="name" name="name" required>
                     </label>
                     <label for="nif">NIF
-                        <input type="text" id="nif" name="nif" required>
+                        <input type="text" id="nif" name="nif" maxlength="9" required>
                     </label>
                     <label for="mobile">Telemóvel
-                        <input type="tel" id="mobile" name="mobile" required>
+                        <input type="tel" id="mobile" name="mobile" maxlength="13" required>
                     </label>
                 </fieldset>
 
@@ -35,36 +35,19 @@
                         </select>
                     </label>
                     <label for="street">Rua
-                        <input id="street" type="text" name="street"required>
+                        <input id="street" type="text" name="street" required>
                     </label>
                     <label for="door">Porta
-                        <input id="door" type="text" name="door"required>
+                        <input id="door" type="text" name="door" required>
                     </label>
                     <label for="localidade">Localidade
-                        <input id="localidade" type="text" name="localidade"required>
+                        <input id="localidade" type="text" name="localidade" required>
                     </label>
-                    <label for="postal_code">Codigo postal
-                        <input id="postal_code" type="text" name="postal_code"required>
+                    <label for="postal_code">Código postal
+                        <input id="postal_code" type="text" name="postal_code" maxlength="9" required>
                     </label>
                     
                 </fieldset>
-
-                <fieldset>
-                    <legend>Opções de Entrega</legend>
-                    <div class="radio-option">
-                    <label>
-                        <input type="radio" name="delivery_method" value="delivery" checked>
-                         <img src="../assets/icons/delivery.png" alt="Delivery Logo"> Entrega ao domicílio
-                    </label>
-                    </div>
-                    <div class="radio-option">
-                    <label>
-                        <input type="radio" name="delivery_method" value="pickup">  
-                        <img src="../assets/icons/pickup.png" alt="Pickup Logo">  Levantamento num ponto PickUp
-                    </label>
-                    </div>
-                </fieldset>
-                <fieldset>
                     <legend>Método de Pagamento</legend>
 
                     <div class="radio-option">
@@ -91,31 +74,31 @@
                      
                     <div data-toggle-group="card" style="display: none;">
                         <label for="name">Nome do titular
-                            <input type="text" id="name" name="name" required>
+                            <input type="text" id="name-pay" name="name-pay">
                         </label>
                         <label for="nif">Número do cartão
-                            <input type="number" id="cardID" name="cardID" max="9999999999999999" required>
+                            <input type="number" id="cardID" name="cardID" maxlength="16">
                         </label>
                         <label for="nif">Validade
-                            <input type="month" id="date" name="date" required>
+                            <input type="month" id="date" name="date">
                         </label>
                         <label for="nif">CVV
-                            <input type="number" id="cvv" name="cvv" max="999" required>
+                            <input type="number" id="cvv" name="cvv" maxlength="3">
                         </label>
                     </div>
 
                     <div data-toggle-group="paypal" style="display: none;">
                         <label for="email">Email
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email">
                         </label>
                         <label for="nif">Password
-                            <input type="password" id="password" name="password" required>
+                            <input type="password" id="password" name="password" >
                         </label>
                     </div>
 
                     <div data-toggle-group="mbway" style="display: none;">
                         <label for="mobile">Número de telemóvel
-                            <input type="tel" id="mobile" name="mobile" required>
+                            <input type="tel" id="mobile-pay" name="mobile-pay" maxlength="13" >
                         </label>
                     </div>
                 </fieldset>

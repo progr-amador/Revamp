@@ -80,6 +80,12 @@ CREATE TABLE PHOTO (
 -- Creates a table for reserved products
 CREATE TABLE RESERVED (
     productID INT NOT NULL,
+    name VARCHAR(250) NOT NULL,
+    district VARCHAR(100) NOT NULL,
+    street VARCHAR(100) NOT NULL,
+    door VARCHAR(10) NOT NULL,
+    localidade VARCHAR(100) NOT NULL,
+    postalCode VARCHAR(10) NOT NULL,
     FOREIGN KEY(productID) REFERENCES PRODUCT(productID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 

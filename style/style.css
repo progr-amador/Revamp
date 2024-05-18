@@ -531,6 +531,11 @@ input[type="checkbox"]:checked + #estado>label {
     }
 }
 
+.drawer-content .flex-row .small-flex-item {
+    margin-bottom: 5px;
+}
+
+
 .cart-buttons {
     display: flex;
     justify-content: center;
@@ -706,4 +711,16 @@ input[type="checkbox"]:checked + #estado>label {
 #other {
     background-color: white;
 } 
+
+/* SHIPPING FORM */
+
+#shipping-form input[type="text"]{
+    border: 2px solid black;
+}
+
+@media print {
+    .abtn{
+        display: none;
+    }
+}
 

@@ -1,27 +1,41 @@
 <?php
-  declare(strict_types = 1);
+declare(strict_types=1);
 
-  session_start();
+session_start();
 
-  require_once('../database/connection.db.php');
-  require_once('../database/product.class.php');
+require_once('../database/connection.db.php');
+require_once('../database/product.class.php');
 
-  $db = getDatabaseConnection();
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-  // Extract search and filter parameters from $_GET superglobal
-    $search = $_GET['search'] ?? $_GET['query'];
-    $filters = [
-        'search' => $search,
-        'condition' => $_GET['condition'] ?? '',
-        'district' => $_GET['district'] ?? '',
-        'category' => $_GET['category'] ?? '',
-        'brand' => $_GET['brand'] ?? '',
-        'order' => $_GET['order'] ?? '',
-        'price_min' => $_GET['price_min'] ?? '',
-        'price_max' => $_GET['price_max'] ?? '',
-    ];
+    $search = '';
+    $filters = [];
 
-  $products = Product::searchProducts($db, $filters, 20);
+    if (isset($_GET['search']) || isset($_GET['query'])) {
+        $search = $_GET['search'] ?? $_GET['query'];
+    }
+    $filters['search'] = $search;
 
-  echo json_encode($products);
+    $filterParams = ['condition', 'district', 'category', 'brand', 'order', 'price_min', 'price_max'];
+    foreach ($filterParams as $param) {
+        if (isset($_GET[$param])) {
+            $filters[$param] = $_GET[$param];
+        }
+    }
+
+    $db = getDatabaseConnection();
+
+    try {
+        $products = Product::searchProducts($db, $filters, 20);
+        echo json_encode($products);
+        exit;
+    } catch (PDOException $e) {
+
+        $errorMessage = 'Failed to search for products: ' . $e->getMessage();
+        echo json_encode(['error' => $errorMessage]);
+        exit;
+    }
+}
+
+echo json_encode([]);
 ?>

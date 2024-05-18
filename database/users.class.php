@@ -63,6 +63,13 @@ class Users {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public static function getUserByEmail(PDO $db, string $email): array {
+
+        $stmt = $db->prepare('SELECT userID, username, email, creationDate, hashedPassword, isAdmin FROM USERS WHERE email = ?');
+        $stmt->execute([$email]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public static function isEmailAvailable(PDO $db, string $newEmail): bool {
 
         $stmt = $db->prepare('SELECT COUNT(*) FROM USERS WHERE email = ?');

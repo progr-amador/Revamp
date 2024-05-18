@@ -12,7 +12,7 @@
 
   $name = "Produto";
   $db = getDatabaseConnection();
-  $ID = $_GET['id'];
+  $ID = intval($_GET['id']);
 
   $product = Product::getProduct($db, $ID);
   $photos = Photo::getProductPhotos($db, $ID);

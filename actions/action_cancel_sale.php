@@ -1,17 +1,25 @@
 <?php
-  declare(strict_types = 1);
+declare(strict_types=1);
 
-  session_start();
+session_start();
 
-  require_once('../database/connection.db.php');
-  require_once('../database/baskets.class.php');
-  require_once('../database/product.class.php');
+require_once('../database/connection.db.php');
+require_once('../database/baskets.class.php');
+require_once('../database/product.class.php');
 
-  $db = getDatabaseConnection();
 
-  $productID = $_GET['id'];
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
+    $productID = intval($_GET['id']);
+    if ($productID > 0) {
 
-  Product::removeReserved($db, intval($productID));
+        $db = getDatabaseConnection();
+        Product::removeReserved($db, $productID);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit();
+    }
+}
 
-  header('Location: ' . $_SERVER['HTTP_REFERER']);
+// If input parameter is invalid
+header("Location: ../code/home.php");
+exit();
 ?>

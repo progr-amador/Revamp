@@ -1,18 +1,33 @@
 <?php
-  declare(strict_types = 1);
+declare(strict_types=1);
 
-  session_start();
+session_start();
 
-  require_once('../database/connection.db.php');
-  require_once('../database/product.class.php');
+require_once('../database/connection.db.php');
+require_once('../database/product.class.php');
 
-  $db = getDatabaseConnection();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    $productID = $_POST['productID'] ?? null;
 
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $productID = $_POST['productID'];
-            
-      Product::removeProduct($db, intval($productID));
-  }
+    if (!is_numeric($productID)) {
 
-  header('Location: ../code/home.php');
+        $_SESSION['error_message'] = 'Invalid product ID.';
+        header('Location: ../code/home.php');
+        exit;
+    }
+
+    try {
+        $db = getDatabaseConnection();
+        Product::removeProduct($db, intval($productID));
+    } catch (PDOException $e) {
+
+        $_SESSION['error_message'] = 'Failed to remove product: ' . $e->getMessage();
+        header('Location: ../code/home.php');
+        exit;
+    }
+}
+
+header('Location: ../code/home.php');
+exit;
 ?>

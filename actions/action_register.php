@@ -1,22 +1,29 @@
 <?php
-  declare(strict_types = 1);
+declare(strict_types=1);
 
-  session_start();
+session_start();
 
-  require_once('../database/connection.db.php');
-  require_once('../database/users.class.php');
+require_once('../database/connection.db.php');
+require_once('../database/users.class.php');
 
-  $db = getDatabaseConnection();
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'], $_POST['password'], $_POST['email'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
 
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $username = $_POST['username'] ?? '';
-      $password = $_POST['password'] ?? '';
-      $email = $_POST['email'] ?? '';
-          
-      $newUser = new Users($username, $email);
-  
-      $newUser->save($db, $password);  // Save the user
-  }
+    if (!empty($username) && !empty($password) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $db = getDatabaseConnection();
 
-header('Location: ../code/login.php');
+        $newUser = new Users($username, $email);
+
+        $newUser->save($db, $password);
+
+        header('Location: ../code/login.php');
+        exit();
+    }
+}
+
+// If input parameters are invalid
+header("Location: ../code/home.php");
+exit();
 ?>

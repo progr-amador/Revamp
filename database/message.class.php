@@ -3,63 +3,96 @@ declare(strict_types=1);
 
 class Message{
 
-    static function getChats(PDO $db, $userID): array{
-        $stmt = $db->prepare( '
-            SELECT chatID, photoURL, title, CHAT.sellerID, BUYER.username as buyerName, SELLER.username as sellerName
-            FROM CHAT
-            JOIN PRODUCT USING (productID)
-            JOIN PHOTO USING (productID)
-            JOIN USERS AS BUYER ON CHAT.buyerID = BUYER.userID
-            JOIN USERS AS SELLER ON CHAT.sellerID = SELLER.userID
-            WHERE CHAT.sellerID = ? OR buyerID = ?
-            GROUP BY chatID
-        ');
-
-        $stmt->execute(array($userID, $userID));
-        $chats = $stmt->fetchAll();
-        return $chats;
-    }
-
-    static function getMessages(PDO $db, $chatID): array{
-        $stmt = $db->prepare( '
-            SELECT messageText, username as senderName, senderID, messageDate
-            FROM MESSAGE_
-            JOIN CHAT USING (chatID)
-            JOIN USERS ON MESSAGE_.senderID = USERS.userID
-            WHERE chatID = ?
-            ORDER BY messageDate
+    
+    public static function getChats(PDO $db, int $userID): array {
+        try {
+            
+            $stmt = $db->prepare('
+                SELECT chatID, photoURL, title, CHAT.sellerID, BUYER.username as buyerName, SELLER.username as sellerName
+                FROM CHAT
+                JOIN PRODUCT USING (productID)
+                JOIN PHOTO USING (productID)
+                JOIN USERS AS BUYER ON CHAT.buyerID = BUYER.userID
+                JOIN USERS AS SELLER ON CHAT.sellerID = SELLER.userID
+                WHERE CHAT.sellerID = :userID OR buyerID = :userID
+                GROUP BY chatID
             ');
-
-        $stmt->execute(array($chatID));
-        $messages = $stmt->fetchAll();
-        return $messages;
+            $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            
+            error_log('Failed to fetch chats: ' . $e->getMessage());
+            return [];
+        }
     }
 
     
-
-    static function sendMessage(PDO $db, $chatID, $senderID, $message) {
-        $stmt = $db->prepare('
-            INSERT INTO MESSAGE_ (chatID, senderID, messageText, messageDate) 
-            VALUES (?,?,?,?)
-        ');
-
-        $date = new DateTime('now');
-        $displayDate = $date->format('Y-m-d H:i:s');
-
-        $stmt->execute([$chatID, $senderID, $message, $displayDate]);
+    public static function getMessages(PDO $db, int $chatID): array {
+        try {
+            
+            $stmt = $db->prepare('
+                SELECT messageText, username as senderName, senderID, messageDate
+                FROM MESSAGE_
+                JOIN CHAT USING (chatID)
+                JOIN USERS ON MESSAGE_.senderID = USERS.userID
+                WHERE chatID = :chatID
+                ORDER BY messageDate
+            ');
+            $stmt->bindParam(':chatID', $chatID, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            
+            error_log('Failed to fetch messages: ' . $e->getMessage());
+            return [];
+        }
     }
 
-    static function addChat($db, $buyerID, $sellerID, $productID) : int {
-    $stmt = $db->prepare('
-        INSERT INTO CHAT (buyerID, sellerID, productID) 
-        VALUES (?,?,?)
-    ');
-
-    $stmt->execute([$buyerID, $sellerID, $productID]);
-
-    return intval($db->lastInsertId());
+    
+    public static function sendMessage(PDO $db, int $chatID, int $senderID, string $message): bool {
+        try {
+            
+            $stmt = $db->prepare('
+                INSERT INTO MESSAGE_ (chatID, senderID, messageText, messageDate) 
+                VALUES (:chatID, :senderID, :message, :displayDate)
+            ');
+            
+            $date = new DateTime('now');
+            $displayDate = $date->format('Y-m-d H:i:s');
+            $stmt->bindParam(':chatID', $chatID, PDO::PARAM_INT);
+            $stmt->bindParam(':senderID', $senderID, PDO::PARAM_INT);
+            $stmt->bindParam(':message', $message, PDO::PARAM_STR);
+            $stmt->bindParam(':displayDate', $displayDate, PDO::PARAM_STR);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            
+            error_log('Failed to send message: ' . $e->getMessage());
+            return false;
+        }
     }
 
-
+    
+    public static function addChat(PDO $db, int $buyerID, int $sellerID, int $productID): int {
+        try {
+            
+            $stmt = $db->prepare('
+                INSERT INTO CHAT (buyerID, sellerID, productID) 
+                VALUES (:buyerID, :sellerID, :productID)
+            ');
+            $stmt->bindParam(':buyerID', $buyerID, PDO::PARAM_INT);
+            $stmt->bindParam(':sellerID', $sellerID, PDO::PARAM_INT);
+            $stmt->bindParam(':productID', $productID, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            return (int) $db->lastInsertId();
+        } catch (PDOException $e) {
+            
+            error_log('Failed to add chat: ' . $e->getMessage());
+            return 0;
+        }
+    }
 }
 ?>

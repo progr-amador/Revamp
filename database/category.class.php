@@ -1,140 +1,137 @@
 <?php 
-    declare(strict_types=1);
+declare(strict_types=1);
 
-    class Category{
-        public int $id;
-        public string $name;
+class Category {
+    public int $id;
+    public string $name;
 
-    public function __construct(int $id, string $name){
+    public function __construct(int $id, string $name) {
         $this->id = $id;
         $this->name = $name;
     }
 
     // CATEGORIES
 
-      static function getCategories(PDO $db) : array {
-        $stmt = $db->prepare('
-          SELECT categoryID, categoryName 
-          FROM CATEGORY 
+    public static function getCategories(PDO $db): array {
+        $stmt = $db->query('
+            SELECT categoryID, categoryName 
+            FROM CATEGORY
         ');
 
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function addCategory(PDO $db, string $name): void {
+        $stmt = $db->prepare('
+            INSERT INTO CATEGORY (categoryName) 
+            VALUES (:name)
+        ');
+
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
         $stmt->execute();
-        $categories = $stmt->fetchAll();
-        return $categories;
-      }
+    }
 
-
-      static function addCategory(PDO $db, $name) {
+    public static function removeCategory(PDO $db, string $name): void {
         $stmt = $db->prepare('
-          INSERT INTO CATEGORY (categoryName) 
-          VALUES (?)
+            DELETE FROM CATEGORY
+            WHERE categoryName = :name
         ');
 
-        $stmt->execute(array($name));
-      }
-
-      static function removeCategory(PDO $db, $name) {
-        $stmt = $db->prepare('
-          DELETE FROM CATEGORY
-          WHERE categoryName = ?
-        ');
-
-        $stmt->execute(array($name));
-      }
-
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        $stmt->execute();
+    }
 
     // DISTRICTS
 
-      static function getDistricts(PDO $db) : array {
-        $stmt = $db->prepare('
-          SELECT locationID, locationName 
-          FROM LOCATION_ 
+    public static function getDistricts(PDO $db): array {
+        $stmt = $db->query('
+            SELECT locationID, locationName 
+            FROM LOCATION_
         ');
 
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function addDistrict(PDO $db, string $name): void {
+        $stmt = $db->prepare('
+            INSERT INTO LOCATION_ (locationName) 
+            VALUES (:name)
+        ');
+
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
         $stmt->execute();
-        $categories = $stmt->fetchAll();
-        return $categories;
-      }
+    }
 
-      static function addDistrict(PDO $db, $name) {
+    public static function removeDistrict(PDO $db, string $name): void {
         $stmt = $db->prepare('
-          INSERT INTO LOCATION_ (locationName) 
-          VALUES (?)
+            DELETE FROM LOCATION_
+            WHERE locationName = :name
         ');
 
-        $stmt->execute(array($name));
-      }
-
-      static function removeDistrict(PDO $db, $name) {
-        $stmt = $db->prepare('
-          DELETE FROM LOCATION_
-          WHERE locationName = ?
-        ');
-
-        $stmt->execute(array($name));
-      }
-
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        $stmt->execute();
+    }
 
     // BRANDS
 
-      static function getBrands(PDO $db) : array {
-        $stmt = $db->prepare('
-          SELECT brandID, brandName 
-          FROM BRAND 
+    public static function getBrands(PDO $db): array {
+        $stmt = $db->query('
+            SELECT brandID, brandName 
+            FROM BRAND
         ');
 
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function addBrand(PDO $db, string $name): void {
+        $stmt = $db->prepare('
+            INSERT INTO BRAND (brandName) 
+            VALUES (:name)
+        ');
+
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
         $stmt->execute();
-        $categories = $stmt->fetchAll();
-        return $categories;
-      }
+    }
 
-      static function addBrand(PDO $db, $name) {
+    public static function removeBrand(PDO $db, string $name): void {
         $stmt = $db->prepare('
-          INSERT INTO BRAND (brandName) 
-          VALUES (?)
+            DELETE FROM BRAND
+            WHERE brandName = :name
         ');
 
-        $stmt->execute(array($name));
-      }
-
-      static function removeBrand(PDO $db, $name) {
-        $stmt = $db->prepare('
-          DELETE FROM BRAND
-          WHERE brandName = ?
-        ');
-
-        $stmt->execute(array($name));
-      }
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        $stmt->execute();
+    }
 
     // CONDITIONS
 
-      static function getConditions(PDO $db) : array {
-        $stmt = $db->prepare('
-          SELECT conditionID, conditionName 
-          FROM CONDITION 
+    public static function getConditions(PDO $db): array {
+        $stmt = $db->query('
+            SELECT conditionID, conditionName 
+            FROM CONDITION
         ');
 
-        $stmt->execute();
-        $categories = $stmt->fetchAll();
-        return $categories;
-      }
-      
-      static function addCondition(PDO $db, $name) {
-        $stmt = $db->prepare('
-          INSERT INTO CONDITION (conditionName) 
-          VALUES (?)
-        ');
-
-        $stmt->execute(array($name));
-      }
-
-      static function removeCondition(PDO $db, $name) {
-        $stmt = $db->prepare('
-          DELETE FROM CONDITION
-          WHERE conditionName = ?
-        ');
-
-        $stmt->execute(array($name));
-      }
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function addCondition(PDO $db, string $name): void {
+        $stmt = $db->prepare('
+            INSERT INTO CONDITION (conditionName) 
+            VALUES (:name)
+        ');
+
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+
+    public static function removeCondition(PDO $db, string $name): void {
+        $stmt = $db->prepare('
+            DELETE FROM CONDITION
+            WHERE conditionName = :name
+        ');
+
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+}
 ?>

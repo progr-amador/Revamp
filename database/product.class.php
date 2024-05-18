@@ -24,39 +24,55 @@
       $this->description = $description;
     }
 
-    public function save(PDO $db, $paths) {
-      $stmt = $db->prepare('
-        INSERT INTO PRODUCT (sellerID, brandID, categoryID, locationID, conditionID, title, description, price) 
-        VALUES (?,?,?,?,?,?,?,?) 
-      ');
+    public function save(PDO $db, array $paths): bool {
+      try {
+          $db->beginTransaction();
 
-      $stmt->execute([
-        $this->seller,
-        $this->brand,
-        $this->category,
-        $this->location,
-        $this->condition,
-        $this->title,
-        $this->description,
-        $this->price,
-      ]);
+          $stmt = $db->prepare('
+              INSERT INTO PRODUCT (sellerID, brandID, categoryID, locationID, conditionID, title, description, price) 
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+          ');
 
-      $productID = $db->lastInsertId();
+          $stmt->execute([
+              $this->seller,
+              $this->brand,
+              $this->category,
+              $this->location,
+              $this->condition,
+              $this->title,
+              $this->description,
+              $this->price
+          ]);
 
-      $stmt = $db->prepare('
-        INSERT INTO PHOTO (productID, photoURL) VALUES
-        (?, ?) 
-      ');
+          $productID = (int) $db->lastInsertId();
 
-      foreach ($paths as $path) {
-        $stmt->execute([$productID, $path]);
+          $stmt = $db->prepare('
+              INSERT INTO PHOTO (productID, photoURL) VALUES (?, ?)
+          ');
+
+          foreach ($paths as $path) {
+              $stmt->execute([$productID, $path]);
+          }
+
+          $db->commit();
+          return true;
+          
+      } catch (PDOException $e) {
+          $db->rollBack();
+          error_log('Failed to save product: ' . $e->getMessage());
+          return false;
       }
-    } 
+  } 
 
 
-    static function removeProduct(PDO $db, int $productID) {
-      $stmt = $db->prepare('DELETE FROM PRODUCT WHERE productID = ?');
-      $stmt->execute([$productID]);
+    public static function removeProduct(PDO $db, int $productID): bool {
+        try {
+            $stmt = $db->prepare('DELETE FROM PRODUCT WHERE productID = ?');
+            return $stmt->execute([$productID]);
+        } catch (PDOException $e) {
+            error_log('Failed to remove product: ' . $e->getMessage());
+            return false;
+        }
     }
 
     static function searchProducts(PDO $db, $filters, $count) : array {
@@ -121,8 +137,7 @@
       $stmt = $db->prepare($sql);
       $stmt->execute($params);
   
-      $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      return $products;
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
   static function getFeatured(PDO $db): array{
@@ -139,8 +154,7 @@
     ');
 
     $stmt->execute();
-    $featured = $stmt->fetchAll();
-    return $featured;
+    return $stmt->fetchAll();
   }
 
     static function getCategory(PDO $db, string $category): array {
@@ -156,9 +170,8 @@
         ORDER BY price ASC
       ');
   
-      $stmt->execute(array($category)); 
-      $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      return $products;
+      $stmt->execute([$category]); 
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     static function getProduct(PDO $db, $id): array{
@@ -175,11 +188,8 @@
         GROUP BY productID
       ');
 
-      $stmt->execute(array($id));
-
-      $product = $stmt->fetch(PDO::FETCH_ASSOC);
-
-      return $product;
+      $stmt->execute([$id]);
+      return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     static function getUserListings(PDO $db, $userID): array {
@@ -194,40 +204,48 @@
         GROUP BY productID
       ');
   
-      $stmt->execute(array($userID)); 
-      $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      return $products;
+      $stmt->execute([$userID]); 
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    static function getReserved(PDO $db, $userID): array {
+    public static function getReserved(PDO $db, int $userID): array {
       $stmt = $db->prepare('
-        SELECT productID, title, price, locationName AS location, photoURL, categoryName, sellerID
-        FROM PRODUCT
-        LEFT JOIN LOCATION_ USING (locationID)
-        LEFT JOIN CATEGORY USING (categoryID)
-        JOIN PHOTO USING (productID)
-        JOIN RESERVED USING (productID)
-        WHERE sellerID = ?
-        GROUP BY productID
+          SELECT productID, title, price, locationName AS location, photoURL, categoryName, sellerID
+          FROM PRODUCT
+          LEFT JOIN LOCATION_ USING (locationID)
+          LEFT JOIN CATEGORY USING (categoryID)
+          JOIN PHOTO USING (productID)
+          JOIN RESERVED USING (productID)
+          WHERE sellerID = ?
+          GROUP BY productID
       ');
-  
-      $stmt->execute(array($userID)); 
-      $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      return $products;
-    }
 
-    static function setReserved(PDO $db, int $productID) {
-      $stmt = $db->prepare('
-        INSERT INTO RESERVED (productID) 
-        VALUES (?)
-      ');
-      $stmt->execute([$productID]);
-    }
+      $stmt->execute([$userID]);
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
 
-    static function removeReserved(PDO $db, int $productID) {
+  public static function setReserved(PDO $db, int $productID): bool {
+    try {
+        $stmt = $db->prepare('
+            INSERT INTO RESERVED (productID) 
+            VALUES (?)
+        ');
+        return $stmt->execute([$productID]);
+    } catch (PDOException $e) {
+        error_log('Failed to set product as reserved: ' . $e->getMessage());
+        return false;
+    }
+}
+
+public static function removeReserved(PDO $db, int $productID): bool {
+  try {
       $stmt = $db->prepare('DELETE FROM RESERVED WHERE productID = ?');
-      $stmt->execute([$productID]);
-    }
+      return $stmt->execute([$productID]);
+  } catch (PDOException $e) {
+      error_log('Failed to remove reserved product: ' . $e->getMessage());
+      return false;
+  }
+}
   
   }
 

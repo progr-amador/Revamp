@@ -7,17 +7,13 @@ class Users {
     public string $email;
     public string $phone;
     public string $date;
-    public string $address;
-    public int $location;
     public bool $isAdmin;
-
+    
     public function __construct(string $name, string $email, int $id = 0, string $date = '', bool $isAdmin = false) {
         $this->id = $id;
         $this->name = $name;
         $this->email = $email;
-        
         $this->date = $date;
-        
         $this->isAdmin = $isAdmin;
     }
 
@@ -25,11 +21,12 @@ class Users {
         return $this->name;
     }
 
-    public function save(PDO $db, string $password) {
+    public function save(PDO $db, string $password): bool {
         $date = new DateTime('now');
         $displayDate = $date->format('Y-m-d');
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $db->prepare('INSERT INTO USERS (username, email, hashedPassword, creationDate) VALUES (?,?,?,?) ');
-        $stmt->execute([$this->name, $this->email, sha1($password), $displayDate]);
+        return $stmt->execute([$this->name, $this->email, $hashedPassword, $displayDate]);
     }
 
     public static function getUsersWithPassword(string $email, string $password): ?Users {
@@ -37,12 +34,13 @@ class Users {
         $stmt = $db->prepare('
             SELECT userID, username, email, hashedPassword, creationDate, isAdmin 
             FROM USERS 
-            WHERE lower(email) = ? AND hashedPassword = ?
+            WHERE lower(email) = ?
         ');
-        $stmt->execute(array(strtolower($email), sha1($password)));
+
+        $stmt->execute([strtolower($email)]);
         
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($user) {
+        if ($user && password_verify($password, $user['hashedPassword'])) {
 
             $phoneNumber = $user['phoneNumber'] ?? '';
             $address = $user['address'] ?? '';
@@ -58,110 +56,82 @@ class Users {
         } else return null;
     }
 
-    public static function getUser(PDO $db, $id) : array {
-        $stmt = $db->prepare('
-            SELECT userID, username, email, creationDate, isAdmin 
-            FROM USERS 
-            WHERE userID = ?
-        ');
-        
-        $stmt->execute(array($id));
+    public static function getUser(PDO $db, int $id): array {
 
+        $stmt = $db->prepare('SELECT userID, username, email, creationDate, isAdmin FROM USERS WHERE userID = ?');
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function isEmailAvailable(PDO $db, string $newEmail): bool {
+
+        $stmt = $db->prepare('SELECT COUNT(*) FROM USERS WHERE email = ?');
+        $stmt->execute([$newEmail]);
+        return $stmt->fetchColumn() == 0;
+    }
+
+    public static function updateUserEmail(PDO $db, int $id, string $newEmail): bool {
+
+        try {
+            $stmt = $db->prepare('UPDATE USERS SET email = ? WHERE userID = ?');
+            return $stmt->execute([$newEmail, $id]);
+        } catch (PDOException $e) {
+            // Log the error
+            error_log('Failed to update email: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    public static function isUsernameAvailable(PDO $db, string $newUsername): bool {
+
+        $stmt = $db->prepare('SELECT COUNT(*) FROM USERS WHERE username = ?');
+        $stmt->execute([$newUsername]);
+        return $stmt->fetchColumn() == 0;
+    }
+
+    public static function updateUserName(PDO $db, int $id, string $newUsername): bool {
+        try {
+            $stmt = $db->prepare('UPDATE USERS SET username = ? WHERE userID = ?');
+            return $stmt->execute([$newUsername, $id]);
+        } catch (PDOException $e) {
+            // Log the error
+            error_log('Failed to update username: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    public static function updateUserPassword(PDO $db, int $id, string $newPassword): bool {
+        try {
+            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+            $stmt = $db->prepare('UPDATE USERS SET hashedPassword = ? WHERE userID = ?');
+            return $stmt->execute([$hashedPassword, $id]);
+        } catch (PDOException $e) {
+            // Log the error
+            error_log('Failed to update password: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    public static function removeUser(PDO $db, string $name): bool {
+        $stmt = $db->prepare('DELETE FROM USERS WHERE isAdmin = 0 AND username = ?');
+        return $stmt->execute([$name]);
+    }
+
+    public static function makeAdmin(PDO $db, string $name): bool {
+        $stmt = $db->prepare('UPDATE USERS SET isAdmin = 1 WHERE username = ?');
+        return $stmt->execute([$name]);
+    }
+
+    public static function removeAdmin(PDO $db, string $name): bool {
+        $stmt = $db->prepare('UPDATE USERS SET isAdmin = 0 WHERE username = ?');
+        return $stmt->execute([$name]);
+    }
+
+    public static function verifyUserPassword(PDO $db, string $email, string $password): bool {
+        $stmt = $db->prepare('SELECT hashedPassword FROM USERS WHERE lower(email) = ?');
+        $stmt->execute([strtolower($email)]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        return $user;
-    }
-
-    public static function isEmailAvailable(PDO $db,string $newEmail) : bool {
-
-        $stmt = $db->prepare('SELECT COUNT(*) FROM USERS WHERE email = :email');
-        $stmt->bindParam(':email', $newEmail, PDO::PARAM_STR);
-        $stmt->execute();
-        
-        $count = $stmt->fetchColumn();
-        
-        return $count == 0; 
-    }
-
-    public static function updateUserEmail(PDO $db,int $id, string $newEmail) : bool {
-
-        try {
-            $stmt = $db->prepare('UPDATE USERS SET email = :newEmail WHERE userID = :userId');
-            $stmt->bindParam(':newEmail', $newEmail, PDO::PARAM_STR);
-            $stmt->bindParam(':userId', $id, PDO::PARAM_INT);
-            return $stmt->execute(); 
-        } catch (PDOException $e) {
-            
-            return false;
-        }
-    }
-
-    public static function isUsernameAvailable(PDO $db,string $newUsername) : bool {
-
-        $stmt = $db->prepare('SELECT COUNT(*) FROM USERS WHERE username = :username');
-        $stmt->bindParam(':username', $newUsername, PDO::PARAM_STR);
-        $stmt->execute();
-        
-        $count = $stmt->fetchColumn();
-        
-        return $count == 0;
-    }
-
-    public static function updateUserName(PDO $db,int $id, string $newUsername) : bool {
-
-        try {
-            $stmt = $db->prepare('UPDATE USERS SET username = :newUsername WHERE userID = :userId');
-            $stmt->bindParam(':newUsername', $newUsername, PDO::PARAM_STR);
-            $stmt->bindParam(':userId', $id, PDO::PARAM_INT);
-            return $stmt->execute(); 
-        } catch (PDOException $e) {
-            
-            return false;
-        }
-    }
-
-    public static function updateUserPassword(PDO $db, int $id, string $hashedNewPassword): bool {
-        try {
-            $stmt = $db->prepare('UPDATE USERS SET hashedPassword = :newPassword WHERE userID = :userId');
-            $stmt->bindParam(':newPassword', $hashedNewPassword, PDO::PARAM_STR);
-            $stmt->bindParam(':userId', $id, PDO::PARAM_INT);
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            return false;
-        }
-    }
-
-
-
-
-
-    static function removeUser(PDO $db, $name) {
-        $stmt = $db->prepare('
-          DELETE FROM USERS
-          WHERE (isAdmin = 0) and (username = ?)
-        ');
-
-        $stmt->execute(array($name));
-    }
-
-    static function makeAdmin(PDO $db, $name) {
-        $stmt = $db->prepare('
-            UPDATE USERS 
-            SET isAdmin = 1
-            WHERE username = ?;
-        ');
-
-        $stmt->execute(array($name));
-    }
-
-    static function removeAdmin(PDO $db, $name) {
-        $stmt = $db->prepare('
-            UPDATE USERS 
-            SET isAdmin = 0
-            WHERE username = ?;
-        ');
-
-        $stmt->execute(array($name));
+        return $user && password_verify($password, $user['hashedPassword']);
     }
 }
 ?>

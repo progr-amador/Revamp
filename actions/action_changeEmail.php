@@ -9,15 +9,22 @@ require_once('../database/users.class.php');
 $db = getDatabaseConnection();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $oldEmail = $_POST['old'] ?? '';
-    $newEmail = $_POST['new'] ?? '';
+    $oldEmail = trim($_POST['old'] ?? '');
+    $newEmail = trim($_POST['new'] ?? '');
     $password = $_POST['password'] ?? '';
     $userId = $_SESSION['user_id'] ?? null;
+
 
     if ($userId === null) {
         // Redirect if no user is logged in
         $_SESSION['error_message'] = 'No active session. Please login.';
         header('Location: ../code/login.php');
+        exit();
+    }
+
+    if (!filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {         // Verifica se é um formato válido de e-mail
+        $_SESSION['error_message'] = 'Invalid email format.';
+        header('Location: ../code/edit_profile.php?type=email');
         exit();
     }
 
@@ -31,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($success) {
                 // Update email in the session and redirect
                 $_SESSION['email'] = $newEmail;
+                
                 $_SESSION['success_message'] = 'Email successfully updated.';
                 header('Location: ../code/home.php');
                 exit();

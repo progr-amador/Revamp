@@ -8,7 +8,7 @@ function drawHome(array $featured): void {
             <h2>Em Destaque</h2>
             <div class="flex-container">
                 <div class="flex-row">
-                    <?php drawProductCard($featured); ?>
+                    <?php drawProductCard($featured);?>
                 </div>
             </div>
         </div>

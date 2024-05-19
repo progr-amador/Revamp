@@ -170,7 +170,8 @@ INSERT INTO USERS (userID, username, email, creationDate, hashedPassword, isAdmi
 (7,'PedroL', 'pedro.lima@example.com', '2023-04-07', '$2y$10$KWJxiEhWrbAWzge8I3SmG.niaUc2S2yVgrMYZ4d.Um9TeZ0OFTKvG', FALSE),
 (8,'JoanaF', 'joana.ferreira@example.com', '2023-04-08', '$2y$10$KWJxiEhWrbAWzge8I3SmG.niaUc2S2yVgrMYZ4d.Um9TeZ0OFTKvG', TRUE),
 (9,'LuisN', 'luis.nunes@example.com', '2023-04-09', '$2y$10$KWJxiEhWrbAWzge8I3SmG.niaUc2S2yVgrMYZ4d.Um9TeZ0OFTKvG', TRUE),
-(10,'MartaS', 'marta.silva@example.com', '2023-04-10', '$2y$10$KWJxiEhWrbAWzge8I3SmG.niaUc2S2yVgrMYZ4d.Um9TeZ0OFTKvG', FALSE);
+(10,'MartaS', 'marta.silva@example.com', '2023-04-10', '$2y$10$KWJxiEhWrbAWzge8I3SmG.niaUc2S2yVgrMYZ4d.Um9TeZ0OFTKvG', FALSE),
+(11,'Admin', 'admin@email.com', '2023-04-10', '$2y$10$58Z27.FKvY4eAIiiLdQxw.fP/ZmtaxAyL4AkfrKYCk.OOBWgBjnry', TRUE); -- pass:Admin2000
 
 INSERT INTO BRAND (brandID, brandName) VALUES
 (1, 'Apple'),

@@ -1,69 +1,75 @@
-<?php declare(strict_types = 1); ?>
+<?php declare(strict_types=1); ?>
 
-<?php function drawNewProduct($districts, $categories, $brands, $conditions) { 
+<?php
+function drawNewProduct(array $districts, array $categories, array $brands, array $conditions): void {
     $errorMessage = '';
     if (isset($_SESSION['error_message'])) {
-        $errorMessage = '<p>' . $_SESSION['error_message'] . '</p>';
+        $errorMessage = '<p>' . htmlspecialchars($_SESSION['error_message'], ENT_QUOTES, 'UTF-8') . '</p>';
         unset($_SESSION['error_message']);
     }
-    $csrfToken = generateCsrfToken();
     ?>
     <main id="shipping">
         <h1>Novo Produto</h1>
         <section id="shipping-details">
             <form action="../actions/action_new_product.php" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken); ?>">
                 <fieldset>
                     <legend>Texto</legend>
-                    <label for="name">Título
-                        <input type="text" id="name" name="title" maxlength="42" required>
+                    <label for="title">Título
+                        <input type="text" id="title" name="title" maxlength="42" required>
                     </label>
                     <br>
                     <label for="description"> Descrição</label>
                     <br>
                     <textarea id="description" name="description" rows="15" required></textarea>
-                    
                 </fieldset>
 
                 <fieldset>
-                    <legend> Detalhes </legend>
-                    <label for="name">Preço
-                        <input type="number" id="name" name="price" required>
+                    <legend>Detalhes</legend>
+                    <label for="price">Preço
+                        <input type="number" id="price" name="price" required>
                     </label>
                     <br>
-                    <label id = "categoria">
+                    <label id="categoria">
                         Categoria
                         <select name="category" required>
                             <option value="">&mdash;</option>
                             <?php foreach ($categories as $category) { ?>
-                                <option value="<?php echo $category['categoryID']; ?>"><?php echo $category['categoryName']; ?></option>
+                                <option value="<?php echo htmlspecialchars((string)$category['categoryID'], ENT_QUOTES, 'UTF-8'); ?>">
+                                    <?php echo htmlspecialchars($category['categoryName'], ENT_QUOTES, 'UTF-8'); ?>
+                                </option>
                             <?php } ?>
                         </select>
                     </label>
-                    <label id = "marca">
+                    <label id="marca">
                         Marca
                         <select name="brand" required>
                             <option value="">&mdash;</option>
                             <?php foreach ($brands as $brand) { ?>
-                                <option value="<?php echo $brand['brandID']; ?>"><?php echo $brand['brandName']; ?></option>
+                                <option value="<?php echo htmlspecialchars((string)$brand['brandID'], ENT_QUOTES, 'UTF-8'); ?>">
+                                    <?php echo htmlspecialchars($brand['brandName'], ENT_QUOTES, 'UTF-8'); ?>
+                                </option>
                             <?php } ?>
                         </select>
                     </label>
-                    <label id = "condition">
+                    <label id="condition">
                         Condição
                         <select name="condition" required>
                             <option value="">&mdash;</option>
                             <?php foreach ($conditions as $condition) { ?>
-                                <option value="<?php echo $condition['conditionID']; ?>"><?php echo $condition['conditionName']; ?></option>
+                                <option value="<?php echo htmlspecialchars((string)$condition['conditionID'], ENT_QUOTES, 'UTF-8'); ?>">
+                                    <?php echo htmlspecialchars($condition['conditionName'], ENT_QUOTES, 'UTF-8'); ?>
+                                </option>
                             <?php } ?>
                         </select>
                     </label>
-                    <label id = "regiao">
+                    <label id="regiao">
                         Distrito
                         <select name="location" required>
                             <option value="">&mdash;</option>
                             <?php foreach ($districts as $district) { ?>
-                                <option value="<?php echo $district['locationID']; ?>"><?php echo $district['locationName']; ?></option>
+                                <option value="<?php echo htmlspecialchars((string)$district['locationID'], ENT_QUOTES, 'UTF-8'); ?>">
+                                    <?php echo htmlspecialchars($district['locationName'], ENT_QUOTES, 'UTF-8'); ?>
+                                </option>
                             <?php } ?>
                         </select>
                     </label>
@@ -76,7 +82,7 @@
                     <?php echo $errorMessage; ?>
                 </fieldset>
 
-                <button type="submit" class = "abtn">Publicar</button>
+                <button type="submit" class="abtn">Publicar</button>
             </form>
         </section>
     </main>

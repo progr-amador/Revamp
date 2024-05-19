@@ -1,59 +1,61 @@
-<?php declare(strict_types = 1); ?>
+<?php declare(strict_types=1); ?>
 
-<?php function drawMessage($chats, $messages, $conversation = 0) { ?>
+<?php
+function drawMessage(array $chats, array $messages, int $conversation = 0): void { ?>
     <main>
         <h1>Mensagens</h1>
-        <div id = "message-page">
+        <div id="message-page">
             <div id="sidebar">
                 <div class="flex-row">
-                    <?php drawChatCard($chats) ?>
+                    <?php drawChatCard($chats); ?>
                 </div>
             </div>
             <div id="message">
                 <div id="message-display">
-                    <?php if($conversation !== 0){ 
-                        drawMessageCard($messages) ;
+                    <?php
+                    if ($conversation !== 0) {
+                        drawMessageCard($messages);
                     } else {
                         echo '<h4 id="default">Selecione uma conversa</h4>';
-                    }  ?>
+                    } ?>
                 </div>
-                <?php if($conversation !== 0): ?>
+                <?php if ($conversation !== 0): ?>
                     <div class="message-input">
                         <form action="../actions/action_send_message.php" method="post">
-                            input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
-                            <input type="hidden" value="<?php echo $conversation ?>" name="chatID">
+                            <input type="hidden" name="chatID" value="<?php echo htmlspecialchars((string)$conversation, ENT_QUOTES, 'UTF-8'); ?>">
                             <input type="text" name="message-input" required>
                             <button type="submit" class="abtn"><i class="material-icons">send</i></button>
                         </form>
                     </div>
-                <?php endif;?>
+                <?php endif; ?>
             </div>
         </div>
     </main>
-<?php } ?>
+<?php }
 
-<?php function drawChatCard($chats) {
+function drawChatCard(array $chats): void {
     foreach ($chats as $chat) { ?>
         <div class="small-flex-item">
-            <a href="message.php?chatID=<?php echo $chat['chatID'] ?>">
+            <a href="message.php?chatID=<?php echo htmlspecialchars((string)$chat['chatID'], ENT_QUOTES, 'UTF-8'); ?>">
                 <div class="small-item-image">
-                    <img src="<?php echo $chat['photoURL'] ?>" alt="Image of <?php echo $chat['title'] ?>">
+                    <img src="<?php echo htmlspecialchars($chat['photoURL'], ENT_QUOTES, 'UTF-8'); ?>" alt="Image of <?php echo htmlspecialchars($chat['title'], ENT_QUOTES, 'UTF-8'); ?>">
                 </div>
                 <div class="small-item-details">
-                    <p id="title"><?php echo $chat['title'] ?></p>
-                    <p id="username"><?php echo $_SESSION['user_id'] == $chat['sellerID'] ? $chat['buyerName'] : $chat['sellerName'] ?></p>
-                    <p id="status"><?php echo $_SESSION['user_id'] == $chat['sellerID'] ? "A vender" : "A comprar" ?></p>
+                    <p id="title"><?php echo htmlspecialchars($chat['title'], ENT_QUOTES, 'UTF-8'); ?></p>
+                    <p id="username"><?php echo $_SESSION['user_id'] == $chat['sellerID'] ? htmlspecialchars($chat['buyerName'], ENT_QUOTES, 'UTF-8') : htmlspecialchars($chat['sellerName'], ENT_QUOTES, 'UTF-8'); ?></p>
+                    <p id="status"><?php echo $_SESSION['user_id'] == $chat['sellerID'] ? "A vender" : "A comprar"; ?></p>
                 </div>
             </a>
         </div>
     <?php }
-} ?>
+}
 
-<?php function drawMessageCard($messages) {
+function drawMessageCard(array $messages): void {
     foreach ($messages as $message) { ?>
-        <div class="message-item" <?php echo $message['senderID'] == $_SESSION['user_id'] ? 'id="me"' : 'id="other"' ?>>
-            <h4><?php echo $message['senderName'] . " - " . date('H:i d/m/Y', strtotime($message['messageDate'])); ?></h4>
-            <p id="text-message"><?php echo $message['messageText'] ?></p>
+        <div class="message-item" id="<?php echo $message['senderID'] == $_SESSION['user_id'] ? 'me' : 'other'; ?>">
+            <h4><?php echo htmlspecialchars($message['senderName'], ENT_QUOTES, 'UTF-8') . " - " . date('H:i d/m/Y', strtotime($message['messageDate'])); ?></h4>
+            <p id="text-message"><?php echo htmlspecialchars($message['messageText'], ENT_QUOTES, 'UTF-8'); ?></p>
         </div>
     <?php }
-} ?>
+}
+?>

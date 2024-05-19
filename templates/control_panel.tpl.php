@@ -2,83 +2,58 @@
 
 <?php
 function drawControlPanel() {
-    $csrf_token = generateCsrfToken();
-?>
+    function drawForm($action, $placeholder, $buttonText) {
+        return '
+        <form action="' . htmlspecialchars($action, ENT_QUOTES, 'UTF-8') . '" method="post">
+            <input type="text" name="name" placeholder="' . htmlspecialchars($placeholder, ENT_QUOTES, 'UTF-8') . '" required>
+            <button type="submit" class="abtn">' . htmlspecialchars($buttonText, ENT_QUOTES, 'UTF-8') . '</button>
+        </form>';
+    }
+
+    ?>
     <main>
         <h1>Painel de controlo</h1>
         <fieldset>
             <legend><h2>Utilizadores</h2></legend>
-            <form action="../actions/control_panel/action_make_admin.php" method="post">
-                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
-                <input type="text" name="name" placeholder="Nome de Utilizador" required>
-                <button type="submit" class="abtn">Tornar Admin</button>
-            </form>
-            <form action="../actions/control_panel/action_remove_admin.php" method="post">
-                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
-                <input type="text" name="name" placeholder="Nome de Utilizador" required>
-                <button type="submit" class="abtn">Retirar Admin</button>
-            </form>
-            <form action="../actions/control_panel/action_remove_user.php" method="post">
-                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
-                <input type="text" name="name" placeholder="Nome de Utilizador" required>
-                <button type="submit" class="abtn">Remover Utilizador</button>
-            </form>
+            <?php
+            echo drawForm('../actions/control_panel/action_make_admin.php', 'Nome de Utilizador', 'Tornar Admin');
+            echo drawForm('../actions/control_panel/action_remove_admin.php', 'Nome de Utilizador', 'Retirar Admin');
+            echo drawForm('../actions/control_panel/action_remove_user.php', 'Nome de Utilizador', 'Remover Utilizador');
+            ?>
         </fieldset>
- 
+
         <fieldset>
             <legend><h2>Categorias</h2></legend>
-            <form action="../actions/control_panel/action_add_category.php" method="post">
-                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
-                <input type="text" name="name" placeholder="Nome da Categoria" required>
-                <button type="submit" class="abtn">Adicionar Categoria</button>
-            </form>
-            <form action="../actions/control_panel/action_remove_category.php" method="post">
-                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
-                <input type="text" name="name" placeholder="Nome da Categoria" required>
-                <button type="submit" class="abtn">Remover Categoria</button>
-            </form>
+            <?php
+            echo drawForm('../actions/control_panel/action_add_category.php', 'Nome da Categoria', 'Adicionar Categoria');
+            echo drawForm('../actions/control_panel/action_remove_category.php', 'Nome da Categoria', 'Remover Categoria');
+            ?>
         </fieldset>
 
         <fieldset>
             <legend><h2>Distritos</h2></legend>
-            <form action="../actions/control_panel/action_add_district.php" method="post">
-                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
-                <input type="text" name="name" placeholder="Nome do Distrito" required>
-                <button type="submit" class="abtn">Adicionar Distrito</button>
-            </form>
-            <form action="../actions/control_panel/action_remove_district.php" method="post">
-                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
-                <input type="text" name="name" placeholder="Nome do Distrito" required>
-                <button type="submit" class="abtn">Remover Distrito</button>
-            </form>
+            <?php
+            echo drawForm('../actions/control_panel/action_add_district.php', 'Nome do Distrito', 'Adicionar Distrito');
+            echo drawForm('../actions/control_panel/action_remove_district.php', 'Nome do Distrito', 'Remover Distrito');
+            ?>
         </fieldset>
 
         <fieldset>
             <legend><h2>Marcas</h2></legend>
-            <form action="../actions/control_panel/action_add_brand.php" method="post">
-                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
-                <input type="text" name="name" placeholder="Nome da Marca" required>
-                <button type="submit" class="abtn">Adicionar Marca</button>
-            </form>
-            <form action="../actions/control_panel/action_remove_brand.php" method="post">
-                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
-                <input type="text" name="name" placeholder="Nome da Marca" required>
-                <button type="submit" class="abtn">Remover Marca</button>
-            </form>
+            <?php
+            echo drawForm('../actions/control_panel/action_add_brand.php', 'Nome da Marca', 'Adicionar Marca');
+            echo drawForm('../actions/control_panel/action_remove_brand.php', 'Nome da Marca', 'Remover Marca');
+            ?>
         </fieldset>
 
         <fieldset>
             <legend><h2>Condições</h2></legend>
-            <form action="../actions/control_panel/action_add_condition.php" method="post">
-                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
-                <input type="text" name="name" placeholder="Nome da Condição" required>
-                <button type="submit" class="abtn">Adicionar Condição</button>
-            </form>
-            <form action="../actions/control_panel/action_remove_condition.php" method="post">
-                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
-                <input type="text" name="name" placeholder="Nome da Condição" required>
-                <button type="submit" class="abtn">Remover Condição</button>
-            </form>
+            <?php
+            echo drawForm('../actions/control_panel/action_add_condition.php', 'Nome da Condição', 'Adicionar Condição');
+            echo drawForm('../actions/control_panel/action_remove_condition.php', 'Nome da Condição', 'Remover Condição');
+            ?>
         </fieldset>
     </main>
-<?php } ?>
+    <?php
+}
+?>

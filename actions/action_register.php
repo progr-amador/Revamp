@@ -19,9 +19,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 
+
     if (empty($username) || empty($password) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['error_message'] = 'Invalid input. Please check your details and try again.';
         header('Location: ../code/register.php');
+        exit();
+    }
+
+    if (strlen($password) < 8 || !preg_match('/[A-Z]/', $password) || !preg_match('/[a-z]/', $password) || !preg_match('/[0-9]/', $password)) {
+        $_SESSION['error_message'] = 'New password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.';
+        header('Location: ../code/edit_profile.php?type=password');
         exit();
     }
 

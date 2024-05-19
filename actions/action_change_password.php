@@ -6,17 +6,13 @@ session_start();
 require_once('../database/connection.db.php');
 require_once('../database/users.class.php');
 
-
-
-// Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get form inputs
+    
     $email = $_POST['old'] ?? '';
     $oldPassword = $_POST['password'] ?? '';
     $newPassword = $_POST['new'] ?? '';
     $userId = $_SESSION['user_id'] ?? null;
 
-    // Redirect if there's no active session
     if ($userId === null) {
         $_SESSION['error_message'] = 'No active session. Please login.';
         header('Location: ../code/login.php');

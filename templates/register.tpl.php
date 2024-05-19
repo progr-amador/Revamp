@@ -6,6 +6,7 @@
             <div class="box form-box">
                 <header> Criar Conta </header>
                 <form action="../actions/action_register.php" method="post">
+                    <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>"> 
                     <div class="field input">
                     <label for="username"> Username </label> 
                     <input type="text" name="username" id="username" autocomplete="off" required>

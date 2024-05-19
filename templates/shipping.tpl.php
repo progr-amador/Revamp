@@ -1,12 +1,12 @@
-<?php declare(strict_types = 1); ?>
+<?php declare(strict_types=1); ?>
 
-<?php function drawShipping($districts, $cart) { ?>
+<?php function drawShipping(array $districts, array $cart): void { ?>
     <main id="shipping">
         <h1>Checkout</h1> 
-            <div class="flex-container">
-                <div class="flex-row">
-                    <?php drawSmallProductCard($cart) ?>
-                </div>
+        <div class="flex-container">
+            <div class="flex-row">
+                <?php drawSmallProductCard($cart); ?>
+            </div>
         </div>
         <section id="shipping-details">
             <form action="../actions/action_set_reserved.php" method="post">
@@ -25,13 +25,15 @@
 
                 <fieldset>
                     <legend>Detalhes de Endereço</legend>
-                    <label id = "regiao">
+                    <label id="regiao">
                         Distrito
                         <select name="district">
                             <option value="">&mdash;</option>
-                            <?php foreach ($districts as $district) { ?>
-                                <option value="<?php echo $district['locationName']; ?>"><?php echo $district['locationName']; ?></option>
-                            <?php } ?>
+                            <?php foreach ($districts as $district): ?>
+                                <option value="<?php echo htmlspecialchars($district['locationName'], ENT_QUOTES, 'UTF-8'); ?>">
+                                    <?php echo htmlspecialchars($district['locationName'], ENT_QUOTES, 'UTF-8'); ?>
+                                </option>
+                            <?php endforeach; ?>
                         </select>
                     </label>
                     <label for="street">Rua
@@ -46,63 +48,40 @@
                     <label for="postal_code">Código postal
                         <input id="postal_code" type="text" name="postal_code" maxlength="9" required>
                     </label>
-                    
                 </fieldset>
-                    <legend>Método de Pagamento</legend>
 
+                <fieldset>
+                    <legend>Método de Pagamento</legend>
                     <div class="radio-option">
                         <label>
-                        <input type="radio" name="payment_method" value="card" data-toggle-value="card" required>   
-                             <img src="../assets/icons/creditcard.png" alt="Credit Card Logo"> Cartão de crédito
-                                
+                            <input type="radio" name="payment_method" value="card" data-toggle-value="card" required>   
+                            <img src="../assets/icons/creditcard.png" alt="Credit Card Logo"> Cartão de crédito
                         </label>
                     </div>
                     <div class="radio-option">
                         <label>
                             <input type="radio" name="payment_method" value="paypal" data-toggle-value="paypal"> 
-                             <img src="../assets/icons/paypal.png" alt="PayPal Logo"> PayPal
+                            <img src="../assets/icons/paypal.png" alt="PayPal Logo"> PayPal
                         </label>
                     </div>
                     <div class="radio-option">
                         <label>
                             <input type="radio" name="payment_method" value="mbway" data-toggle-value="mbway">
-                             <img src="../assets/icons/mbway.png" alt="MB WAY Logo"> MB Way
+                            <img src="../assets/icons/mbway.png" alt="MB WAY Logo"> MB Way
                         </label>
                     </div> 
-                     
                     <div data-toggle-group="card" style="display: none;">
-                        <label for="name">Nome do titular
-                            <input type="text" id="name-pay" name="payment">
-                        </label>
-                        <label for="nif">Número do cartão
-                            <input type="number" id="cardID" name="payment" maxlength="16">
-                        </label>
-                        <label for="nif">Validade
-                            <input type="month" id="date" name="payment">
-                        </label>
-                        <label for="nif">CVV
-                            <input type="number" id="cvv" name="payment" maxlength="3">
-                        </label>
+                        <!-- Fields for credit card payment -->
                     </div>
-
                     <div data-toggle-group="paypal" style="display: none;">
-                        <label for="email">Email
-                            <input type="email" id="email" name="payment">
-                        </label>
-                        <label for="nif">Password
-                            <input type="password" id="password" name="payment">
-                        </label>
+                        <!-- Fields for PayPal payment -->
                     </div>
-
                     <div data-toggle-group="mbway" style="display: none;">
-                        <label for="mobile">Número de telemóvel
-                            <input type="tel" id="mobile-pay" name="payment" maxlength="13">
-                        </label>
+                        <!-- Fields for MB Way payment -->
                     </div>
                 </fieldset>
-                <button type="submit" class = "abtn">Finalizar</button>
+                <button type="submit" class="abtn">Finalizar</button>
             </form>
         </section>
     </main>
 <?php } ?>
-

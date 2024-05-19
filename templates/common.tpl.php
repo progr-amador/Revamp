@@ -1,10 +1,14 @@
 <?php declare(strict_types = 1); ?>
 
-<?php function drawHead($name) {
+<?php function drawHead(string $name) {
     require_once('../database/connection.db.php');
     require_once('../database/baskets.class.php');
 
     $db = getDatabaseConnection();
+    $favorites = [];
+    $cart = [];
+    $cartTotal = 0.0;
+
     if ($_SESSION['user_id'] != null) {
         $favorites = Baskets::getFavorites($db, $_SESSION['user_id']);
         $cart = Baskets::getCart($db, $_SESSION['user_id']);
@@ -14,7 +18,7 @@
     <!DOCTYPE html>
     <html lang="en">
     <head>
-        <title>Revamp - <?php echo htmlspecialchars($name); ?></title>
+        <title>Revamp - <?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../style/style.css">
@@ -33,7 +37,7 @@
         </div>
         <div class="drawer-content">
             <div class="flex-row">
-                <h3><strong>Preço Total:</strong> <?php echo $cartTotal?> € </h3>
+                <h3><strong>Preço Total:</strong> <?php echo htmlspecialchars((string)$cartTotal, ENT_QUOTES, 'UTF-8'); ?> € </h3>
                 <?php drawSmallProductCard($cart) ?>
             </div>
             
@@ -55,7 +59,7 @@
     <div class="body-container"> 
 <?php } ?>
 
-<?php function drawHeader($value = "") { 
+<?php function drawHeader(string $value = "") { 
     require_once('../database/connection.db.php');
     require_once('../database/category.class.php');
 
@@ -69,12 +73,13 @@
             <h1><a href="home.php"> R E V A M P </a></h1>
             <div class="search-container">
                 <form action="search.php"  method="get">
-                    <input id="searchproduct" type="text" name="query" placeholder="Search..." class="search-input" autocomplete="off" value="<?php echo $value?>">
+                <input id="searchproduct" type="text" name="query" placeholder="Search..." class="search-input" autocomplete="off" value="<?php echo htmlspecialchars($value, ENT_QUOTES, 'UTF-8'); ?>">
                 </form>
             </div>
             <div class="authentication-buttons">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <a href="profile.php?id=<?php echo $_SESSION['user_id']; ?>"> <button class="abtn" title="Perfil"><i class="material-icons">account_circle</i></button></a>
+                    <a href="profile.php?id=<?php echo htmlspecialchars((string)$_SESSION['user_id'], ENT_QUOTES, 'UTF-8'); ?>">
+                    <button class="abtn" title="Perfil"><i class="material-icons">account_circle</i></button></a>
                     <button onclick="openCartDrawer()" title="Carrinho" class="abtn"> <i class="material-icons">shopping_cart</i> </button>
                     <button onclick="openFavoritesDrawer()" title="Favoritos" class="abtn"> <i class="material-icons">favorite</i> </button>
                     <a href="new_product.php"> <button class="abtn" title="Vender"> <i class="material-icons">sell</i> </button></a>
@@ -119,18 +124,18 @@
 </html>
 <?php } ?>
 
-<?php function drawProductCard($products) {
+<?php function drawProductCard(array $products) {
     if(!isMobile()){
         foreach ($products as $product) { ?>
             <div class="flex-item">
-                <a href="product.php?id=<?php echo $product['productID']; ?>">
+                <a href="product.php?id=<?php echo htmlspecialchars((string)$product['productID'], ENT_QUOTES, 'UTF-8'); ?>">
                     <div class="item-image">
-                        <img src="<?php echo $product['photoURL']; ?>" alt="Image for <?php echo $product['title']; ?>">
+                        <img src="<?php echo htmlspecialchars($product['photoURL'], ENT_QUOTES, 'UTF-8'); ?>" alt="Image for <?php echo htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8'); ?>">
                     </div>
                     <div class="item-details">                   
-                        <h3 id="title"><?php echo $product['title']; ?></h3>
-                        <p id="price"><?php echo $product['price']; ?> €</p>
-                        <p id="location"><?php echo $product['location']; ?></p>
+                        <h3 id="title"><?php echo htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                        <p id="price"><?php echo htmlspecialchars((string)$product['price'], ENT_QUOTES, 'UTF-8'); ?> €</p>
+                        <p id="location"><?php echo htmlspecialchars($product['location'], ENT_QUOTES, 'UTF-8'); ?></p>
                     </div>
                 </a>
             </div>
@@ -138,13 +143,13 @@
     } else {
         foreach ($products as $product) { ?>
             <div class="small-flex-item">
-                <a href="product.php?id=<?php echo $product['productID']; ?>">
+                <a href="product.php?id=<?php echo htmlspecialchars((string)$product['productID'], ENT_QUOTES, 'UTF-8'); ?>">
                     <div class="small-item-image">
-                        <img src="<?php echo $product['photoURL']; ?>" alt="Image of <?php echo $product['title']; ?>">
+                        <img src="<?php echo htmlspecialchars($product['photoURL'], ENT_QUOTES, 'UTF-8'); ?>" alt="Image of <?php echo htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8'); ?>">
                     </div>
                     <div class="small-item-details">
-                        <h3 id="title"><?php echo $product['title']; ?></h3>
-                        <p id="price"><?php echo $product['price']; ?> €</p>
+                        <h3 id="title"><?php echo htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                        <p id="price"><?php echo htmlspecialchars((string)$product['price'], ENT_QUOTES, 'UTF-8'); ?> €</p>
                     </div>
                 </a>
             </div>
@@ -152,16 +157,16 @@
     }
 } ?>
 
-<?php function drawSmallProductCard($products) {
+<?php function drawSmallProductCard(array $products) {
     foreach ($products as $product) { ?>
         <div class="small-flex-item">
-            <a href="product.php?id=<?php echo $product['productID']; ?>">
+            <a href="product.php?id=<?php echo htmlspecialchars((string)$product['productID'], ENT_QUOTES, 'UTF-8'); ?>">
                 <div class="small-item-image">
-                    <img src="<?php echo $product['photoURL']; ?>" alt="Image of <?php echo $product['title']; ?>">
+                    <img src="<?php echo htmlspecialchars($product['photoURL'], ENT_QUOTES, 'UTF-8'); ?>" alt="Image of <?php echo $product['title']; ?>">
                 </div>
                 <div class="small-item-details">
-                    <h3 id="title"><?php echo $product['title']; ?></h3>
-                    <p id="price"><?php echo $product['price']; ?> €</p>
+                    <h3 id="title"><?php echo htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                    <p id="price"><?php echo htmlspecialchars((string)$product['price'], ENT_QUOTES, 'UTF-8'); ?> €</p>
                 </div>
             </a>
         </div>
@@ -169,9 +174,9 @@
 } ?>
 
 
-<?php function drawcategories($categories) {
+<?php function drawcategories(array $categories) {
     foreach ($categories as $category) { ?>
-        <li><a href="category.php?id=<?php echo $category['categoryName']; ?>"><?php echo $category['categoryName']; ?></a></li>
+        <li><a href="category.php?id=<?php echo htmlspecialchars($category['categoryName'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($category['categoryName'], ENT_QUOTES, 'UTF-8'); ?></a></li>
     <?php }
 } ?>
 

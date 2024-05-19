@@ -5,15 +5,8 @@ session_start();
 
 require_once('../database/connection.db.php');
 require_once('../database/product.class.php');
-require_once('../csrf_token.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    if (!isset($_POST['csrf_token']) || !validateCsrfToken($_POST['csrf_token'])) {
-        $_SESSION['error_message'] = 'Invalid CSRF token.';
-        header('Location: ../code/new_product.php');
-        exit();
-    }
 
     $seller = $_SESSION['user_id'] ?? 0;
     if ($seller === 0) {

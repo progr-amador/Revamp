@@ -13,9 +13,9 @@ class Baskets {
     }
 
     public static function emptyCart(PDO $db, int $buyerID): bool {
-        $stmt = $db->prepare('DELETE FROM CART WHERE buyerID = :buyerID');
+        $stmt = $db->prepare('DELETE FROM CART WHERE buyerID = ?');
         $stmt->bindParam(':buyerID', $buyerID, PDO::PARAM_INT);
-        return $stmt->execute();
+        return $stmt->execute([$buyerID]);
     }
 
     public static function getCart(PDO $db, int $userID): array {

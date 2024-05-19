@@ -8,6 +8,7 @@
 
   require_once('../templates/common.tpl.php');
   require_once('../templates/new_product.tpl.php');
+  require_once('../csrf_token.php');
 
   $db = getDatabaseConnection();
   $name = 'Novo Produto';

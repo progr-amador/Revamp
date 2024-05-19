@@ -1,7 +1,10 @@
 <?php declare(strict_types = 1); ?>
 
-<?php function drawProduct($product, $ID, $photos) { ?>
+<?php function drawProduct($product, $ID, $photos) { 
+    $csrfToken = generateCsrfToken();
+    ?>
     <main>
+
         <div class="product-container">
             <div class="product-image">
                 <?php if (!empty($photos)) { ?>
@@ -34,6 +37,7 @@
                                 <form action="../actions/action_remove_product.php" method="post">
                                     <input type="hidden" name="whereTo" value="home">
                                     <input type="hidden" name="productID" value="<?php echo $ID ?>">
+                                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken); ?>">
                                     <button title="Delete product" type="submit" class="abtn"> <i class="material-icons">delete</i> </button>
                                 </form>
                             <?php } else if($_SESSION['admin']) { ?>
@@ -54,6 +58,7 @@
                                 <form action="../actions/action_remove_product.php" method="post">
                                     <input type="hidden" name="whereTo" value="reserved">
                                     <input type="hidden" name="productID" value="<?php echo $ID ?>">
+                                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken); ?>">
                                     <button title="Delete product" type="submit" class="abtn"> <i class="material-icons">delete</i> </button>
                                 </form>
                             <?php } else { ?>

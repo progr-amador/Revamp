@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['error_message'] = 'Failed to update password.';
         }
     } else {
-        $_SESSION['error_message'] = 'Invalid old password.';
+        $_SESSION['error_message'] = 'Invalid credentials.';
     }
 
     header('Location: ../code/edit_profile.php?type=password');

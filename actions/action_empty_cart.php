@@ -13,9 +13,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 try {
- 
     $db = getDatabaseConnection();
-
     Baskets::emptyCart($db, $_SESSION['user_id']);
 
     $_SESSION['success_message'] = 'Cart emptied successfully.';
@@ -26,4 +24,3 @@ try {
 header('Location: ../code/home.php');
 exit();
 ?>
-

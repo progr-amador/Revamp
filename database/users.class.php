@@ -63,12 +63,19 @@ class Users {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function getUserByEmail(PDO $db, string $email): array {
+    public static function getUserByEmail(PDO $db, string $email): ?array {
+    $stmt = $db->prepare('SELECT userID, username, email, creationDate, hashedPassword, isAdmin FROM USERS WHERE email = ?');
+    $stmt->execute([$email]);
 
-        $stmt = $db->prepare('SELECT userID, username, email, creationDate, hashedPassword, isAdmin FROM USERS WHERE email = ?');
-        $stmt->execute([$email]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+    $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($userData === false) {
+        return null;
     }
+
+    return $userData;
+}
+
 
     public static function isEmailAvailable(PDO $db, string $newEmail): bool {
 

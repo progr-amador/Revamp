@@ -6,11 +6,13 @@
         $errorMessage = '<p>' . $_SESSION['error_message'] . '</p>';
         unset($_SESSION['error_message']);
     }
+    $csrfToken = generateCsrfToken();
     ?>
     <main id="shipping">
         <h1>Novo Produto</h1>
         <section id="shipping-details">
             <form action="../actions/action_new_product.php" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken); ?>">
                 <fieldset>
                     <legend>Texto</legend>
                     <label for="name">Título

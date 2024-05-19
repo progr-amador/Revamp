@@ -14,7 +14,7 @@
   $conversation = $_GET['chatID'] ?? 0;
 
   $chats = Message::getChats($db, $_SESSION['user_id']);
-  $messages = Message::getMessages($db, $conversation);
+  $messages = Message::getMessages($db, intval($conversation));
 
   drawHead($name);
   drawHeader();

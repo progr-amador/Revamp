@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['error_message'] = 'Email is already in use or invalid.';
         }
     } else {
-        $_SESSION['error_message'] = 'Invalid password.';
+        $_SESSION['error_message'] = 'Invalid credentials.';
     }
 
     header('Location: ../code/edit_profile.php?type=email');

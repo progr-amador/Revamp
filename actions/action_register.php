@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (strlen($password) < 8 || !preg_match('/[A-Z]/', $password) || !preg_match('/[a-z]/', $password) || !preg_match('/[0-9]/', $password)) {
         $_SESSION['error_message'] = 'New password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.';
-        header('Location: ../code/edit_profile.php?type=password');
+        header('Location: ../code/register.php');
         exit();
     }
 

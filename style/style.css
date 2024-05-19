@@ -165,7 +165,7 @@ nav ul li a:hover, .categories ul li a:hover {
     height: 7em;
     word-wrap: break-word;
     text-align: center; 
-    padding: 5px;
+    padding-top: 12px;
     color: black;
     font-weight: 600;
      * {

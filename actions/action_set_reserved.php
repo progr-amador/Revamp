@@ -27,9 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($name && $district && $street && $door && $localidade && $postal_code) {
         foreach ($cart as $product) {
-            Product::setReserved(
-                $db, (int)$product['productID']
-            );
+            Product::setReserved($db, intval($product['productID']), $name, $district, $street, $door, $localidade, $postal_code);
         }
 
         Baskets::emptyCart($db, $_SESSION['user_id']);

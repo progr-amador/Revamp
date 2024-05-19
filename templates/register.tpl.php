@@ -1,6 +1,12 @@
 <?php declare(strict_types = 1); ?>
 
-<?php function drawRegister() { ?>
+<?php function drawRegister(): void { 
+    $errorMessage = '';
+    if (isset($_SESSION['error_message'])) {
+        $errorMessage = '<p>' . htmlspecialchars($_SESSION['error_message'], ENT_QUOTES, 'UTF-8') . '</p>';
+        unset($_SESSION['error_message']);
+    }
+    ?>
     <main>
         <div class="login-container">
             <div class="box form-box">
@@ -26,6 +32,7 @@
                         Já tem conta? <a href="login.php"> Inicie sessão.</a>
                     </div>
                 </form>
+                <?php echo $errorMessage; ?>
             </div>
         </div>
     </main>

@@ -35,23 +35,24 @@
         <div class="body-container" id="shipping-form">
             <main>
                 <h2>Formulário de envio</h2>
+
                 <label for="name">Nome</label>
-                <input type="text" id="name" name="name" readonly value="<?php echo $name ?>">
+                <textarea id="name" name="name" wrap="soft" readonly><?php echo $name ?></textarea>
 
                 <label for="district">Distrito</label>
-                <input type="text" id="district" name="district" readonly value="<?php echo $district ?>">
+                <textarea id="district" name="district" readonly><?php echo $district ?></textarea>
 
                 <label for="street">Rua</label>
-                <input type="text" id="street" name="street" readonly value="<?php echo $street ?>">
+                <textarea id="street" name="street" readonly><?php echo $street ?></textarea>
 
                 <label for="door">Porta</label>
-                <input type="text" id="door" name="door" readonly value="<?php echo $door ?>">
+                <textarea id="door" name="door" readonly><?php echo $door ?></textarea>
 
                 <label for="localidade">Localidade</label>
-                <input type="text" id="localidade" name="localidade" readonly value="<?php echo $localidade ?>">
+                <textarea id="localidade" name="localidade" readonly><?php echo $localidade ?></textarea>
 
                 <label for="postal_code">Código postal</label>
-                <input type="text" id="postal_code" name="postal_code" readonly value="<?php echo $postal_code ?>">
+                <textarea id="postal_code" name="postal_code" readonly><?php echo $postal_code ?></textarea>
 
                 <form action="../actions/action_remove_product.php" method="post">
                     <input type="hidden" name="whereTo" value="reserved">

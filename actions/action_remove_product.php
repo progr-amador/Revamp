@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 
     $productID = filter_input(INPUT_POST, 'productID', FILTER_VALIDATE_INT);
-    $whereTo = filter_input(INPUT_POST, 'whereTo', FILTER_SANITIZE_STRING);
+    $whereTo = filter_input(INPUT_POST, 'whereTo', FILTER_UNSAFE_RAW);
 
     if ($productID === false || $productID === null || empty($whereTo)) {
         $_SESSION['error_message'] = 'Invalid product ID or destination.';

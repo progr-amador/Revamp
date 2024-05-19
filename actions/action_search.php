@@ -9,18 +9,18 @@ require_once('../database/product.class.php');
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $filters = [];
 
-    $search = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_STRING) ?? 
-              filter_input(INPUT_GET, 'query', FILTER_SANITIZE_STRING);
+    $search = filter_input(INPUT_GET, 'search', FILTER_UNSAFE_RAW) ?? 
+              filter_input(INPUT_GET, 'query', FILTER_UNSAFE_RAW);
     if ($search) {
         $filters['search'] = $search;
     }
 
     $filterParams = [
-        'condition' => FILTER_SANITIZE_STRING,
-        'district' => FILTER_SANITIZE_STRING,
-        'category' => FILTER_SANITIZE_STRING,
-        'brand' => FILTER_SANITIZE_STRING,
-        'order' => FILTER_SANITIZE_STRING,
+        'condition' => FILTER_UNSAFE_RAW,
+        'district' => FILTER_UNSAFE_RAW,
+        'category' => FILTER_UNSAFE_RAW,
+        'brand' => FILTER_UNSAFE_RAW,
+        'order' => FILTER_UNSAFE_RAW,
         'price_min' => FILTER_VALIDATE_INT,
         'price_max' => FILTER_VALIDATE_INT
     ];

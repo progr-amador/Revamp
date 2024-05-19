@@ -16,6 +16,6 @@
 
   drawHead($category);
   drawHeader();
-  drawCategory($category, $products);
+  drawCategory($products);
   drawFooter();
 ?>

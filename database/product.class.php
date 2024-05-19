@@ -165,7 +165,7 @@
         LEFT JOIN CATEGORY USING (categoryID)
         JOIN PHOTO USING (productID)
         LEFT JOIN RESERVED USING (productID)
-        WHERE categoryName = ? AND RESERVED.productID IS NULL
+        WHERE categoryID = ? AND RESERVED.productID IS NULL
         GROUP BY productID
         ORDER BY price ASC
       ');
@@ -237,17 +237,12 @@
       return $product;
     }
 
-    public static function setReserved(PDO $db, int $productID): bool {
-      try {
-          $stmt = $db->prepare('
-              INSERT INTO RESERVED (productID) 
-              VALUES (?)
-          ');
-          return $stmt->execute([$productID]);
-      } catch (PDOException $e) {
-          error_log('Failed to set product as reserved: ' . $e->getMessage());
-          return false;
-      }
+    static function setReserved(PDO $db, int $productID, $name, $district, $street, $door, $localidade, $postalCode) {
+      $stmt = $db->prepare('
+        INSERT INTO RESERVED (productID, name, district, street, door, localidade, postalCode) 
+        VALUES (?,?,?,?,?,?,?)
+      ');
+      $stmt->execute([$productID, $name, $district, $street, $door, $localidade, $postalCode]);
     }
 
     public static function removeReserved(PDO $db, int $productID): bool {
@@ -263,3 +258,4 @@
   }
 
 ?>
+

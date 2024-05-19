@@ -94,5 +94,24 @@ class Message{
             return 0;
         }
     }
+
+    public static function canViewMessage(PDO $db, int $userID, int $chatID): bool {
+        try {
+            $stmt = $db->prepare('
+                SELECT 1 
+                FROM CHAT 
+                WHERE chatID = :chatID 
+                AND (:userID = buyerID OR :userID = sellerID)
+            ');
+            $stmt->bindParam(':chatID', $chatID, PDO::PARAM_INT);
+            $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
+        } catch (PDOException $e) {
+            error_log('Failed to check if user can view message: ' . $e->getMessage());
+            return false;
+        }
+    }
 }
 ?>

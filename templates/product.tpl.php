@@ -11,11 +11,13 @@ function drawProduct(array $product, int $ID, array $photos): void {
     <main>
         <div class="product-container">
             <div class="product-image">
-                <?php if (!empty($photos)) { ?>
-                    <img id="main-photo" src="<?php echo htmlspecialchars($photos[0]['photoURL'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8'); ?>">
-                <?php } else { ?>
-                    <img id="main-photo" src="default-photo-url.jpg" alt="Default Image">
-                <?php } ?>
+                <div id="image-container">
+                    <?php if (!empty($photos)) { ?>
+                        <img id="main-photo" src="<?php echo htmlspecialchars($photos[0]['photoURL'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8'); ?>">
+                    <?php } else { ?>
+                        <img id="main-photo" src="default-photo-url.jpg" alt="Default Image">
+                    <?php } ?>
+                </div>
                 <div class="photo-navigation">
                     <?php foreach ($photos as $index => $photo) { ?>
                         <img src="<?php echo htmlspecialchars($photo['photoURL'], ENT_QUOTES, 'UTF-8'); ?>" alt="Photo <?php echo $index + 1; ?>" class="thumbnail" onclick="changePhoto('<?php echo htmlspecialchars($photo['photoURL'], ENT_QUOTES, 'UTF-8'); ?>')">
@@ -44,7 +46,7 @@ function drawProduct(array $product, int $ID, array $photos): void {
                                     <button title="Delete product" type="submit" class="abtn"> <i class="material-icons">delete</i> </button>
                                 </form>
                             <?php } else if($_SESSION['admin']) { ?>
-                                <form action="../actions/action_add_chat.php" method="get">
+                                <form action="../actions/action_add_chat.php" method="post">
                                     <input type="hidden" name="buyerID" value="<?php echo htmlspecialchars((string)$_SESSION['user_id'], ENT_QUOTES, 'UTF-8'); ?>">
                                     <input type="hidden" name="sellerID" value="<?php echo htmlspecialchars((string)$product['sellerID'], ENT_QUOTES, 'UTF-8'); ?>">
                                     <input type="hidden" name="productID" value="<?php echo htmlspecialchars((string)$product['productID'], ENT_QUOTES, 'UTF-8'); ?>">

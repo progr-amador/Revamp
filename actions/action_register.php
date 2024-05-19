@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+    $username = filter_input(INPUT_POST, 'username', FILTER_UNSAFE_RAW);
     $password = $_POST['password'];
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 

@@ -9,7 +9,7 @@ require_once('../../database/category.class.php');
 if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
     
     if (isset($_POST['name']) && !empty($_POST['name'])) {
-        $name = filter_var(trim($_POST['name']), FILTER_SANITIZE_STRING);
+        $name = filter_var(trim($_POST['name']), FILTER_UNSAFE_RAW);
 
         if ($name !== '') {
             try {

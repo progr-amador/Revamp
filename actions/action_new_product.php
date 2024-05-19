@@ -20,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $location = filter_input(INPUT_POST, 'location', FILTER_VALIDATE_INT);
     $condition = filter_input(INPUT_POST, 'condition', FILTER_VALIDATE_INT);
     $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
-    $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-    $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+    $title = filter_input(INPUT_POST, 'title', FILTER_UNSAFE_RAW);
+    $description = filter_input(INPUT_POST, 'description', FILTER_UNSAFE_RAW);
 
     if (!$brand || !$category || !$location || !$condition || !$price || !$title || !$description) {
         $_SESSION['error_message'] = 'All fields are required.';

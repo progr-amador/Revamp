@@ -13,7 +13,7 @@
                 <fieldset>
                     <legend>Detalhes Pessoais</legend>
                     <label for="name">Nome
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name" maxlength="100" required>
                     </label>
                     <label for="nif">NIF
                         <input type="text" id="nif" name="nif" maxlength="9" required>
@@ -37,47 +37,70 @@
                         </select>
                     </label>
                     <label for="street">Rua
-                        <input id="street" type="text" name="street" required>
+                        <input id="street" type="text" name="street" maxlength="100" required>
                     </label>
                     <label for="door">Porta
-                        <input id="door" type="text" name="door" required>
+                        <input id="door" type="text" name="door" maxlength="10" required>
                     </label>
                     <label for="localidade">Localidade
-                        <input id="localidade" type="text" name="localidade" required>
+                        <input id="localidade" type="text" name="localidade" maxlength="100" required>
                     </label>
                     <label for="postal_code">Código postal
                         <input id="postal_code" type="text" name="postal_code" maxlength="9" required>
                     </label>
                 </fieldset>
 
-                <fieldset>
+                </fieldset>
                     <legend>Método de Pagamento</legend>
+
                     <div class="radio-option">
                         <label>
-                            <input type="radio" name="payment_method" value="card" data-toggle-value="card" required>   
-                            <img src="../assets/icons/creditcard.png" alt="Credit Card Logo"> Cartão de crédito
+                        <input type="radio" name="payment_method" value="card" data-toggle-value="card" required>   
+                             <img src="../assets/icons/creditcard.png" alt="Credit Card Logo"> Cartão de crédito
+                                
                         </label>
                     </div>
                     <div class="radio-option">
                         <label>
                             <input type="radio" name="payment_method" value="paypal" data-toggle-value="paypal"> 
-                            <img src="../assets/icons/paypal.png" alt="PayPal Logo"> PayPal
+                             <img src="../assets/icons/paypal.png" alt="PayPal Logo"> PayPal
                         </label>
                     </div>
                     <div class="radio-option">
                         <label>
                             <input type="radio" name="payment_method" value="mbway" data-toggle-value="mbway">
-                            <img src="../assets/icons/mbway.png" alt="MB WAY Logo"> MB Way
+                             <img src="../assets/icons/mbway.png" alt="MB WAY Logo"> MB Way
                         </label>
                     </div> 
+                     
                     <div data-toggle-group="card" style="display: none;">
-                        <!-- Fields for credit card payment -->
+                        <label for="name">Nome do titular
+                            <input type="text" id="name-pay" name="payment">
+                        </label>
+                        <label for="nif">Número do cartão
+                            <input type="number" id="cardID" name="payment" maxlength="16">
+                        </label>
+                        <label for="nif">Validade
+                            <input type="month" id="date" name="payment">
+                        </label>
+                        <label for="nif">CVV
+                            <input type="number" id="cvv" name="payment" maxlength="3">
+                        </label>
                     </div>
+
                     <div data-toggle-group="paypal" style="display: none;">
-                        <!-- Fields for PayPal payment -->
+                        <label for="email">Email
+                            <input type="email" id="email" name="payment">
+                        </label>
+                        <label for="nif">Password
+                            <input type="password" id="password" name="payment">
+                        </label>
                     </div>
+
                     <div data-toggle-group="mbway" style="display: none;">
-                        <!-- Fields for MB Way payment -->
+                        <label for="mobile">Número de telemóvel
+                            <input type="tel" id="mobile-pay" name="payment" maxlength="13">
+                        </label>
                     </div>
                 </fieldset>
                 <button type="submit" class="abtn">Finalizar</button>

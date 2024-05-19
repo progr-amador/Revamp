@@ -38,7 +38,8 @@ function drawProfile(array $listings, array $user): void {
                     <form action="../actions/action_logout.php" method="post">
                         <button type="submit" class="abtn" title="Terminar Sessão"> <i class="material-icons">logout</i> </button>
                     </form>
-                    <form action="../actions/control_panel/action_remove_user.php" method="get">
+                    <form action="../actions/control_panel/action_remove_user.php" method="post">
+                        <input type="hidden" name="self" value="yes">
                         <button name="name" type="submit" title="Apagar Conta" value="<?php echo htmlspecialchars($user['username'], ENT_QUOTES, 'UTF-8'); ?>" class="abtn"><i class="material-icons">person_off</i></button>
                     </form>
                 <?php endif; ?>
@@ -53,6 +54,7 @@ function drawProfile(array $listings, array $user): void {
                         </form>
                     <?php endif; ?>
                     <form action="../actions/control_panel/action_remove_user.php" method="post">
+                        <input type="hidden" name="self" value="yes">
                         <button name="name" type="submit" value="<?php echo htmlspecialchars($user['username'], ENT_QUOTES, 'UTF-8'); ?>" class="abtn"> <i class="material-icons">person_off</i> </button>
                     </form>
                 <?php endif; ?>

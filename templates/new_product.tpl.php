@@ -20,13 +20,13 @@ function drawNewProduct(array $districts, array $categories, array $brands, arra
                     <br>
                     <label for="description"> Descrição</label>
                     <br>
-                    <textarea id="description" name="description" rows="15" required></textarea>
+                    <textarea id="description" name="description" rows="15" maxlength="2100" required></textarea>
                 </fieldset>
 
                 <fieldset>
                     <legend>Detalhes</legend>
                     <label for="price">Preço
-                        <input type="number" id="price" name="price" required>
+                        <input type="number" id="price" name="price" max="2000" required>
                     </label>
                     <br>
                     <label id="categoria">

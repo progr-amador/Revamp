@@ -92,7 +92,7 @@
     </header>
     <div class="categories">
         <ul>
-            <?php drawcategories($categories) ?>
+            <?php drawCategories($categories) ?>
         </ul>
     </div>
 <?php } ?>
@@ -174,9 +174,9 @@
 } ?>
 
 
-<?php function drawcategories(array $categories) {
+<?php function drawCategories(array $categories) {
     foreach ($categories as $category) { ?>
-        <li><a href="category.php?id=<?php echo htmlspecialchars($category['categoryName'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($category['categoryName'], ENT_QUOTES, 'UTF-8'); ?></a></li>
+        <li><a href="category.php?id=<?php echo htmlspecialchars(strval($category['categoryID']), ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($category['categoryName'], ENT_QUOTES, 'UTF-8'); ?></a></li>
     <?php }
 } ?>
 

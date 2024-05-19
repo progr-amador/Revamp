@@ -7,7 +7,7 @@ require_once('../database/connection.db.php');
 require_once('../database/message.class.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $message = filter_input(INPUT_POST, 'message-input', FILTER_SANITIZE_STRING);
+    $message = filter_input(INPUT_POST, 'message-input', FILTER_UNSAFE_RAW);
     $chatID = filter_input(INPUT_POST, 'chatID', FILTER_VALIDATE_INT);
 
     if ($message && $chatID) {

@@ -13,11 +13,17 @@
   $name = 'Mensagens';
   $conversation = $_GET['chatID'] ?? 0;
 
+  if (($conversation !== 0) && (!isset($_SESSION['user_id']) || !Message::canViewMessage($db, $_SESSION['user_id'], intval($conversation)))) {
+    header('Location: ../code/home.php');
+    exit;
+  }
+
+
   $chats = Message::getChats($db, $_SESSION['user_id']);
   $messages = Message::getMessages($db, intval($conversation));
 
   drawHead($name);
   drawHeader();
-  drawMessage($chats, $messages, $conversation);
+  drawMessage($chats, $messages, intval($conversation));
   drawFooter();
 ?>

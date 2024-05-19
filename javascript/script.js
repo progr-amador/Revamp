@@ -1,5 +1,5 @@
 const searchProduct = document.querySelector('#searchproduct');
-let currentFilters = {}; // Object to store the current filter parameters
+let currentFilters = {};
 
 if (searchProduct) {
   searchProduct.addEventListener('input', async function() {
@@ -57,17 +57,16 @@ if (searchProduct) {
         section.appendChild(divFlexItem);
       }
     } else {
-      section.innerHTML = '<p>No results found</p>'; // Display a message when no results found
+      section.innerHTML = '<p>No results found</p>';
     }
   });
 }
 
-// Event listeners for filter inputs to update currentFilters object
 const filterInputs = document.querySelectorAll('#ordem select, #condição select, #regiao select, #categoria select, #marca select, #price_min input, #price_max input');
 filterInputs.forEach(input => {
   input.addEventListener('change', function() {
     currentFilters[this.name] = this.value;
-    searchProduct.dispatchEvent(new Event('input')); // Trigger input event on searchProduct to update search results
+    searchProduct.dispatchEvent(new Event('input'));
   });
 });
 
@@ -83,14 +82,13 @@ function handlePaymentMethodChange() {
     toggleGroups.forEach(group => {
       const inputs = group.querySelectorAll('input[type]');
       inputs.forEach(input => {
-        input.required = group === selectedGroup; // Set required only for the selected group
+        input.required = group === selectedGroup;
       });
-      group.style.display = group === selectedGroup ? 'block' : 'none'; // Toggle visibility
+      group.style.display = group === selectedGroup ? 'block' : 'none';
     });
   }
 }
 
-// Add event listener to radio buttons on page load or after dynamic generation
 document.querySelectorAll('input[name="payment_method"]').forEach(radio => {
   radio.addEventListener('change', handlePaymentMethodChange);
 });

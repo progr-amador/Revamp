@@ -90,7 +90,6 @@ class Users {
             $stmt = $db->prepare('UPDATE USERS SET email = ? WHERE userID = ?');
             return $stmt->execute([$newEmail, $id]);
         } catch (PDOException $e) {
-            // Log the error
             error_log('Failed to update email: ' . $e->getMessage());
             return false;
         }
@@ -108,7 +107,6 @@ class Users {
             $stmt = $db->prepare('UPDATE USERS SET username = ? WHERE userID = ?');
             return $stmt->execute([$newUsername, $id]);
         } catch (PDOException $e) {
-            // Log the error
             error_log('Failed to update username: ' . $e->getMessage());
             return false;
         }
@@ -120,14 +118,13 @@ class Users {
             $stmt = $db->prepare('UPDATE USERS SET hashedPassword = ? WHERE userID = ?');
             return $stmt->execute([$hashedPassword, $id]);
         } catch (PDOException $e) {
-            // Log the error
             error_log('Failed to update password: ' . $e->getMessage());
             return false;
         }
     }
 
     public static function removeUser(PDO $db, string $name): bool {
-        $stmt = $db->prepare('DELETE FROM USERS WHERE isAdmin = 0 AND username = ?');
+        $stmt = $db->prepare('DELETE FROM USERS WHERE username = ?');
         return $stmt->execute([$name]);
     }
 

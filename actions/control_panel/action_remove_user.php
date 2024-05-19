@@ -9,7 +9,7 @@ require_once('../../database/users.class.php');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST['name']) && !empty($_POST['name'])) {
-        $name = filter_var(trim($_POST['name']), FILTER_SANITIZE_STRING);
+        $name = filter_var(trim($_POST['name']), FILTER_UNSAFE_RAW);
 
         if ($name !== '') {
             try {
@@ -25,9 +25,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $_SESSION['error_message'] = 'Username is required.';
     }
+
+    if (isset($_POST['self']) && !empty($_POST['self'])) {
+        $self = filter_var(trim($_POST['self']), FILTER_UNSAFE_RAW);
+        if($self === "yes"){
+            header("Location: ../action_logout.php");
+            exit();
+        }
+    } else {
+        $_SESSION['error_message'] = 'Self status is required.';
+    }
 } else {
     $_SESSION['error_message'] = 'Invalid request method.';
 }
+
 
 header('Location: ' . htmlspecialchars($_SERVER['HTTP_REFERER']));
 exit;

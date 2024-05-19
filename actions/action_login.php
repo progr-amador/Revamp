@@ -5,8 +5,16 @@ session_start();
 
 require_once('../database/connection.db.php');
 require_once('../database/users.class.php');
+require_once('../csrf_token.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    if (!isset($_POST['csrf_token']) || !validateCsrfToken($_POST['csrf_token'])) {
+        $_SESSION['error_message'] = 'Invalid CSRF token.';
+        header('Location: ../code/login.php');
+        exit();
+    }
+
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 

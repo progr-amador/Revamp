@@ -20,6 +20,7 @@
                 <?php if($conversation !== 0): ?>
                     <div class="message-input">
                         <form action="../actions/action_send_message.php" method="post">
+                            input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
                             <input type="hidden" value="<?php echo $conversation ?>" name="chatID">
                             <input type="text" name="message-input" required>
                             <button type="submit" class="abtn"><i class="material-icons">send</i></button>

@@ -8,7 +8,7 @@
     } catch (PDOException $e) {
         echo "An error occurred: " . $e->getMessage();
     }
-    // Example: Inserting a new user
+    
     $stmt = $db->prepare("INSERT INTO USER (username, email, password_) VALUES (?, ?, ?)");
     $stmt->execute(['username', 'email@example.com', 'hashed_password']);
     $db = null;

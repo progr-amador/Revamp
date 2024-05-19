@@ -19,7 +19,7 @@
                     <input type="password" name="password" id="password" required>
                     </div>
                     <div class="field">
-                        <input type="submit" class="bbtn" name="submit"></input>
+                        <input type="submit" class="bbtn" value="Criar Conta" name="submit"></input>
                     </div>
                     <div class="links">
                         Já tem conta? <a href="login.php"> Inicie sessão.</a>

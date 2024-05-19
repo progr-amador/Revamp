@@ -3,12 +3,13 @@ declare(strict_types = 1);
 
 
 function drawEditProfile(string $type) {
-    // Check for an error message and prepare it before HTML starts
+    $csrf_token = generateCsrfToken();
     $errorMessage = '';
     if (isset($_SESSION['error_message'])) {
-        $errorMessage = '<p>' . $_SESSION['error_message'] . '</p>';
+        $errorMessage = '<p>' . htmlspecialchars($_SESSION['error_message']) . '</p>';
         unset($_SESSION['error_message']);
     }
+    
 
     switch ($type) {
         case 'email':
@@ -27,7 +28,6 @@ function drawEditProfile(string $type) {
             $inputType = 'password';
             break;
         default:
-            // Handle unknown type if necessary
             $action = 'default_action.php';
             $newLabel1 = 'Default label';
             $inputType = 'text';
@@ -40,26 +40,27 @@ function drawEditProfile(string $type) {
 <main>
     <div class="login-container">
         <div class="box form-box">
-            <header>Alterar <?php echo $type; ?></header>
-            <form action="../actions/<?php echo $action; ?>" method="post">
+            <header>Alterar <?php echo htmlspecialchars($type); ?></header>
+            <form action="../actions/<?php echo htmlspecialchars($action); ?>" method="post">
+                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
                 <div class="field input">
                     <label for="old"><?php echo "Email atual"; ?></label>
-                    <input type="email" name="old" id="old" required> <!-- Change input type based on type -->
+                    <input type="email" name="old" id="old" required> 
                 </div>
                 <div class="field input">
                     <label for="password"><?php echo "Password atual" ?></label>
-                    <input type="password" name="password" id="password" required> <!-- Change input type based on type -->
+                    <input type="password" name="password" id="password" required> 
                 </div>
                 <div class="field input">
-                    <label for="new"><?php echo $newLabel1; ?></label>
-                    <input type="<?php echo $inputType; ?>" name="new" id="new" required>
+                    <label for="new"><?php echo htmlspecialchars($newLabel1); ?></label>
+                    <input type="<?php echo htmlspecialchars($inputType); ?>" name="new" id="new" required>
                 </div>
 
                 <div class="field">
-                    <input type="submit" class="bbtn" value="Alterar <?php echo $type; ?>">
+                    <input type="submit" class="bbtn" value="Alterar <?php echo htmlspecialchars($type); ?>">
                 </div>
             </form>
-            <?php echo $errorMessage; ?> <!-- Display the error message here -->
+            <?php echo $errorMessage; ?> 
         </div>
     </div>
 </main>

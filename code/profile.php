@@ -8,7 +8,7 @@
   require_once('../database/users.class.php');
   require_once('../templates/common.tpl.php');
   require_once('../templates/profile.tpl.php');
-  
+  require_once('../csrf_token.php');
 
   $name = "Perfil";
 

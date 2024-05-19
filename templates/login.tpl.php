@@ -1,12 +1,12 @@
 <?php 
 declare(strict_types = 1);
-session_start(); // Ensure session is started
+
+session_start(); 
 
 function drawLogin() {
-    // Check for an error message and prepare it before HTML starts
     $errorMessage = '';
     if (isset($_SESSION['error_message'])) {
-        $errorMessage = '<p>' . $_SESSION['error_message'] . '</p>';
+        $errorMessage = '<p>' . htmlspecialchars($_SESSION['error_message']) . '</p>';
         unset($_SESSION['error_message']);
     }
 ?>
@@ -15,6 +15,7 @@ function drawLogin() {
         <div class="box form-box">
             <header>Iniciar Sessão</header>
             <form action="../actions/action_login.php" method="post">
+                <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>"> 
                 <div class="field input">
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" required>
@@ -24,13 +25,13 @@ function drawLogin() {
                     <input type="password" name="password" id="password" required>
                 </div>
                 <div class="field">
-                    <input type="submit" class="bbtn" value="Iniciar sessão"> <!-- Correct input syntax for submit button -->
+                    <input type="submit" class="bbtn" value="Iniciar sessão"> 
                 </div>
                 <div class="links">
                     Não tem conta? <a href="register.php">Registe-se.</a>
                 </div>
             </form>
-            <?php echo $errorMessage; ?> <!-- Display the error message here -->
+            <?php echo $errorMessage; ?>
         </div>
     </div>
 </main>
